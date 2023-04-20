@@ -7,10 +7,7 @@ module.exports = {
     ecmaVersion: 'latest',
   },
   plugins: ['@typescript-eslint/eslint-plugin', 'import'],
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
   root: true,
   env: {
     node: true,
@@ -66,15 +63,7 @@ module.exports = {
     'import/order': [
       'error',
       {
-        groups: [
-          'external',
-          'builtin',
-          'internal',
-          'type',
-          'index',
-          'sibling',
-          'parent',
-        ],
+        groups: ['external', 'builtin', 'internal', 'type', 'index', 'sibling', 'parent'],
         'newlines-between': 'always',
         alphabetize: { order: 'asc', caseInsensitive: true },
       },
