@@ -7,12 +7,12 @@ import { hashData } from '../utils';
 
 @Injectable()
 export class UsersService {
-  async createUser(userData: CreateUserDto): Promise<void> {
+  async createUser(userData: CreateUserDto): Promise<User> {
     const { email, password, role } = userData;
     const user = new User();
     user.email = email;
     user.hashPwd = await hashData(password);
     user.role = role;
-    await user.save();
+    return user.save();
   }
 }
