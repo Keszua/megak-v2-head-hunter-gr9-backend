@@ -34,12 +34,14 @@ const RAW_RUNTIME_STATE =
           ["@nestjs/schematics", "virtual:36f30c0e0880d1a5bcbdb27123a60116da2c587050e9ebe8157ec03ed5aff1bd1259052c21bca582aedd8340ce5ff1d629cc4934d11d3824d4ee220cf57685ae#npm:9.1.0"],\
           ["@nestjs/testing", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.0"],\
           ["@nestjs/typeorm", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.0.1"],\
+          ["@types/bcrypt", "npm:5.0.0"],\
           ["@types/express", "npm:4.17.17"],\
           ["@types/jest", "npm:29.5.0"],\
           ["@types/node", "npm:18.15.11"],\
           ["@types/supertest", "npm:2.0.12"],\
           ["@typescript-eslint/eslint-plugin", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:5.59.0"],\
           ["@typescript-eslint/parser", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:5.59.0"],\
+          ["bcrypt", "npm:5.1.0"],\
           ["eslint", "npm:8.38.0"],\
           ["eslint-config-prettier", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:8.8.0"],\
           ["eslint-plugin-import", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:2.27.5"],\
@@ -1468,6 +1470,24 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@mapbox/node-pre-gyp", [\
+      ["npm:1.0.10", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/@mapbox-node-pre-gyp-npm-1.0.10-1811160047-9.zip/node_modules/@mapbox/node-pre-gyp/",\
+        "packageDependencies": [\
+          ["@mapbox/node-pre-gyp", "npm:1.0.10"],\
+          ["detect-libc", "npm:2.0.1"],\
+          ["https-proxy-agent", "npm:5.0.1"],\
+          ["make-dir", "npm:3.1.0"],\
+          ["node-fetch", "virtual:1811160047d7e0f7e43f371e07920c11204416dd6ae0b8461e04538b2f68e9167aca28b60b34dbd287674a5cdd52bd05be5797bbe2f7de916231958cb58055fb#npm:2.6.9"],\
+          ["nopt", "npm:5.0.0"],\
+          ["npmlog", "npm:5.0.1"],\
+          ["rimraf", "npm:3.0.2"],\
+          ["semver", "npm:7.5.0"],\
+          ["tar", "npm:6.1.13"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@nestjs/cli", [\
       ["npm:9.4.0", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/@nestjs-cli-npm-9.4.0-36f30c0e08-9.zip/node_modules/@nestjs/cli/",\
@@ -1813,7 +1833,7 @@ const RAW_RUNTIME_STATE =
           ["@nuxtjs/opencollective", "npm:0.3.2"],\
           ["chalk", "npm:4.1.2"],\
           ["consola", "npm:2.15.3"],\
-          ["node-fetch", "virtual:72db6b3551c1b46986e711aee96d1643b26ff6991672401c35442adfbef36d10ccd9289b58e518aac04afe4e688ca4b130da9fae9c1c040113a2585b8cfeea9a#npm:2.6.9"]\
+          ["node-fetch", "virtual:1811160047d7e0f7e43f371e07920c11204416dd6ae0b8461e04538b2f68e9167aca28b60b34dbd287674a5cdd52bd05be5797bbe2f7de916231958cb58055fb#npm:2.6.9"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1970,6 +1990,16 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/babel__traverse", "npm:7.18.3"],\
           ["@babel/types", "npm:7.21.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/bcrypt", [\
+      ["npm:5.0.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/@types-bcrypt-npm-5.0.0-c074c165c2-9.zip/node_modules/@types/bcrypt/",\
+        "packageDependencies": [\
+          ["@types/bcrypt", "npm:5.0.0"],\
+          ["@types/node", "npm:18.15.12"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2941,6 +2971,15 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["are-we-there-yet", [\
+      ["npm:2.0.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/are-we-there-yet-npm-2.0.0-7d2f5201ce-9.zip/node_modules/are-we-there-yet/",\
+        "packageDependencies": [\
+          ["are-we-there-yet", "npm:2.0.0"],\
+          ["delegates", "npm:1.0.0"],\
+          ["readable-stream", "npm:3.6.2"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:3.0.1", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/are-we-there-yet-npm-3.0.1-3395b1512f-9.zip/node_modules/are-we-there-yet/",\
         "packageDependencies": [\
@@ -3224,6 +3263,17 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/base64-js-npm-1.5.1-b2f7275641-9.zip/node_modules/base64-js/",\
         "packageDependencies": [\
           ["base64-js", "npm:1.5.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["bcrypt", [\
+      ["npm:5.1.0", {\
+        "packageLocation": "./.yarn/unplugged/bcrypt-npm-5.1.0-2a4230b3eb/node_modules/bcrypt/",\
+        "packageDependencies": [\
+          ["bcrypt", "npm:5.1.0"],\
+          ["@mapbox/node-pre-gyp", "npm:1.0.10"],\
+          ["node-addon-api", "npm:5.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4064,6 +4114,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/destroy-npm-1.2.0-6a511802e2-9.zip/node_modules/destroy/",\
         "packageDependencies": [\
           ["destroy", "npm:1.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["detect-libc", [\
+      ["npm:2.0.1", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/detect-libc-npm-2.0.1-2699cb2ac4-9.zip/node_modules/detect-libc/",\
+        "packageDependencies": [\
+          ["detect-libc", "npm:2.0.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5137,6 +5196,22 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["gauge", [\
+      ["npm:3.0.2", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/gauge-npm-3.0.2-9e22f7af9e-9.zip/node_modules/gauge/",\
+        "packageDependencies": [\
+          ["gauge", "npm:3.0.2"],\
+          ["aproba", "npm:2.0.0"],\
+          ["color-support", "npm:1.1.3"],\
+          ["console-control-strings", "npm:1.1.0"],\
+          ["has-unicode", "npm:2.0.1"],\
+          ["object-assign", "npm:4.1.1"],\
+          ["signal-exit", "npm:3.0.7"],\
+          ["string-width", "npm:4.2.3"],\
+          ["strip-ansi", "npm:6.0.1"],\
+          ["wide-align", "npm:1.1.5"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:4.0.4", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/gauge-npm-4.0.4-8f878385e9-9.zip/node_modules/gauge/",\
         "packageDependencies": [\
@@ -7005,12 +7080,14 @@ const RAW_RUNTIME_STATE =
           ["@nestjs/schematics", "virtual:36f30c0e0880d1a5bcbdb27123a60116da2c587050e9ebe8157ec03ed5aff1bd1259052c21bca582aedd8340ce5ff1d629cc4934d11d3824d4ee220cf57685ae#npm:9.1.0"],\
           ["@nestjs/testing", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.0"],\
           ["@nestjs/typeorm", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.0.1"],\
+          ["@types/bcrypt", "npm:5.0.0"],\
           ["@types/express", "npm:4.17.17"],\
           ["@types/jest", "npm:29.5.0"],\
           ["@types/node", "npm:18.15.11"],\
           ["@types/supertest", "npm:2.0.12"],\
           ["@typescript-eslint/eslint-plugin", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:5.59.0"],\
           ["@typescript-eslint/parser", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:5.59.0"],\
+          ["bcrypt", "npm:5.1.0"],\
           ["eslint", "npm:8.38.0"],\
           ["eslint-config-prettier", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:8.8.0"],\
           ["eslint-plugin-import", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:2.27.5"],\
@@ -7413,6 +7490,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["node-addon-api", [\
+      ["npm:5.1.0", {\
+        "packageLocation": "./.yarn/unplugged/node-addon-api-npm-5.1.0-b50d00f739/node_modules/node-addon-api/",\
+        "packageDependencies": [\
+          ["node-addon-api", "npm:5.1.0"],\
+          ["node-gyp", "npm:9.3.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["node-emoji", [\
       ["npm:1.11.0", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/node-emoji-npm-1.11.0-dd2f09050c-9.zip/node_modules/node-emoji/",\
@@ -7431,10 +7518,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:72db6b3551c1b46986e711aee96d1643b26ff6991672401c35442adfbef36d10ccd9289b58e518aac04afe4e688ca4b130da9fae9c1c040113a2585b8cfeea9a#npm:2.6.9", {\
-        "packageLocation": "./.yarn/__virtual__/node-fetch-virtual-5011ffedd2/6/C:/Users/przem/AppData/Local/Yarn/Berry/cache/node-fetch-npm-2.6.9-9fc9a54529-9.zip/node_modules/node-fetch/",\
+      ["virtual:1811160047d7e0f7e43f371e07920c11204416dd6ae0b8461e04538b2f68e9167aca28b60b34dbd287674a5cdd52bd05be5797bbe2f7de916231958cb58055fb#npm:2.6.9", {\
+        "packageLocation": "./.yarn/__virtual__/node-fetch-virtual-8dc7938f5c/6/C:/Users/przem/AppData/Local/Yarn/Berry/cache/node-fetch-npm-2.6.9-9fc9a54529-9.zip/node_modules/node-fetch/",\
         "packageDependencies": [\
-          ["node-fetch", "virtual:72db6b3551c1b46986e711aee96d1643b26ff6991672401c35442adfbef36d10ccd9289b58e518aac04afe4e688ca4b130da9fae9c1c040113a2585b8cfeea9a#npm:2.6.9"],\
+          ["node-fetch", "virtual:1811160047d7e0f7e43f371e07920c11204416dd6ae0b8461e04538b2f68e9167aca28b60b34dbd287674a5cdd52bd05be5797bbe2f7de916231958cb58055fb#npm:2.6.9"],\
           ["@types/encoding", null],\
           ["encoding", null],\
           ["whatwg-url", "npm:5.0.0"]\
@@ -7484,6 +7571,14 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["nopt", [\
+      ["npm:5.0.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/nopt-npm-5.0.0-304b40fbfe-9.zip/node_modules/nopt/",\
+        "packageDependencies": [\
+          ["nopt", "npm:5.0.0"],\
+          ["abbrev", "npm:1.1.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:6.0.0", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/nopt-npm-6.0.0-5ea8050815-9.zip/node_modules/nopt/",\
         "packageDependencies": [\
@@ -7513,6 +7608,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["npmlog", [\
+      ["npm:5.0.1", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/npmlog-npm-5.0.1-366cab64a2-9.zip/node_modules/npmlog/",\
+        "packageDependencies": [\
+          ["npmlog", "npm:5.0.1"],\
+          ["are-we-there-yet", "npm:2.0.0"],\
+          ["console-control-strings", "npm:1.1.0"],\
+          ["gauge", "npm:3.0.2"],\
+          ["set-blocking", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:6.0.2", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/npmlog-npm-6.0.2-e0e69455c7-9.zip/node_modules/npmlog/",\
         "packageDependencies": [\
