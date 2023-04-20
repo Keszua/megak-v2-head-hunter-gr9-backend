@@ -978,7 +978,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/common@npm:^9.0.0":
+"@nestjs/common@npm:^9.4.0":
   version: 9.4.0
   resolution: "@nestjs/common@npm:9.4.0"
   dependencies:
@@ -1018,7 +1018,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/core@npm:^9.0.0":
+"@nestjs/core@npm:^9.4.0":
   version: 9.4.0
   resolution: "@nestjs/core@npm:9.4.0"
   dependencies:
@@ -2743,10 +2743,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:^10.0.1":
+  version: 10.0.1
+  resolution: "commander@npm:10.0.1"
+  checksum: b2a03d799104eac407ca031b94126c98198594fcff41554eb253cef748de57fb1a4cdd591baa075de589f2fddf1f968d1ecd1b79e8b47570ee441ab4f3363776
+  languageName: node
+  linkType: hard
+
 "commander@npm:^2.20.0":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
   checksum: a6cb7ce73cc1db74a2da4bb6b4fc4f9a655ba35beb90f32bf5831d7d3be610dafc01dcc8a17f8204cf4e3f1f434d2115b7db56dfb0b827d42b10d1ba6ae8cbb4
+  languageName: node
+  linkType: hard
+
+"commander@npm:^8.1.0":
+  version: 8.3.0
+  resolution: "commander@npm:8.3.0"
+  checksum: 94dba589da4444bc07d60537438ce36bbf78b52b18bb720fb3727a3b589cb27b53171065742e6e442962e273976f034ca7475cc5517d92c7033fae2f6ed50e76
   languageName: node
   linkType: hard
 
@@ -5534,9 +5548,9 @@ __metadata:
   resolution: "megak-v2-head-hunter-gr9-backend@workspace:."
   dependencies:
     "@nestjs/cli": "npm:^9.4.0"
-    "@nestjs/common": "npm:^9.0.0"
+    "@nestjs/common": "npm:^9.4.0"
     "@nestjs/config": "npm:^2.3.1"
-    "@nestjs/core": "npm:^9.0.0"
+    "@nestjs/core": "npm:^9.4.0"
     "@nestjs/platform-express": "npm:^9.0.0"
     "@nestjs/schematics": "npm:^9.0.0"
     "@nestjs/testing": "npm:^9.0.0"
@@ -5549,6 +5563,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.48.1"
     "@typescript-eslint/parser": "npm:^5.48.1"
     bcrypt: "npm:^5.1.0"
+    commander: "npm:^10.0.1"
     eslint: "npm:^8.0.1"
     eslint-config-prettier: "npm:^8.6.0"
     eslint-plugin-import: "npm:^2.27.5"
@@ -5556,6 +5571,7 @@ __metadata:
     jest: "npm:29.5.0"
     joi: "npm:^17.9.1"
     mysql2: "npm:^3.2.3"
+    nestjs-console: "npm:^8.0.0"
     prettier: "npm:^2.8.3"
     reflect-metadata: "npm:^0.1.13"
     rxjs: "npm:^7.2.0"
@@ -5909,6 +5925,19 @@ __metadata:
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: 968ceb7350efb069a413eaa590b9ec2532023d6f4075c06ada75a57f86ff7ffbfc5b0b72760fadc1ccdc546b9c0bc346b69e9f5b03cdaa42f21e8063b880d305
+  languageName: node
+  linkType: hard
+
+"nestjs-console@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "nestjs-console@npm:8.0.0"
+  dependencies:
+    commander: "npm:^8.1.0"
+    ora: "npm:5.4.1"
+  peerDependencies:
+    "@nestjs/common": ^9
+    "@nestjs/core": ^9
+  checksum: 227af8a06a1dd017ea05e7785024e2c78992958aaa7f4789286071341b4e8c23d101c7656e51ab972313b4f9f19844d731495e330f113569f5c6cbcf4fd13b66
   languageName: node
   linkType: hard
 

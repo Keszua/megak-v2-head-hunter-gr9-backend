@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
+import { CreateAdminDto } from './dto/create-admin.dto';
+
 import { UserRole } from '../types/user';
 import { UsersService } from '../users/users.service';
 
@@ -7,8 +9,11 @@ import { UsersService } from '../users/users.service';
 export class AdminService {
   constructor(private readonly usersService: UsersService) {}
 
-  async createAdmin(email: string, password: string): Promise<void> {
-    const admin = await this.usersService.createUser({ email, password, role: UserRole.ADMIN });
-    console.log(`Admin account created with email: ${admin.email}`);
+  async createAdmin(createAdminDto: CreateAdminDto): Promise<void> {
+    await this.usersService.createUser({
+      email: createAdminDto.email,
+      password: createAdminDto.password,
+      role: UserRole.ADMIN,
+    });
   }
 }

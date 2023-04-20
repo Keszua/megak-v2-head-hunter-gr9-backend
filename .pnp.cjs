@@ -42,6 +42,7 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/eslint-plugin", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:5.59.0"],\
           ["@typescript-eslint/parser", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:5.59.0"],\
           ["bcrypt", "npm:5.1.0"],\
+          ["commander", "npm:10.0.1"],\
           ["eslint", "npm:8.38.0"],\
           ["eslint-config-prettier", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:8.8.0"],\
           ["eslint-plugin-import", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:2.27.5"],\
@@ -49,6 +50,7 @@ const RAW_RUNTIME_STATE =
           ["jest", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:29.5.0"],\
           ["joi", "npm:17.9.1"],\
           ["mysql2", "npm:3.2.3"],\
+          ["nestjs-console", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:8.0.0"],\
           ["prettier", "npm:2.8.7"],\
           ["reflect-metadata", "npm:0.1.13"],\
           ["rxjs", "npm:7.8.0"],\
@@ -3779,6 +3781,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["commander", [\
+      ["npm:10.0.1", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/commander-npm-10.0.1-f17613b72b-9.zip/node_modules/commander/",\
+        "packageDependencies": [\
+          ["commander", "npm:10.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:2.20.3", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/commander-npm-2.20.3-d8dcbaa39b-9.zip/node_modules/commander/",\
         "packageDependencies": [\
@@ -3790,6 +3799,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/commander-npm-4.1.1-22a0fe921b-9.zip/node_modules/commander/",\
         "packageDependencies": [\
           ["commander", "npm:4.1.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:8.3.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/commander-npm-8.3.0-c0d18c66d5-9.zip/node_modules/commander/",\
+        "packageDependencies": [\
+          ["commander", "npm:8.3.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7088,6 +7104,7 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/eslint-plugin", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:5.59.0"],\
           ["@typescript-eslint/parser", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:5.59.0"],\
           ["bcrypt", "npm:5.1.0"],\
+          ["commander", "npm:10.0.1"],\
           ["eslint", "npm:8.38.0"],\
           ["eslint-config-prettier", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:8.8.0"],\
           ["eslint-plugin-import", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:2.27.5"],\
@@ -7095,6 +7112,7 @@ const RAW_RUNTIME_STATE =
           ["jest", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:29.5.0"],\
           ["joi", "npm:17.9.1"],\
           ["mysql2", "npm:3.2.3"],\
+          ["nestjs-console", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:8.0.0"],\
           ["prettier", "npm:2.8.7"],\
           ["reflect-metadata", "npm:0.1.13"],\
           ["rxjs", "npm:7.8.0"],\
@@ -7477,6 +7495,34 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/neo-async-npm-2.6.2-75d6902586-9.zip/node_modules/neo-async/",\
         "packageDependencies": [\
           ["neo-async", "npm:2.6.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["nestjs-console", [\
+      ["npm:8.0.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/nestjs-console-npm-8.0.0-19d6369d05-9.zip/node_modules/nestjs-console/",\
+        "packageDependencies": [\
+          ["nestjs-console", "npm:8.0.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:8.0.0", {\
+        "packageLocation": "./.yarn/__virtual__/nestjs-console-virtual-b0eb713e61/6/C:/Users/przem/AppData/Local/Yarn/Berry/cache/nestjs-console-npm-8.0.0-19d6369d05-9.zip/node_modules/nestjs-console/",\
+        "packageDependencies": [\
+          ["nestjs-console", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:8.0.0"],\
+          ["@nestjs/common", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.0"],\
+          ["@nestjs/core", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.0"],\
+          ["@types/nestjs__common", null],\
+          ["@types/nestjs__core", null],\
+          ["commander", "npm:8.3.0"],\
+          ["ora", "npm:5.4.1"]\
+        ],\
+        "packagePeers": [\
+          "@nestjs/common",\
+          "@nestjs/core",\
+          "@types/nestjs__common",\
+          "@types/nestjs__core"\
         ],\
         "linkType": "HARD"\
       }]\
