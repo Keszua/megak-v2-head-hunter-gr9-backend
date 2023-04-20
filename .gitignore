@@ -40,3 +40,6 @@ lerna-debug.log*
 # Private data
 config.ts
 *prv*
+
+# Environment
+.env

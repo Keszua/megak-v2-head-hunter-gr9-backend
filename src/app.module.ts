@@ -1,17 +1,18 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ormConfig } from './config/ormconfig';
+import { envValidationObjectSchema } from './config';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-        isGlobal: true,
+      isGlobal: true,
+      validationSchema: envValidationObjectSchema,
     }),
-    TypeOrmModule.forRoot(ormConfig),
+    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
