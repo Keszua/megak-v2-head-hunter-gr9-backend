@@ -42,6 +42,8 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/eslint-plugin", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:5.59.0"],\
           ["@typescript-eslint/parser", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:5.59.0"],\
           ["bcrypt", "npm:5.1.0"],\
+          ["class-transformer", "npm:0.5.1"],\
+          ["class-validator", "npm:0.14.0"],\
           ["commander", "npm:10.0.1"],\
           ["eslint", "npm:8.38.0"],\
           ["eslint-config-prettier", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:8.8.0"],\
@@ -1539,8 +1541,8 @@ const RAW_RUNTIME_STATE =
           ["@types/reflect-metadata", null],\
           ["@types/rxjs", null],\
           ["cache-manager", null],\
-          ["class-transformer", null],\
-          ["class-validator", null],\
+          ["class-transformer", "npm:0.5.1"],\
+          ["class-validator", "npm:0.14.0"],\
           ["iterare", "npm:1.2.1"],\
           ["reflect-metadata", "npm:0.1.13"],\
           ["rxjs", "npm:7.8.0"],\
@@ -2267,6 +2269,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/supertest", "npm:2.0.12"],\
           ["@types/superagent", "npm:4.1.16"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/validator", [\
+      ["npm:13.7.15", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/@types-validator-npm-13.7.15-d2ecc5630d-9.zip/node_modules/@types/validator/",\
+        "packageDependencies": [\
+          ["@types/validator", "npm:13.7.15"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3611,6 +3622,27 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/cjs-module-lexer-npm-1.2.2-473ce063ea-9.zip/node_modules/cjs-module-lexer/",\
         "packageDependencies": [\
           ["cjs-module-lexer", "npm:1.2.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["class-transformer", [\
+      ["npm:0.5.1", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/class-transformer-npm-0.5.1-96b5161e6c-9.zip/node_modules/class-transformer/",\
+        "packageDependencies": [\
+          ["class-transformer", "npm:0.5.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["class-validator", [\
+      ["npm:0.14.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/class-validator-npm-0.14.0-b600d5fe72-9.zip/node_modules/class-validator/",\
+        "packageDependencies": [\
+          ["class-validator", "npm:0.14.0"],\
+          ["@types/validator", "npm:13.7.15"],\
+          ["libphonenumber-js", "npm:1.10.28"],\
+          ["validator", "npm:13.9.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6879,6 +6911,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["libphonenumber-js", [\
+      ["npm:1.10.28", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/libphonenumber-js-npm-1.10.28-c5d0e1b42c-9.zip/node_modules/libphonenumber-js/",\
+        "packageDependencies": [\
+          ["libphonenumber-js", "npm:1.10.28"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["lines-and-columns", [\
       ["npm:1.2.4", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/lines-and-columns-npm-1.2.4-d6c7cc5799-9.zip/node_modules/lines-and-columns/",\
@@ -7104,6 +7145,8 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/eslint-plugin", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:5.59.0"],\
           ["@typescript-eslint/parser", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:5.59.0"],\
           ["bcrypt", "npm:5.1.0"],\
+          ["class-transformer", "npm:0.5.1"],\
+          ["class-validator", "npm:0.14.0"],\
           ["commander", "npm:10.0.1"],\
           ["eslint", "npm:8.38.0"],\
           ["eslint-config-prettier", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:8.8.0"],\
@@ -9735,6 +9778,15 @@ const RAW_RUNTIME_STATE =
           ["@jridgewell/trace-mapping", "npm:0.3.18"],\
           ["@types/istanbul-lib-coverage", "npm:2.0.4"],\
           ["convert-source-map", "npm:1.9.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["validator", [\
+      ["npm:13.9.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/validator-npm-13.9.0-54b07e9e81-9.zip/node_modules/validator/",\
+        "packageDependencies": [\
+          ["validator", "npm:13.9.0"]\
         ],\
         "linkType": "HARD"\
       }]\
