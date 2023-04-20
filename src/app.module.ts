@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { envValidationObjectSchema } from './config';
 import { DatabaseModule } from './database/database.module';
+import { UsersModule } from './users/users.module';
 
 
 @Module({
@@ -14,6 +15,7 @@ import { DatabaseModule } from './database/database.module';
       validationSchema: envValidationObjectSchema,
     }),
     DatabaseModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
