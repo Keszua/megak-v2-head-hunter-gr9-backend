@@ -28,10 +28,12 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@nestjs/cli", "npm:9.4.0"],\
           ["@nestjs/common", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.0"],\
+          ["@nestjs/config", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:2.3.1"],\
           ["@nestjs/core", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.0"],\
           ["@nestjs/platform-express", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.0"],\
           ["@nestjs/schematics", "virtual:36f30c0e0880d1a5bcbdb27123a60116da2c587050e9ebe8157ec03ed5aff1bd1259052c21bca582aedd8340ce5ff1d629cc4934d11d3824d4ee220cf57685ae#npm:9.1.0"],\
           ["@nestjs/testing", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.0"],\
+          ["@nestjs/typeorm", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.0.1"],\
           ["@types/express", "npm:4.17.17"],\
           ["@types/jest", "npm:29.5.0"],\
           ["@types/node", "npm:18.15.11"],\
@@ -43,6 +45,8 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-import", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:2.27.5"],\
           ["eslint-plugin-prettier", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:4.2.1"],\
           ["jest", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:29.5.0"],\
+          ["joi", "npm:17.9.1"],\
+          ["mysql2", "npm:3.2.3"],\
           ["prettier", "npm:2.8.7"],\
           ["reflect-metadata", "npm:0.1.13"],\
           ["rxjs", "npm:7.8.0"],\
@@ -52,6 +56,7 @@ const RAW_RUNTIME_STATE =
           ["ts-loader", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.2"],\
           ["ts-node", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:10.9.1"],\
           ["tsconfig-paths", "npm:4.2.0"],\
+          ["typeorm", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:0.3.15"],\
           ["typescript", "patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=23ec76"]\
         ],\
         "linkType": "SOFT"\
@@ -1038,6 +1043,25 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@hapi/hoek", [\
+      ["npm:9.3.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/@hapi-hoek-npm-9.3.0-447eb8d274-9.zip/node_modules/@hapi/hoek/",\
+        "packageDependencies": [\
+          ["@hapi/hoek", "npm:9.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@hapi/topo", [\
+      ["npm:5.1.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/@hapi-topo-npm-5.1.0-5e0b776809-9.zip/node_modules/@hapi/topo/",\
+        "packageDependencies": [\
+          ["@hapi/topo", "npm:5.1.0"],\
+          ["@hapi/hoek", "npm:9.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@humanwhocodes/config-array", [\
       ["npm:0.11.8", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/@humanwhocodes-config-array-npm-0.11.8-7955bfecc2-9.zip/node_modules/@humanwhocodes/config-array/",\
@@ -1516,6 +1540,40 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@nestjs/config", [\
+      ["npm:2.3.1", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/@nestjs-config-npm-2.3.1-9c445a938d-9.zip/node_modules/@nestjs/config/",\
+        "packageDependencies": [\
+          ["@nestjs/config", "npm:2.3.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:2.3.1", {\
+        "packageLocation": "./.yarn/__virtual__/@nestjs-config-virtual-e33605b46b/6/C:/Users/przem/AppData/Local/Yarn/Berry/cache/@nestjs-config-npm-2.3.1-9c445a938d-9.zip/node_modules/@nestjs/config/",\
+        "packageDependencies": [\
+          ["@nestjs/config", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:2.3.1"],\
+          ["@nestjs/common", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.0"],\
+          ["@types/nestjs__common", null],\
+          ["@types/reflect-metadata", null],\
+          ["@types/rxjs", null],\
+          ["dotenv", "npm:16.0.3"],\
+          ["dotenv-expand", "npm:10.0.0"],\
+          ["lodash", "npm:4.17.21"],\
+          ["reflect-metadata", "npm:0.1.13"],\
+          ["rxjs", "npm:7.8.0"],\
+          ["uuid", "npm:9.0.0"]\
+        ],\
+        "packagePeers": [\
+          "@nestjs/common",\
+          "@types/nestjs__common",\
+          "@types/reflect-metadata",\
+          "@types/rxjs",\
+          "reflect-metadata",\
+          "rxjs"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@nestjs/core", [\
       ["npm:9.4.0", {\
         "packageLocation": "./.yarn/unplugged/@nestjs-core-virtual-6eb15a863f/node_modules/@nestjs/core/",\
@@ -1656,6 +1714,45 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@nestjs/typeorm", [\
+      ["npm:9.0.1", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/@nestjs-typeorm-npm-9.0.1-048c05d122-9.zip/node_modules/@nestjs/typeorm/",\
+        "packageDependencies": [\
+          ["@nestjs/typeorm", "npm:9.0.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.0.1", {\
+        "packageLocation": "./.yarn/__virtual__/@nestjs-typeorm-virtual-42124addd5/6/C:/Users/przem/AppData/Local/Yarn/Berry/cache/@nestjs-typeorm-npm-9.0.1-048c05d122-9.zip/node_modules/@nestjs/typeorm/",\
+        "packageDependencies": [\
+          ["@nestjs/typeorm", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.0.1"],\
+          ["@nestjs/common", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.0"],\
+          ["@nestjs/core", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.0"],\
+          ["@types/nestjs__common", null],\
+          ["@types/nestjs__core", null],\
+          ["@types/reflect-metadata", null],\
+          ["@types/rxjs", null],\
+          ["@types/typeorm", null],\
+          ["reflect-metadata", "npm:0.1.13"],\
+          ["rxjs", "npm:7.8.0"],\
+          ["typeorm", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:0.3.15"],\
+          ["uuid", "npm:8.3.2"]\
+        ],\
+        "packagePeers": [\
+          "@nestjs/common",\
+          "@nestjs/core",\
+          "@types/nestjs__common",\
+          "@types/nestjs__core",\
+          "@types/reflect-metadata",\
+          "@types/rxjs",\
+          "@types/typeorm",\
+          "reflect-metadata",\
+          "rxjs",\
+          "typeorm"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@nodelib/fs.scandir", [\
       ["npm:2.1.5", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/@nodelib-fs.scandir-npm-2.1.5-89c67370dd-9.zip/node_modules/@nodelib/fs.scandir/",\
@@ -1721,6 +1818,34 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@sideway/address", [\
+      ["npm:4.1.4", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/@sideway-address-npm-4.1.4-32f94bc9f5-9.zip/node_modules/@sideway/address/",\
+        "packageDependencies": [\
+          ["@sideway/address", "npm:4.1.4"],\
+          ["@hapi/hoek", "npm:9.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@sideway/formula", [\
+      ["npm:3.0.1", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/@sideway-formula-npm-3.0.1-ee371b2ddf-9.zip/node_modules/@sideway/formula/",\
+        "packageDependencies": [\
+          ["@sideway/formula", "npm:3.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@sideway/pinpoint", [\
+      ["npm:2.0.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/@sideway-pinpoint-npm-2.0.0-66d94e687e-9.zip/node_modules/@sideway/pinpoint/",\
+        "packageDependencies": [\
+          ["@sideway/pinpoint", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@sinclair/typebox", [\
       ["npm:0.25.24", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/@sinclair-typebox-npm-0.25.24-d04d0f45ef-9.zip/node_modules/@sinclair/typebox/",\
@@ -1746,6 +1871,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@sinonjs/fake-timers", "npm:10.0.2"],\
           ["@sinonjs/commons", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@sqltools/formatter", [\
+      ["npm:1.2.5", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/@sqltools-formatter-npm-1.2.5-709e7c0ab8-9.zip/node_modules/@sqltools/formatter/",\
+        "packageDependencies": [\
+          ["@sqltools/formatter", "npm:1.2.5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2759,6 +2893,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["any-promise", [\
+      ["npm:1.3.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/any-promise-npm-1.3.0-f34eeaa7e7-9.zip/node_modules/any-promise/",\
+        "packageDependencies": [\
+          ["any-promise", "npm:1.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["anymatch", [\
       ["npm:3.1.3", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/anymatch-npm-3.1.3-bc81d103b1-9.zip/node_modules/anymatch/",\
@@ -2766,6 +2909,15 @@ const RAW_RUNTIME_STATE =
           ["anymatch", "npm:3.1.3"],\
           ["normalize-path", "npm:3.0.0"],\
           ["picomatch", "npm:2.3.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["app-root-path", [\
+      ["npm:3.1.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/app-root-path-npm-3.1.0-9822bb2a96-9.zip/node_modules/app-root-path/",\
+        "packageDependencies": [\
+          ["app-root-path", "npm:3.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3208,6 +3360,15 @@ const RAW_RUNTIME_STATE =
           ["ieee754", "npm:1.2.1"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:6.0.3", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/buffer-npm-6.0.3-cd90dfedfe-9.zip/node_modules/buffer/",\
+        "packageDependencies": [\
+          ["buffer", "npm:6.0.3"],\
+          ["base64-js", "npm:1.5.1"],\
+          ["ieee754", "npm:1.2.1"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["buffer-from", [\
@@ -3421,6 +3582,21 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["cli-highlight", [\
+      ["npm:2.1.11", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/cli-highlight-npm-2.1.11-569697f73a-9.zip/node_modules/cli-highlight/",\
+        "packageDependencies": [\
+          ["cli-highlight", "npm:2.1.11"],\
+          ["chalk", "npm:4.1.2"],\
+          ["highlight.js", "npm:10.7.3"],\
+          ["mz", "npm:2.7.0"],\
+          ["parse5", "npm:5.1.1"],\
+          ["parse5-htmlparser2-tree-adapter", "npm:6.0.1"],\
+          ["yargs", "npm:16.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["cli-spinners", [\
       ["npm:2.8.0", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/cli-spinners-npm-2.8.0-5085c29d94-9.zip/node_modules/cli-spinners/",\
@@ -3451,6 +3627,16 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["cliui", [\
+      ["npm:7.0.4", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/cliui-npm-7.0.4-d6b8a9edb6-9.zip/node_modules/cliui/",\
+        "packageDependencies": [\
+          ["cliui", "npm:7.0.4"],\
+          ["string-width", "npm:4.2.3"],\
+          ["strip-ansi", "npm:6.0.1"],\
+          ["wrap-ansi", "npm:7.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:8.0.1", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/cliui-npm-8.0.1-3b029092cf-9.zip/node_modules/cliui/",\
         "packageDependencies": [\
@@ -3855,6 +4041,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["denque", [\
+      ["npm:2.1.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/denque-npm-2.1.0-578d0b6297-9.zip/node_modules/denque/",\
+        "packageDependencies": [\
+          ["denque", "npm:2.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["depd", [\
       ["npm:2.0.0", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/depd-npm-2.0.0-b6c51a4b43-9.zip/node_modules/depd/",\
@@ -3935,6 +4130,24 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["doctrine", "npm:3.0.0"],\
           ["esutils", "npm:2.0.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["dotenv", [\
+      ["npm:16.0.3", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/dotenv-npm-16.0.3-4cc29121dc-9.zip/node_modules/dotenv/",\
+        "packageDependencies": [\
+          ["dotenv", "npm:16.0.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["dotenv-expand", [\
+      ["npm:10.0.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/dotenv-expand-npm-10.0.0-fa5b032ad9-9.zip/node_modules/dotenv-expand/",\
+        "packageDependencies": [\
+          ["dotenv-expand", "npm:10.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4940,6 +5153,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["generate-function", [\
+      ["npm:2.3.1", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/generate-function-npm-2.3.1-c839dc559c-9.zip/node_modules/generate-function/",\
+        "packageDependencies": [\
+          ["generate-function", "npm:2.3.1"],\
+          ["is-property", "npm:1.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["gensync", [\
       ["npm:1.0.0-beta.2", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/gensync-npm-1.0.0-beta.2-224666d72f-9.zip/node_modules/gensync/",\
@@ -5229,6 +5452,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/hexoid-npm-1.0.0-2274609209-9.zip/node_modules/hexoid/",\
         "packageDependencies": [\
           ["hexoid", "npm:1.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["highlight.js", [\
+      ["npm:10.7.3", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/highlight.js-npm-10.7.3-247e67d5c0-9.zip/node_modules/highlight.js/",\
+        "packageDependencies": [\
+          ["highlight.js", "npm:10.7.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5673,6 +5905,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/is-path-inside-npm-3.0.3-2ea0ef44fd-9.zip/node_modules/is-path-inside/",\
         "packageDependencies": [\
           ["is-path-inside", "npm:3.0.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["is-property", [\
+      ["npm:1.0.2", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/is-property-npm-1.0.2-6eac53b30e-9.zip/node_modules/is-property/",\
+        "packageDependencies": [\
+          ["is-property", "npm:1.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6387,6 +6628,20 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["joi", [\
+      ["npm:17.9.1", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/joi-npm-17.9.1-3d1fcfa933-9.zip/node_modules/joi/",\
+        "packageDependencies": [\
+          ["joi", "npm:17.9.1"],\
+          ["@hapi/hoek", "npm:9.3.0"],\
+          ["@hapi/topo", "npm:5.1.0"],\
+          ["@sideway/address", "npm:4.1.4"],\
+          ["@sideway/formula", "npm:3.0.1"],\
+          ["@sideway/pinpoint", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["js-sdsl", [\
       ["npm:4.4.0", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/js-sdsl-npm-4.4.0-e8ec19da4a-9.zip/node_modules/js-sdsl/",\
@@ -6607,6 +6862,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["long", [\
+      ["npm:5.2.3", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/long-npm-5.2.3-61dddb7586-9.zip/node_modules/long/",\
+        "packageDependencies": [\
+          ["long", "npm:5.2.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["lru-cache", [\
       ["npm:5.1.1", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/lru-cache-npm-5.1.1-f475882a51-9.zip/node_modules/lru-cache/",\
@@ -6628,6 +6892,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/lru-cache-npm-7.18.3-e68be5b11c-9.zip/node_modules/lru-cache/",\
         "packageDependencies": [\
           ["lru-cache", "npm:7.18.3"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:8.0.5", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/lru-cache-npm-8.0.5-bb030cd93e-9.zip/node_modules/lru-cache/",\
+        "packageDependencies": [\
+          ["lru-cache", "npm:8.0.5"]\
         ],\
         "linkType": "HARD"\
       }],\
@@ -6728,10 +6999,12 @@ const RAW_RUNTIME_STATE =
           ["megak-v2-head-hunter-gr9-backend", "workspace:."],\
           ["@nestjs/cli", "npm:9.4.0"],\
           ["@nestjs/common", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.0"],\
+          ["@nestjs/config", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:2.3.1"],\
           ["@nestjs/core", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.0"],\
           ["@nestjs/platform-express", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.0"],\
           ["@nestjs/schematics", "virtual:36f30c0e0880d1a5bcbdb27123a60116da2c587050e9ebe8157ec03ed5aff1bd1259052c21bca582aedd8340ce5ff1d629cc4934d11d3824d4ee220cf57685ae#npm:9.1.0"],\
           ["@nestjs/testing", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.0"],\
+          ["@nestjs/typeorm", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.0.1"],\
           ["@types/express", "npm:4.17.17"],\
           ["@types/jest", "npm:29.5.0"],\
           ["@types/node", "npm:18.15.11"],\
@@ -6743,6 +7016,8 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-import", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:2.27.5"],\
           ["eslint-plugin-prettier", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:4.2.1"],\
           ["jest", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:29.5.0"],\
+          ["joi", "npm:17.9.1"],\
+          ["mysql2", "npm:3.2.3"],\
           ["prettier", "npm:2.8.7"],\
           ["reflect-metadata", "npm:0.1.13"],\
           ["rxjs", "npm:7.8.0"],\
@@ -6752,6 +7027,7 @@ const RAW_RUNTIME_STATE =
           ["ts-loader", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:9.4.2"],\
           ["ts-node", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:10.9.1"],\
           ["tsconfig-paths", "npm:4.2.0"],\
+          ["typeorm", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:0.3.15"],\
           ["typescript", "patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=23ec76"]\
         ],\
         "linkType": "SOFT"\
@@ -6996,6 +7272,13 @@ const RAW_RUNTIME_STATE =
           ["mkdirp", "npm:1.0.4"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:2.1.6", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/mkdirp-npm-2.1.6-832c38f12a-9.zip/node_modules/mkdirp/",\
+        "packageDependencies": [\
+          ["mkdirp", "npm:2.1.6"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["ms", [\
@@ -7042,6 +7325,45 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/mute-stream-npm-0.0.8-489a7d6c2b-9.zip/node_modules/mute-stream/",\
         "packageDependencies": [\
           ["mute-stream", "npm:0.0.8"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["mysql2", [\
+      ["npm:3.2.3", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/mysql2-npm-3.2.3-e382c34b11-9.zip/node_modules/mysql2/",\
+        "packageDependencies": [\
+          ["mysql2", "npm:3.2.3"],\
+          ["denque", "npm:2.1.0"],\
+          ["generate-function", "npm:2.3.1"],\
+          ["iconv-lite", "npm:0.6.3"],\
+          ["long", "npm:5.2.3"],\
+          ["lru-cache", "npm:8.0.5"],\
+          ["named-placeholders", "npm:1.1.3"],\
+          ["seq-queue", "npm:0.0.5"],\
+          ["sqlstring", "npm:2.3.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["mz", [\
+      ["npm:2.7.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/mz-npm-2.7.0-ec3cef4ec2-9.zip/node_modules/mz/",\
+        "packageDependencies": [\
+          ["mz", "npm:2.7.0"],\
+          ["any-promise", "npm:1.3.0"],\
+          ["object-assign", "npm:4.1.1"],\
+          ["thenify-all", "npm:1.6.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["named-placeholders", [\
+      ["npm:1.1.3", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/named-placeholders-npm-1.1.3-1b385febe5-9.zip/node_modules/named-placeholders/",\
+        "packageDependencies": [\
+          ["named-placeholders", "npm:1.1.3"],\
+          ["lru-cache", "npm:7.18.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7412,6 +7734,32 @@ const RAW_RUNTIME_STATE =
           ["error-ex", "npm:1.3.2"],\
           ["json-parse-even-better-errors", "npm:2.3.1"],\
           ["lines-and-columns", "npm:1.2.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["parse5", [\
+      ["npm:5.1.1", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/parse5-npm-5.1.1-8e63d82cff-9.zip/node_modules/parse5/",\
+        "packageDependencies": [\
+          ["parse5", "npm:5.1.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:6.0.1", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/parse5-npm-6.0.1-70a35a494a-9.zip/node_modules/parse5/",\
+        "packageDependencies": [\
+          ["parse5", "npm:6.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["parse5-htmlparser2-tree-adapter", [\
+      ["npm:6.0.1", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/parse5-htmlparser2-tree-adapter-npm-6.0.1-60b4888f75-9.zip/node_modules/parse5-htmlparser2-tree-adapter/",\
+        "packageDependencies": [\
+          ["parse5-htmlparser2-tree-adapter", "npm:6.0.1"],\
+          ["parse5", "npm:6.0.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8059,6 +8407,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["seq-queue", [\
+      ["npm:0.0.5", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/seq-queue-npm-0.0.5-d5064d9793-9.zip/node_modules/seq-queue/",\
+        "packageDependencies": [\
+          ["seq-queue", "npm:0.0.5"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["serialize-javascript", [\
       ["npm:6.0.1", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/serialize-javascript-npm-6.0.1-fac87289ed-9.zip/node_modules/serialize-javascript/",\
@@ -8096,6 +8453,17 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/setprototypeof-npm-1.2.0-0fedbdcd3a-9.zip/node_modules/setprototypeof/",\
         "packageDependencies": [\
           ["setprototypeof", "npm:1.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["sha.js", [\
+      ["npm:2.4.11", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/sha.js-npm-2.4.11-14868df4ca-9.zip/node_modules/sha.js/",\
+        "packageDependencies": [\
+          ["sha.js", "npm:2.4.11"],\
+          ["inherits", "npm:2.0.4"],\
+          ["safe-buffer", "npm:5.2.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8243,6 +8611,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/sprintf-js-npm-1.0.3-73f0a322fa-9.zip/node_modules/sprintf-js/",\
         "packageDependencies": [\
           ["sprintf-js", "npm:1.0.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["sqlstring", [\
+      ["npm:2.3.3", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/sqlstring-npm-2.3.3-2db6939570-9.zip/node_modules/sqlstring/",\
+        "packageDependencies": [\
+          ["sqlstring", "npm:2.3.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8573,6 +8950,26 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/text-table-npm-0.2.0-d92a778b59-9.zip/node_modules/text-table/",\
         "packageDependencies": [\
           ["text-table", "npm:0.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["thenify", [\
+      ["npm:3.3.1", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/thenify-npm-3.3.1-030bedb22c-9.zip/node_modules/thenify/",\
+        "packageDependencies": [\
+          ["thenify", "npm:3.3.1"],\
+          ["any-promise", "npm:1.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["thenify-all", [\
+      ["npm:1.6.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/thenify-all-npm-1.6.0-96309bbc8b-9.zip/node_modules/thenify-all/",\
+        "packageDependencies": [\
+          ["thenify-all", "npm:1.6.0"],\
+          ["thenify", "npm:3.3.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8931,6 +9328,106 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["typeorm", [\
+      ["npm:0.3.15", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/typeorm-npm-0.3.15-20a6c4f754-9.zip/node_modules/typeorm/",\
+        "packageDependencies": [\
+          ["typeorm", "npm:0.3.15"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:0.3.15", {\
+        "packageLocation": "./.yarn/__virtual__/typeorm-virtual-75c587377e/6/C:/Users/przem/AppData/Local/Yarn/Berry/cache/typeorm-npm-0.3.15-20a6c4f754-9.zip/node_modules/typeorm/",\
+        "packageDependencies": [\
+          ["typeorm", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:0.3.15"],\
+          ["@google-cloud/spanner", null],\
+          ["@sap/hana-client", null],\
+          ["@sqltools/formatter", "npm:1.2.5"],\
+          ["@types/better-sqlite3", null],\
+          ["@types/google-cloud__spanner", null],\
+          ["@types/hdb-pool", null],\
+          ["@types/ioredis", null],\
+          ["@types/mongodb", null],\
+          ["@types/mssql", null],\
+          ["@types/mysql2", null],\
+          ["@types/oracledb", null],\
+          ["@types/pg", null],\
+          ["@types/pg-native", null],\
+          ["@types/pg-query-stream", null],\
+          ["@types/redis", null],\
+          ["@types/sap__hana-client", null],\
+          ["@types/sql.js", null],\
+          ["@types/sqlite3", null],\
+          ["@types/ts-node", null],\
+          ["@types/typeorm-aurora-data-api-driver", null],\
+          ["app-root-path", "npm:3.1.0"],\
+          ["better-sqlite3", null],\
+          ["buffer", "npm:6.0.3"],\
+          ["chalk", "npm:4.1.2"],\
+          ["cli-highlight", "npm:2.1.11"],\
+          ["debug", "virtual:ac3d8e680759ce54399273724d44e041d6c9b73454d191d411a8c44bb27e22f02aaf6ed9d3ad0ac1c298eac4833cff369c9c7b84c573016112c4f84be2cd8543#npm:4.3.4"],\
+          ["dotenv", "npm:16.0.3"],\
+          ["glob", "npm:8.1.0"],\
+          ["hdb-pool", null],\
+          ["ioredis", null],\
+          ["mkdirp", "npm:2.1.6"],\
+          ["mongodb", null],\
+          ["mssql", null],\
+          ["mysql2", "npm:3.2.3"],\
+          ["oracledb", null],\
+          ["pg", null],\
+          ["pg-native", null],\
+          ["pg-query-stream", null],\
+          ["redis", null],\
+          ["reflect-metadata", "npm:0.1.13"],\
+          ["sha.js", "npm:2.4.11"],\
+          ["sql.js", null],\
+          ["sqlite3", null],\
+          ["ts-node", "virtual:7681d4863cdd30998203c042d01f1413bf7e65db39378a25b05942f555b956516d0ce0f41ad58b9924cc5e4e31e73b93a9aef391bf695fd690a38f3b8ceb0bbc#npm:10.9.1"],\
+          ["tslib", "npm:2.5.0"],\
+          ["typeorm-aurora-data-api-driver", null],\
+          ["uuid", "npm:9.0.0"],\
+          ["yargs", "npm:17.7.1"]\
+        ],\
+        "packagePeers": [\
+          "@google-cloud/spanner",\
+          "@sap/hana-client",\
+          "@types/better-sqlite3",\
+          "@types/google-cloud__spanner",\
+          "@types/hdb-pool",\
+          "@types/ioredis",\
+          "@types/mongodb",\
+          "@types/mssql",\
+          "@types/mysql2",\
+          "@types/oracledb",\
+          "@types/pg-native",\
+          "@types/pg-query-stream",\
+          "@types/pg",\
+          "@types/redis",\
+          "@types/sap__hana-client",\
+          "@types/sql.js",\
+          "@types/sqlite3",\
+          "@types/ts-node",\
+          "@types/typeorm-aurora-data-api-driver",\
+          "better-sqlite3",\
+          "hdb-pool",\
+          "ioredis",\
+          "mongodb",\
+          "mssql",\
+          "mysql2",\
+          "oracledb",\
+          "pg-native",\
+          "pg-query-stream",\
+          "pg",\
+          "redis",\
+          "sql.js",\
+          "sqlite3",\
+          "ts-node",\
+          "typeorm-aurora-data-api-driver"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["typescript", [\
       ["patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=23ec76", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/typescript-patch-dffdadc747-9.zip/node_modules/typescript/",\
@@ -9049,6 +9546,22 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/utils-merge-npm-1.0.1-363bbdfbca-9.zip/node_modules/utils-merge/",\
         "packageDependencies": [\
           ["utils-merge", "npm:1.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["uuid", [\
+      ["npm:8.3.2", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/uuid-npm-8.3.2-eca0baba53-9.zip/node_modules/uuid/",\
+        "packageDependencies": [\
+          ["uuid", "npm:8.3.2"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:9.0.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/uuid-npm-9.0.0-46c41e3e43-9.zip/node_modules/uuid/",\
+        "packageDependencies": [\
+          ["uuid", "npm:9.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -9342,6 +9855,20 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["yargs", [\
+      ["npm:16.2.0", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/yargs-npm-16.2.0-547873d425-9.zip/node_modules/yargs/",\
+        "packageDependencies": [\
+          ["yargs", "npm:16.2.0"],\
+          ["cliui", "npm:7.0.4"],\
+          ["escalade", "npm:3.1.1"],\
+          ["get-caller-file", "npm:2.0.5"],\
+          ["require-directory", "npm:2.1.1"],\
+          ["string-width", "npm:4.2.3"],\
+          ["y18n", "npm:5.0.8"],\
+          ["yargs-parser", "npm:20.2.9"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:17.7.1", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/yargs-npm-17.7.1-0758ec0e50-9.zip/node_modules/yargs/",\
         "packageDependencies": [\
@@ -9358,6 +9885,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["yargs-parser", [\
+      ["npm:20.2.9", {\
+        "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/yargs-parser-npm-20.2.9-a1d19e598d-9.zip/node_modules/yargs-parser/",\
+        "packageDependencies": [\
+          ["yargs-parser", "npm:20.2.9"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:21.1.1", {\
         "packageLocation": "../../../../../C:/Users/przem/AppData/Local/Yarn/Berry/cache/yargs-parser-npm-21.1.1-8fdc003314-9.zip/node_modules/yargs-parser/",\
         "packageDependencies": [\

@@ -36,3 +36,10 @@ lerna-debug.log*
 
 # Yarn Integrity file
 .yarn/*
+
+# Private data
+config.ts
+*prv*
+
+# Environment
+.env
