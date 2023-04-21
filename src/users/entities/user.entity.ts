@@ -1,13 +1,6 @@
-import {
-  BaseEntity,
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-import { UserEntity, UserRole } from '../../types/user';
+import { UserEntity, UserRole } from '../../types';
 
 @Entity('users')
 export class User extends BaseEntity implements UserEntity {
