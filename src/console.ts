@@ -7,6 +7,7 @@ const bootstrap = new BootstrapConsole({
   useDecorators: true,
 });
 bootstrap.init().then(async app => {
+  app.useLogger(['log', 'error', 'warn', 'debug', 'verbose']);
   try {
     await app.init();
     await bootstrap.boot();
