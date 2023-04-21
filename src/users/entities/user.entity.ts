@@ -7,7 +7,7 @@ export class User extends BaseEntity implements UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ nullable: false })
+  @Column({ unique: true, nullable: false })
   email: string;
 
   @Column({ nullable: false })
