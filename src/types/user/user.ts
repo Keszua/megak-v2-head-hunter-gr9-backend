@@ -7,6 +7,7 @@ export enum UserRole {
 export interface UserEntity {
   id: string;
   email: string;
-  hashPwd: string;
+  hashPwd?: string;
   role: UserRole;
+  isActive: boolean;
 }
