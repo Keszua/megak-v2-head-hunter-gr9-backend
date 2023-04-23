@@ -1,5 +1,13 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
+import { Student } from '../../students/entities';
 import { UserEntity, UserRole } from '../../types';
 
 @Entity('users')
@@ -21,4 +29,7 @@ export class User extends BaseEntity implements UserEntity {
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
+
+  @OneToOne(() => Student, student => student.user)
+  student: Student;
 }
