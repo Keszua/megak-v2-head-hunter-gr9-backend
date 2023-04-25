@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { Response } from 'express';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -14,5 +15,10 @@ export class UsersService {
     user.hashPwd = await hashData(password);
     user.role = role;
     return user.save();
+  }
+
+  async getUser(userId: string, res: Response): Promise<void> {
+    const user = await User.findOneByOrFail({ id: userId }).catch(e => Logger.log(e));
+    res.json(user);
   }
 }

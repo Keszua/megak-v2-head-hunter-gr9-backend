@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import {
   ArgumentsHost,
   Catch,
@@ -8,10 +9,11 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { EntityNotFoundError } from 'typeorm';
+import { EntityNotFoundError, QueryFailedError } from 'typeorm';
 
 import { ClientApiResponse } from '../types/client-api/client-api.response';
-import { ErrorData } from '../types/error/ErrorData';
+import { ErrorData } from '../types/error/error-data';
+import { MysqlErrorCodes } from '../types/error/mysql-errors';
 import { ErrorMessage } from '../types/messages/error-message/error-message';
 import { MySqlErrorMessage } from '../types/messages/mysql-message/mysql-error.message';
 
@@ -39,10 +41,23 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
   private tryToGetErrorData(error: unknown): ErrorData {
     Logger.error(error);
+
+    //Not found exception
     if (error instanceof EntityNotFoundError) {
       return {
         error: ErrorMessage.NotFound,
         status: HttpStatus.NOT_FOUND,
+      };
+    }
+
+    //DB Query error
+    if (error instanceof QueryFailedError) {
+      const { code } = error.driverError;
+      const message = this.getMysqlErrorMessage(code);
+
+      return {
+        error: message,
+        status: HttpStatus.BAD_REQUEST,
       };
     }
 
@@ -61,5 +76,49 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       error: ErrorMessage.InternalServerError,
       status: HttpStatus.INTERNAL_SERVER_ERROR,
     };
+  }
+
+  private getMysqlErrorMessage(code: string): string {
+    let message: string;
+    switch (code) {
+      case MysqlErrorCodes.ER_DUP_ENTRY:
+        message = MySqlErrorMessage.ER_DUP_ENTRY;
+        break;
+      case MysqlErrorCodes.ER_CHECK_CONSTRAINT_VIOLATED:
+        message = MySqlErrorMessage.ER_CHECK_CONSTRAINT_VIOLATED;
+        break;
+      case MysqlErrorCodes.ER_DATA_TOO_LONG:
+        message = MySqlErrorMessage.ER_DATA_TOO_LONG;
+        break;
+      case MysqlErrorCodes.ER_INVALID_DEFAULT:
+        message = MySqlErrorMessage.ER_INVALID_DEFAULT;
+        break;
+      case MysqlErrorCodes.ER_LOCK_WAIT_TIMEOUT:
+        message = MySqlErrorMessage.ER_LOCK_WAIT_TIMEOUT;
+        break;
+      case MysqlErrorCodes.ER_NO_REFERENCED_ROW:
+        message = MySqlErrorMessage.ER_NO_REFERENCED_ROW;
+        break;
+      case MysqlErrorCodes.ER_QUERY_INTERRUPTED:
+        message = MySqlErrorMessage.ER_QUERY_INTERRUPTED;
+        break;
+      case MysqlErrorCodes.ER_ROW_IS_REFERENCED:
+        message = MySqlErrorMessage.ER_ROW_IS_REFERENCED;
+        break;
+      case MysqlErrorCodes.ER_SYNTAX_ERROR:
+        message = MySqlErrorMessage.ER_SYNTAX_ERROR;
+        break;
+      case MysqlErrorCodes.ER_UNSUPPORTED_EXTENSION:
+        message = MySqlErrorMessage.ER_UNSUPPORTED_EXTENSION;
+        break;
+      case MysqlErrorCodes.ER_WRONG_VALUE_COUNT:
+        message = MySqlErrorMessage.ER_WRONG_VALUE_COUNT;
+        break;
+      default:
+        message = ErrorMessage.InternalServerError;
+        break;
+    }
+    Logger.log(code);
+    return message;
   }
 }
