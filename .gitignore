@@ -37,6 +37,9 @@ lerna-debug.log*
 # Yarn Integrity file
 .yarn/*
 
+# NPM Integrity file
+package-lock.json
+
 # Private data
 config.ts
 *prv*
