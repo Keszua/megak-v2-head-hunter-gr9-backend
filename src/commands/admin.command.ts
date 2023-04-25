@@ -1,7 +1,6 @@
+import { Injectable, Logger } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
-
-import { Injectable, Logger } from '@nestjs/common';
 import { Command, Console } from 'nestjs-console';
 
 import { AdminService } from '../admin/admin.service';
