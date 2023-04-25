@@ -12,8 +12,8 @@ export class GlobalResponseInterceptor<T> implements NestInterceptor<T, ClientAp
   ): Observable<ClientApiResponse<T>> | Promise<Observable<ClientApiResponse<T>>> {
     const ctx = context.switchToHttp();
     const response = ctx.getResponse<Response>();
-    const status = response.statusCode;
+    const { statusCode } = response;
 
-    return next.handle().pipe(map((data) => ({ ok: true, status, data })));
+    return next.handle().pipe(map(data => ({ ok: true, statusCode, data })));
   }
 }
