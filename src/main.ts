@@ -7,6 +7,7 @@ import { corsOptions } from './config';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api');
   const configService = app.get(ConfigService);
   app.enableCors(corsOptions);
   const PORT = configService.get('APP_PORT');
