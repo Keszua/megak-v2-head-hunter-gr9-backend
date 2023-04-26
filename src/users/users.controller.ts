@@ -12,6 +12,11 @@ export class UsersController {
     await this.userService.createUser(userData);
   }
 
+  @Get('/emails')
+  async getAllEmails(): Promise<void> {
+    await this.userService.getAllEmails();
+  }
+
   @Get('/:userId')
   async getUser(@Param('userId') userId: string): Promise<void> {
     await this.userService.getUser(userId);
