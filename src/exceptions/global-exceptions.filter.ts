@@ -5,7 +5,6 @@ import {
   ExceptionFilter,
   HttpException,
   HttpStatus,
-  BadRequestException,
   Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
@@ -42,7 +41,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
   private tryToGetErrorData(error: unknown): ErrorData {
     Logger.error(error);
 
-    //Not found exception
+    //Not found exception 404
     if (error instanceof EntityNotFoundError) {
       return {
         error: ErrorMessage.NotFound,
@@ -50,7 +49,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       };
     }
 
-    //DB Query error
+    //DB Query exception 400
     if (error instanceof QueryFailedError) {
       const { code } = error.driverError;
       const message = this.getMysqlErrorMessage(code);
