@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
+import { Response } from 'express';
 
 import { LoginDto, RegisterDto } from './dto';
 
@@ -29,5 +30,9 @@ export class AuthService {
       }
     }
     return null;
+  }
+
+  login(user: UserResponse, res: Response): UserResponse {
+    return user;
   }
 }
