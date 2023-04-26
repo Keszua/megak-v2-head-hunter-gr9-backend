@@ -6,6 +6,7 @@ import { ConsoleModule } from 'nestjs-console';
 import { AdminModule } from './admin/admin.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
 import { AdminCommand } from './commands/admin.command';
 import { GlobalExceptionFilter, GlobalResponseInterceptor } from './common';
 import { envValidationObjectSchema } from './config';
@@ -24,6 +25,7 @@ import { UsersModule } from './users/users.module';
     AdminModule,
     ConsoleModule,
     StudentsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [
