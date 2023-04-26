@@ -18,9 +18,7 @@ export class UsersService {
   }
 
   async getUser(userId: string, res: Response): Promise<void> {
-    const user = await User.findOneByOrFail({ id: userId }).catch(e =>
-      Logger.log('User not found, error: ', e),
-    );
+    const user = await User.findOneByOrFail({ id: userId });
     res.json(user);
   }
 }

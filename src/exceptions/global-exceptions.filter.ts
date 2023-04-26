@@ -13,8 +13,8 @@ import { EntityNotFoundError, QueryFailedError } from 'typeorm';
 import { ClientApiResponse } from '../types/client-api/client-api.response';
 import { ErrorData } from '../types/error/error-data';
 import { MysqlErrorCodes } from '../types/error/mysql-errors';
-import { ErrorMessage } from '../types/messages/error-message/error-message';
-import { MySqlErrorMessage } from '../types/messages/mysql-message/mysql-error.message';
+import { MySqlErrorMessage } from '../types/mysql-message/mysql-error.message';
+import { ErrorMessage } from '../utils/error-message/error-message';
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
@@ -24,7 +24,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest<Request>();
 
     const { status: statusCode, ...errorData } = this.tryToGetErrorData(exception);
-    Logger.log({
+    Logger.error({
       statusCode,
       ...errorData,
       timestamp: new Date().toISOString(),
@@ -39,7 +39,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
   }
 
   private tryToGetErrorData(error: unknown): ErrorData {
-    Logger.error(error);
+    Logger.log(error);
 
     //Not found exception 404
     if (error instanceof EntityNotFoundError) {
