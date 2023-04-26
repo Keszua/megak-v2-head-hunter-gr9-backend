@@ -24,6 +24,16 @@ export class UsersService {
     await User.update(id, { isActive: true });
   }
 
+  getUserByEmail(email: string): Promise<User> {
+    return User.findOneOrFail({
+      where: { email },
+    });
+  }
+
+  async changePassword(id: string, password: string): Promise<void> {
+    await User.update(id, { hashPwd: await hashData(password) });
+  }
+
   async getAllEmails(): Promise<string[]> {
     const users = await User.find();
     return users.map(user => user.email);
