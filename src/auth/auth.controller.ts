@@ -9,7 +9,7 @@ export class AuthController {
 
   @HttpCode(200)
   @Post('register')
-  async register(@Body() registerDto: RegisterDto): Promise<void> {
+  register(@Body() registerDto: RegisterDto): Promise<void> {
     return this.authService.register(registerDto);
   }
 }
