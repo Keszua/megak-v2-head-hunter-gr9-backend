@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 
-import { hashData } from '../utils';
+import { checkHash, hashData } from '../utils';
 
 @Injectable()
 export class UsersService {
@@ -11,7 +11,7 @@ export class UsersService {
     const { email, password, role } = userData;
     const user = new User();
     user.email = email;
-    user.hashPwd = password ? await hashData(password) : null;
+    user.hashPwd = password ? await this.hashPassword(password) : null;
     user.role = role;
     return user.save();
   }
@@ -28,6 +28,14 @@ export class UsersService {
 
   async changePassword(id: string, password: string): Promise<void> {
     await User.update(id, { hashPwd: await hashData(password) });
+  }
+
+  hashPassword(password: string): Promise<string> {
+    return hashData(password);
+  }
+
+  isPasswordValid(password: string, hashPwd: string): Promise<boolean> {
+    return checkHash(password, hashPwd);
   }
 
   async getAllEmails(): Promise<string[]> {
