@@ -6,11 +6,6 @@ export interface HrEntity {
   email?: string;
   fullName: string;
   company: string;
+  createdAt: Date;
   maxReservedStudents: number;
-}
-
-export interface HrCreatedResponse {
-  id: string;
-  fullName: string;
-  company: string;
 }

@@ -1,7 +1,6 @@
-import { Controller, Post, Body, HttpStatus, HttpCode } from '@nestjs/common';
-import { HrCreatedResponse } from 'src/types';
+import { Controller, Body, HttpStatus, HttpCode, Patch } from '@nestjs/common';
+import { HrCreateRequest, HrCreatedResponse } from 'src/types';
 
-import { CreateHrDto } from './dto/create-hr.dto';
 import { HrService } from './hr.service';
 
 @Controller('hr')
@@ -9,8 +8,8 @@ export class HrController {
   constructor(private readonly hrService: HrService) {}
 
   @HttpCode(HttpStatus.OK)
-  @Post('/')
-  createHr(@Body() hrData: CreateHrDto): Promise<HrCreatedResponse> {
+  @Patch('/')
+  createHr(@Body() hrData: HrCreateRequest): Promise<HrCreatedResponse> {
     return this.hrService.createHr(hrData);
   }
 }
