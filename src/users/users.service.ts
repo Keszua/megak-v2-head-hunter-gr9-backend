@@ -19,4 +19,9 @@ export class UsersService {
   async activateUser(id: string): Promise<void> {
     await User.update(id, { isActive: true });
   }
+
+  async getAllEmails(): Promise<string[]> {
+    const users = await User.find();
+    return users.map(user => user.email);
+  }
 }
