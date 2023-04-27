@@ -14,6 +14,7 @@ import { User } from '../../users/entities/user.entity';
 
 @Entity('hr')
 export class Hr extends BaseEntity implements HrEntity {
+  email?: string;
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

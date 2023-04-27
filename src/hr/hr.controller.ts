@@ -2,7 +2,6 @@ import { Controller, Body, HttpStatus, HttpCode, Patch } from '@nestjs/common';
 import { ApiBody, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { HrCreatedResponse } from 'src/types';
 
-import { CreateHrDto } from './dto/create-hr.dto';
 import { HrService } from './hr.service';
 
 @Controller('hr')
