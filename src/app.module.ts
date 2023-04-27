@@ -11,6 +11,7 @@ import { envValidationObjectSchema } from './config';
 import { DatabaseModule } from './database/database.module';
 import { HrModule } from './hr/hr.module';
 import { StudentsModule } from './students/students.module';
+import { TokensModule } from './tokens/tokens.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -25,6 +26,7 @@ import { UsersModule } from './users/users.module';
     ConsoleModule,
     StudentsModule,
     AuthModule,
+    TokensModule,
     HrModule,
   ],
   providers: [
