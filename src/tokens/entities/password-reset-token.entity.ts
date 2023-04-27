@@ -1,4 +1,4 @@
-import { BeforeInsert, Entity, ManyToOne } from 'typeorm';
+import { Entity, ManyToOne } from 'typeorm';
 
 import { AbstractToken } from './abstract-token.entity';
 
@@ -10,7 +10,6 @@ export class PasswordResetToken extends AbstractToken implements TokenEntity {
   @ManyToOne(() => User, user => user.passwordResetTokens)
   user: User;
 
-  @BeforeInsert()
   setExpiresIn(jwtExpirationTimePasswordResetToken: number): void {
     this.expiresIn = Date.now() + jwtExpirationTimePasswordResetToken * 1000;
   }

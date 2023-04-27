@@ -1,4 +1,4 @@
-import { BeforeInsert, Entity, ManyToOne } from 'typeorm';
+import { Entity, ManyToOne } from 'typeorm';
 
 import { AbstractToken } from './abstract-token.entity';
 
@@ -10,7 +10,6 @@ export class ActivationToken extends AbstractToken implements TokenEntity {
   @ManyToOne(() => User, user => user.activationTokens)
   user: User;
 
-  @BeforeInsert()
   setExpiresIn(jwtExpirationTimeActivationToken: number): void {
     this.expiresIn = Date.now() + jwtExpirationTimeActivationToken * 1000;
   }
