@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { DataSource } from 'typeorm';
@@ -6,9 +6,16 @@ import { DataSource } from 'typeorm';
 import { ActivationToken, PasswordResetToken, RefreshToken } from './entities';
 import { TokenEntityType } from './types';
 
-import { JwtTokenOptions, TokenData, TokenOptions, TokenPayload } from '../types';
+import {
+  DecodedToken,
+  JwtTokenOptions,
+  TokenData,
+  TokenOptions,
+  TokenPayload,
+  ValidTokenRequest,
+} from '../types';
 import { User } from '../users/entities/user.entity';
-import { hashData } from '../utils';
+import { checkHash, hashData } from '../utils';
 
 @Injectable()
 export class TokensService {
@@ -55,6 +62,39 @@ export class TokensService {
     }
 
     return tokenData;
+  }
+
+  async verifyToken(data: string, hashedData: string): Promise<void> {
+    let isTokenValid: boolean;
+
+    try {
+      isTokenValid = await checkHash(data, hashedData);
+    } catch (error) {
+      Logger.error(`Error verify token: ${error.message}`);
+      isTokenValid = false;
+    }
+
+    if (!isTokenValid) {
+      throw new UnauthorizedException('Invalid or expired token!');
+    }
+  }
+
+  async decodeToken({ type, token }: ValidTokenRequest): Promise<DecodedToken> {
+    let payload: TokenPayload;
+
+    try {
+      payload = await this.jwtService.verify(token, {
+        secret: this.getJwtTokenOptionsByType(type).secret,
+      });
+    } catch (error) {
+      Logger.error(`Error decoding token: ${error.message}`);
+      throw new UnauthorizedException('Invalid or expired token!');
+    }
+    if (!payload || !payload.userId || !payload.tokenType || payload.tokenType !== type) {
+      throw new UnauthorizedException('Invalid or expired token');
+    }
+
+    return { userId: payload.userId, tokenType: payload.tokenType };
   }
 
   private async createAndSaveToken(

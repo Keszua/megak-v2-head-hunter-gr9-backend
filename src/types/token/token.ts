@@ -30,3 +30,7 @@ export interface JwtTokenOptions {
   secret: string;
   expiresIn: number;
 }
+export interface DecodedToken {
+  userId: string;
+  tokenType: TokenOptions['tokenType'];
+}
