@@ -11,7 +11,7 @@ export class ActivationToken extends AbstractToken implements TokenEntity {
   user: User;
 
   @BeforeInsert()
-  setExpiresIn(): void {
-    this.expiresIn = Date.now() + 60 * 60 * 1000;
+  setExpiresIn(jwtExpirationTimeActivationToken: number): void {
+    this.expiresIn = Date.now() + jwtExpirationTimeActivationToken * 1000;
   }
 }

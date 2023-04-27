@@ -11,7 +11,7 @@ export class RefreshToken extends AbstractToken implements TokenEntity {
   user: User;
 
   @BeforeInsert()
-  setExpiresIn(): void {
-    this.expiresIn = Date.now() + 60 * 60 * 10 * 1000;
+  setExpiresIn(jwtExpirationTimeRefreshToken: number): void {
+    this.expiresIn = Date.now() + jwtExpirationTimeRefreshToken * 1000;
   }
 }

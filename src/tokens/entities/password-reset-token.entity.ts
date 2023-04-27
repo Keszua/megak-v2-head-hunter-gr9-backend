@@ -11,7 +11,7 @@ export class PasswordResetToken extends AbstractToken implements TokenEntity {
   user: User;
 
   @BeforeInsert()
-  setExpiresIn(): void {
-    this.expiresIn = Date.now() + 60 * 60 * 1000;
+  setExpiresIn(jwtExpirationTimePasswordResetToken: number): void {
+    this.expiresIn = Date.now() + jwtExpirationTimePasswordResetToken * 1000;
   }
 }
