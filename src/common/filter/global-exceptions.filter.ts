@@ -8,13 +8,12 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { MysqlErrorCodes } from 'src/types/error/mysql-errors';
+import { errorMessage, mySqlErrorMessage } from 'src/utils';
 import { EntityNotFoundError, QueryFailedError } from 'typeorm';
 
 import { ClientApiResponse } from '../../types/client-api/client-api.response';
 import { ErrorData } from '../../types/error/error-data';
-import { MysqlErrorCodes } from '../../types/error/mysql-errors';
-import { MySqlErrorMessage } from '../../types/mysql-message/mysql-error.message';
-import { ErrorMessage } from '../../utils/error-message/error-message';
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
@@ -44,7 +43,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     //Not found exception 404
     if (error instanceof EntityNotFoundError) {
       return {
-        error: ErrorMessage.NotFound,
+        error: errorMessage.NOT_FOUND,
         status: HttpStatus.NOT_FOUND,
       };
     }
@@ -72,7 +71,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     }
 
     return {
-      error: ErrorMessage.InternalServerError,
+      error: errorMessage.INTERNAL_SERVER_ERROR,
       status: HttpStatus.INTERNAL_SERVER_ERROR,
     };
   }
@@ -81,40 +80,40 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     let message: string;
     switch (code) {
       case MysqlErrorCodes.ER_DUP_ENTRY:
-        message = MySqlErrorMessage.ER_DUP_ENTRY;
+        message = mySqlErrorMessage.ER_DUP_ENTRY;
         break;
       case MysqlErrorCodes.ER_CHECK_CONSTRAINT_VIOLATED:
-        message = MySqlErrorMessage.ER_CHECK_CONSTRAINT_VIOLATED;
+        message = mySqlErrorMessage.ER_CHECK_CONSTRAINT_VIOLATED;
         break;
       case MysqlErrorCodes.ER_DATA_TOO_LONG:
-        message = MySqlErrorMessage.ER_DATA_TOO_LONG;
+        message = mySqlErrorMessage.ER_DATA_TOO_LONG;
         break;
       case MysqlErrorCodes.ER_INVALID_DEFAULT:
-        message = MySqlErrorMessage.ER_INVALID_DEFAULT;
+        message = mySqlErrorMessage.ER_INVALID_DEFAULT;
         break;
       case MysqlErrorCodes.ER_LOCK_WAIT_TIMEOUT:
-        message = MySqlErrorMessage.ER_LOCK_WAIT_TIMEOUT;
+        message = mySqlErrorMessage.ER_LOCK_WAIT_TIMEOUT;
         break;
       case MysqlErrorCodes.ER_NO_REFERENCED_ROW:
-        message = MySqlErrorMessage.ER_NO_REFERENCED_ROW;
+        message = mySqlErrorMessage.ER_NO_REFERENCED_ROW;
         break;
       case MysqlErrorCodes.ER_QUERY_INTERRUPTED:
-        message = MySqlErrorMessage.ER_QUERY_INTERRUPTED;
+        message = mySqlErrorMessage.ER_QUERY_INTERRUPTED;
         break;
       case MysqlErrorCodes.ER_ROW_IS_REFERENCED:
-        message = MySqlErrorMessage.ER_ROW_IS_REFERENCED;
+        message = mySqlErrorMessage.ER_ROW_IS_REFERENCED;
         break;
       case MysqlErrorCodes.ER_SYNTAX_ERROR:
-        message = MySqlErrorMessage.ER_SYNTAX_ERROR;
+        message = mySqlErrorMessage.ER_SYNTAX_ERROR;
         break;
       case MysqlErrorCodes.ER_UNSUPPORTED_EXTENSION:
-        message = MySqlErrorMessage.ER_UNSUPPORTED_EXTENSION;
+        message = mySqlErrorMessage.ER_UNSUPPORTED_EXTENSION;
         break;
       case MysqlErrorCodes.ER_WRONG_VALUE_COUNT:
-        message = MySqlErrorMessage.ER_WRONG_VALUE_COUNT;
+        message = mySqlErrorMessage.ER_WRONG_VALUE_COUNT;
         break;
       default:
-        message = ErrorMessage.InternalServerError;
+        message = errorMessage.INTERNAL_SERVER_ERROR;
         break;
     }
     Logger.log(code);

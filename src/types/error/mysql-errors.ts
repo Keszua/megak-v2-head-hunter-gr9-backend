@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 export enum MysqlErrorCodes {
   ER_DUP_ENTRY = 'ER_DUP_ENTRY',
   ER_ROW_IS_REFERENCED = 'ER_ROW_IS_REFERENCED',
