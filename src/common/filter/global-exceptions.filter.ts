@@ -7,11 +7,9 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { ErrorData, MysqlErrorCodes } from 'src/types';
+import { ClientApiResponse, ErrorData, MysqlErrorCodes } from 'src/types';
 import { errorMessage, mySqlErrorMessage } from 'src/utils';
 import { EntityNotFoundError, QueryFailedError } from 'typeorm';
-
-import { ClientApiResponse } from '../../types/client-api/client-api.response';
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
