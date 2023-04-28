@@ -16,6 +16,10 @@ export class UsersService {
     return user.save();
   }
 
+  getUser(userId: string): Promise<User> {
+    return User.findOneByOrFail({ id: userId });
+  }
+
   async activateUser(id: string): Promise<void> {
     await User.update(id, { isActive: true });
   }
