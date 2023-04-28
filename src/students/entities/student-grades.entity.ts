@@ -19,7 +19,7 @@ export class StudentGrades extends BaseEntity {
   @Column({ type: 'float', nullable: false })
   teamProjectDegree: number;
 
-  @Column({ type: 'json', nullable: true })
+  @Column({ type: 'simple-array', nullable: true })
   bonusProjectUrls: string[];
 
   @OneToOne(() => Student, student => student.grades)
