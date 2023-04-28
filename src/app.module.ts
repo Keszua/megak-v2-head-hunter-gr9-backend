@@ -25,7 +25,6 @@ import { UsersModule } from './users/users.module';
     StudentsModule,
     AuthModule,
   ],
-  providers: [AdminCommand],
   controllers: [],
   providers: [
     AdminCommand,
