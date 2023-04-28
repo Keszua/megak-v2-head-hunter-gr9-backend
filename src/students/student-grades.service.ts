@@ -2,9 +2,10 @@ import { Injectable, Logger } from '@nestjs/common';
 import * as Papa from 'papaparse';
 
 import { StudentGrades } from './entities';
+import { mapProcessedStudentsResponse } from './response.mappers';
 import { StudentsService } from './students.service';
 
-import { StudentGrade } from '../types';
+import { ImportErrors, ImportResultResponse, ProcessedStudents, StudentGrade } from '../types';
 import { UsersService } from '../users/users.service';
 
 @Injectable()
@@ -14,10 +15,10 @@ export class StudentGradesService {
     private readonly studentsService: StudentsService,
   ) {}
 
-  async importStudents(csvData: string): Promise<void> {
+  async importStudents(csvData: string): Promise<ImportResultResponse> {
     const studentsData = this.parseCsvData(csvData);
     const existingEmails = await this.usersService.getAllEmails();
-    await this.processStudents(studentsData, existingEmails);
+    return this.processStudents(studentsData, existingEmails);
   }
 
   private parseCsvData(csvData: string): StudentGrade[] {
@@ -40,18 +41,41 @@ export class StudentGradesService {
   private async processStudents(
     studentsData: StudentGrade[],
     existingEmails: string[],
-  ): Promise<void> {
-    const studentPromises = studentsData.map(async student => {
+  ): Promise<ImportResultResponse> {
+    const errors: ImportErrors = {
+      csvDuplicates: { count: 0, details: [] },
+      databaseDuplicates: { count: 0, details: [] },
+      invalidEmails: { count: 0, details: [] },
+    };
+    const uniqueStudentsData = this.removeDuplicateRecords(studentsData, errors);
+    const { addedEmails, errors: studentErrors } = await this.processUniqueStudents(
+      uniqueStudentsData,
+      existingEmails,
+      errors,
+    );
+    return mapProcessedStudentsResponse(addedEmails, studentErrors);
+  }
+
+  private async processUniqueStudents(
+    uniqueStudentsData: StudentGrade[],
+    existingEmails: string[],
+    errors: ImportErrors,
+  ): Promise<ProcessedStudents> {
+    const addedEmails: string[] = [];
+    const studentPromises = uniqueStudentsData.map(async student => {
       if (!this.isValidEmail(student.email)) {
-        Logger.log(`Niepoprawny email: ${student.email}`);
+        errors.invalidEmails.details.push(student.email);
+        Logger.warn(`Niepoprawny email: ${student.email}`);
       } else if (this.emailExistsInDatabase(student.email, existingEmails)) {
-        Logger.log(`Email ${student.email} znajduje się już w bazie danych`);
+        errors.databaseDuplicates.details.push(student.email);
+        Logger.warn(`Email ${student.email} znajduje się już w bazie danych`);
       } else {
         await this.addStudent(student);
+        addedEmails.push(student.email);
       }
     });
-
     await Promise.all(studentPromises);
+    return { addedEmails, errors };
   }
 
   private isValidEmail(email: string): boolean {
@@ -62,11 +86,30 @@ export class StudentGradesService {
     return existingEmails.includes(email);
   }
 
+  private removeDuplicateRecords(
+    studentsData: StudentGrade[],
+    errors: ImportErrors,
+  ): StudentGrade[] {
+    const emailsSet = new Set<string>();
+    const uniqueStudentsData: StudentGrade[] = [];
+
+    studentsData.forEach(student => {
+      if (!emailsSet.has(student.email)) {
+        emailsSet.add(student.email);
+        uniqueStudentsData.push(student);
+      } else {
+        errors.csvDuplicates.details.push(student.email);
+        Logger.warn(`Znaleziono duplikat emaila w pliku CSV: ${student.email}`);
+      }
+    });
+    return uniqueStudentsData;
+  }
+
   private async addStudent(studentData: StudentGrade): Promise<void> {
-    Logger.log(`Dodano studenta ${studentData.email}`);
     const student = await this.studentsService.createStudent(studentData.email);
     student.grades = await this.addStudentGrade(studentData);
     await student.save();
+    Logger.log(`Dodano studenta ${studentData.email}`);
   }
 
   addStudentGrade(studentData: StudentGrade): Promise<StudentGrades> {
