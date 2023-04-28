@@ -1,3 +1,5 @@
+import { StudentEntity } from '../student';
+
 export enum UserRole {
   ADMIN = 'admin',
   STUDENT = 'student',
@@ -10,4 +12,7 @@ export interface UserEntity {
   hashPwd?: string;
   role: UserRole;
   isActive: boolean;
+  student?: StudentEntity;
+  createdAt: Date;
+  updatedAt: Date;
 }

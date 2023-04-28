@@ -16,6 +16,10 @@ export class UsersService {
     return user.save();
   }
 
+  getUser(userId: string): Promise<User> {
+    return User.findOneByOrFail({ id: userId });
+  }
+
   async activateUser(id: string): Promise<void> {
     await User.update(id, { isActive: true });
   }
@@ -28,5 +32,10 @@ export class UsersService {
 
   async changePassword(id: string, password: string): Promise<void> {
     await User.update(id, { hashPwd: await hashData(password) });
+  }
+    
+  async getAllEmails(): Promise<string[]> {
+    const users = await User.find();
+    return users.map(user => user.email);
   }
 }

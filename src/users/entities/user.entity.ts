@@ -6,6 +6,7 @@ import {
   Entity,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 import { Student } from '../../students/entities';
@@ -30,6 +31,9 @@ export class User extends BaseEntity implements UserEntity {
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  updatedAt: Date;
 
   @OneToOne(() => Student, student => student.user)
   student: Student;

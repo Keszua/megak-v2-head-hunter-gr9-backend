@@ -11,4 +11,5 @@ export const envValidationObjectSchema = Joi.object({
   DB_DATABASE: Joi.string().required(),
   DB_SYNCHRONIZE: Joi.boolean().required(),
   DB_LOGGING: Joi.boolean().required(),
+  CLIENT_URL: Joi.string().required(),
 });
