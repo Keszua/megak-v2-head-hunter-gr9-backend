@@ -10,6 +10,7 @@ import { AdminCommand } from './commands/admin.command';
 import { GlobalExceptionFilter, GlobalResponseInterceptor } from './common';
 import { envValidationObjectSchema } from './config';
 import { DatabaseModule } from './database/database.module';
+import { StudentsModule } from './students/students.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -22,6 +23,7 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     AdminModule,
     ConsoleModule,
+    StudentsModule,
   ],
   controllers: [AppController],
   providers: [
