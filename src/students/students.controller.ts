@@ -12,7 +12,7 @@ import { StudentGradesService } from './student-grades.service';
 import { StudentsService } from './students.service';
 
 import { ImportResultResponse } from '../types';
-import { csvFileFilter } from '../utils/csv-file-filter';
+import { csvFileFilter } from '../utils';
 
 // TODO add swagger
 @Controller('students')

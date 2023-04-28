@@ -1,10 +1,22 @@
-export interface StudentGrade {
+import { StudentEntity } from '../student';
+
+export interface StudentGradesRequest {
   email: string;
   courseCompletion: number;
   courseEngagement: number;
   projectDegree: number;
   teamProjectDegree: number;
-  bonusProjectUrls: string;
+  bonusProjectUrls: string[];
+}
+
+export interface StudentGradesEntity {
+  id: string;
+  courseCompletion: number;
+  courseEngagement: number;
+  projectDegree: number;
+  teamProjectDegree: number;
+  bonusProjectUrls: string[];
+  student: StudentEntity;
 }
 
 export interface ImportDetails {

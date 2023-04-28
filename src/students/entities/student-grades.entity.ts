@@ -2,8 +2,10 @@ import { BaseEntity, Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'ty
 
 import { Student } from './student.entity';
 
+import { StudentGradesEntity } from '../../types';
+
 @Entity('student_grades')
-export class StudentGrades extends BaseEntity {
+export class StudentGrades extends BaseEntity implements StudentGradesEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

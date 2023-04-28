@@ -2,10 +2,15 @@ import { Injectable, Logger } from '@nestjs/common';
 import * as Papa from 'papaparse';
 
 import { StudentGrades } from './entities';
-import { mapProcessedStudentsResponse } from './response.mappers';
+import { mapProcessedStudentsResponse } from './mappers.response';
 import { StudentsService } from './students.service';
 
-import { ImportErrors, ImportResultResponse, ProcessedStudents, StudentGrade } from '../types';
+import {
+  ImportErrors,
+  ImportResultResponse,
+  ProcessedStudents,
+  StudentGradesRequest,
+} from '../types';
 import { UsersService } from '../users/users.service';
 
 @Injectable()
@@ -21,25 +26,26 @@ export class StudentGradesService {
     return this.processStudents(studentsData, existingEmails);
   }
 
-  private parseCsvData(csvData: string): StudentGrade[] {
+  private parseCsvData(csvData: string): StudentGradesRequest[] {
     const parsedData = Papa.parse(csvData, {
       header: true,
       skipEmptyLines: true,
     });
 
     return parsedData.data
-      .filter((row: Partial<StudentGrade>) => row.email !== '')
-      .map((row: Partial<StudentGrade>) => ({
+      .filter((row: Partial<StudentGradesRequest>) => row.email !== '')
+      .map((row: Partial<StudentGradesRequest>) => ({
         ...row,
         courseCompletion: Number(row.courseCompletion),
         courseEngagement: Number(row.courseEngagement),
         projectDegree: Number(row.projectDegree),
         teamProjectDegree: Number(row.teamProjectDegree),
-      })) as StudentGrade[];
+        bonusProjectUrls: row.bonusProjectUrls || [],
+      })) as StudentGradesRequest[];
   }
 
   private async processStudents(
-    studentsData: StudentGrade[],
+    studentsData: StudentGradesRequest[],
     existingEmails: string[],
   ): Promise<ImportResultResponse> {
     const errors: ImportErrors = {
@@ -57,7 +63,7 @@ export class StudentGradesService {
   }
 
   private async processUniqueStudents(
-    uniqueStudentsData: StudentGrade[],
+    uniqueStudentsData: StudentGradesRequest[],
     existingEmails: string[],
     errors: ImportErrors,
   ): Promise<ProcessedStudents> {
@@ -65,10 +71,10 @@ export class StudentGradesService {
     const studentPromises = uniqueStudentsData.map(async student => {
       if (!this.isValidEmail(student.email)) {
         errors.invalidEmails.details.push(student.email);
-        Logger.warn(`Niepoprawny email: ${student.email}`);
+        Logger.warn(`Invalid email: ${student.email}`);
       } else if (this.emailExistsInDatabase(student.email, existingEmails)) {
         errors.databaseDuplicates.details.push(student.email);
-        Logger.warn(`Email ${student.email} znajduje się już w bazie danych`);
+        Logger.warn(`Email ${student.email} already exists in the database`);
       } else {
         await this.addStudent(student);
         addedEmails.push(student.email);
@@ -87,11 +93,11 @@ export class StudentGradesService {
   }
 
   private removeDuplicateRecords(
-    studentsData: StudentGrade[],
+    studentsData: StudentGradesRequest[],
     errors: ImportErrors,
-  ): StudentGrade[] {
+  ): StudentGradesRequest[] {
     const emailsSet = new Set<string>();
-    const uniqueStudentsData: StudentGrade[] = [];
+    const uniqueStudentsData: StudentGradesRequest[] = [];
 
     studentsData.forEach(student => {
       if (!emailsSet.has(student.email)) {
@@ -99,26 +105,26 @@ export class StudentGradesService {
         uniqueStudentsData.push(student);
       } else {
         errors.csvDuplicates.details.push(student.email);
-        Logger.warn(`Znaleziono duplikat emaila w pliku CSV: ${student.email}`);
+        Logger.warn(`CSV duplicate email found: ${student.email}`);
       }
     });
     return uniqueStudentsData;
   }
 
-  private async addStudent(studentData: StudentGrade): Promise<void> {
+  private async addStudent(studentData: StudentGradesRequest): Promise<void> {
     const student = await this.studentsService.createStudent(studentData.email);
     student.grades = await this.addStudentGrade(studentData);
     await student.save();
-    Logger.log(`Dodano studenta ${studentData.email}`);
+    Logger.log(`Added student ${studentData.email}`);
   }
 
-  addStudentGrade(studentData: StudentGrade): Promise<StudentGrades> {
+  addStudentGrade(studentData: StudentGradesRequest): Promise<StudentGrades> {
     const studentGrade = new StudentGrades();
     studentGrade.courseCompletion = studentData.courseCompletion;
     studentGrade.courseEngagement = studentData.courseEngagement;
     studentGrade.projectDegree = studentData.projectDegree;
     studentGrade.teamProjectDegree = studentData.teamProjectDegree;
-    studentGrade.bonusProjectUrls = studentData.bonusProjectUrls.split(',');
+    studentGrade.bonusProjectUrls = studentData.bonusProjectUrls;
     return studentGrade.save();
   }
 }
