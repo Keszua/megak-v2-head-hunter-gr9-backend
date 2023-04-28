@@ -1,5 +1,4 @@
-import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
-import { Response } from 'express';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
@@ -14,7 +13,7 @@ export class UsersController {
   }
 
   @Get('/:userId')
-  async getUser(@Param('userId') userId: string, @Res() res: Response): Promise<void> {
-    await this.userService.getUser(userId, res);
+  async getUser(@Param('userId') userId: string): Promise<void> {
+    await this.userService.getUser(userId);
   }
 }

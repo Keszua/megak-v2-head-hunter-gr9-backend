@@ -10,11 +10,11 @@ import {
 import { Request, Response } from 'express';
 import { EntityNotFoundError, QueryFailedError } from 'typeorm';
 
-import { ClientApiResponse } from '../types/client-api/client-api.response';
-import { ErrorData } from '../types/error/error-data';
-import { MysqlErrorCodes } from '../types/error/mysql-errors';
-import { MySqlErrorMessage } from '../types/mysql-message/mysql-error.message';
-import { ErrorMessage } from '../utils/error-message/error-message';
+import { ClientApiResponse } from '../../types/client-api/client-api.response';
+import { ErrorData } from '../../types/error/error-data';
+import { MysqlErrorCodes } from '../../types/error/mysql-errors';
+import { MySqlErrorMessage } from '../../types/mysql-message/mysql-error.message';
+import { ErrorMessage } from '../../utils/error-message/error-message';
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
