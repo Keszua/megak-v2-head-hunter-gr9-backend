@@ -75,4 +75,8 @@ export class AuthService {
     await this.generateAuthTokenAndSetCookie(user, res, { tokenType: 'authentication' });
     await this.generateAuthTokenAndSetCookie(user, res, { tokenType: 'refresh' });
   }
+
+  getAuthenticatedUserByAuthenticationToken(userId: string): Promise<User> {
+    return this.usersService.getUserById(userId);
+  }
 }

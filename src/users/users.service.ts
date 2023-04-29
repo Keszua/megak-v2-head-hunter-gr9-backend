@@ -16,6 +16,12 @@ export class UsersService {
     return user.save();
   }
 
+  async getUserById(userId: string): Promise<User> {
+    const user = await User.findOneByOrFail({ id: userId });
+    delete user.hashPwd;
+    return user;
+  }
+
   async activateUser(id: string): Promise<void> {
     await User.update(id, { isActive: true });
   }
