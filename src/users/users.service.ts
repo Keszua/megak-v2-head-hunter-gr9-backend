@@ -1,5 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { GetAllEmailsResponse } from 'src/types';
+import { Injectable } from '@nestjs/common';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -36,7 +35,7 @@ export class UsersService {
   }
 
   async getAllEmails(): Promise<string[]> {
-    const users = await User.find({ select: ['email'] });
+    const users = await User.find({ select: { email: true } });
     return users.map(user => user.email);
   }
 }
