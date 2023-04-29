@@ -1,4 +1,11 @@
+import { ErrorResponse } from '../client-api';
+
 export interface ErrorData {
-  error: string;
+  error: ErrorResponse;
   status: number;
+}
+
+export interface ErrorResponseBadRequestException {
+  statusCode: number;
+  message: string | string[];
 }
