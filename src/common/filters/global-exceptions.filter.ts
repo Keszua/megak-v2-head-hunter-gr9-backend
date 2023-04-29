@@ -1,5 +1,6 @@
 import {
   ArgumentsHost,
+  BadRequestException,
   Catch,
   ExceptionFilter,
   HttpException,
@@ -7,9 +8,17 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { ClientApiResponse, ErrorData, MysqlErrorCodes } from 'src/types';
+import {
+  ClientApiResponse,
+  ErrorData,
+  ErrorResponse,
+  ErrorResponseBadRequestException,
+  MysqlErrorCodes,
+} from 'src/types';
 import { errorMessage, mySqlErrorMessage } from 'src/utils';
 import { EntityNotFoundError, QueryFailedError } from 'typeorm';
+
+import { UnauthorizedTokenException } from '../exceptions';
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
@@ -33,9 +42,28 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     });
   }
 
-  private handleEntityNotFoundError(): ErrorData {
+  private tryToGetErrorData(error: unknown): ErrorData {
+    if (error instanceof EntityNotFoundError) {
+      return this.handleEntityNotFoundError(error);
+    } else if (error instanceof QueryFailedError) {
+      return this.handleQueryFailedError(error);
+    } else if (error instanceof UnauthorizedTokenException) {
+      return this.handleUnauthorizedTokenException(error);
+    } else if (error instanceof BadRequestException) {
+      return this.handleBadRequestException(error);
+    } else if (error instanceof HttpException) {
+      return this.handleHttpException(error);
+    }
     return {
-      error: errorMessage.NOT_FOUND,
+      error: { message: errorMessage.INTERNAL_SERVER_ERROR },
+      status: HttpStatus.INTERNAL_SERVER_ERROR,
+    };
+  }
+
+  private handleEntityNotFoundError(error: EntityNotFoundError): ErrorData {
+    Logger.warn(error.message, error.name);
+    return {
+      error: { message: errorMessage.NOT_FOUND },
       status: HttpStatus.NOT_FOUND,
     };
   }
@@ -43,40 +71,44 @@ export class GlobalExceptionFilter implements ExceptionFilter {
   private handleQueryFailedError(error: QueryFailedError): ErrorData {
     const { code } = error.driverError;
     const message = this.getMysqlErrorMessage(code);
+    Logger.warn(`${message}. Code: ${code}`, error.name);
 
     return {
-      error: message,
+      error: { message },
       status: HttpStatus.BAD_REQUEST,
     };
   }
 
-  private handleHttpException(error: HttpException): ErrorData {
+  private handleUnauthorizedTokenException(error: UnauthorizedTokenException): ErrorData {
+    const errorResponse = error.getResponse() as ErrorResponse;
+    Logger.warn(`${errorResponse.message}. Code: ${errorResponse.code}`, error.name);
     return {
-      status: error.getStatus(),
-      ...(typeof error.getResponse() === 'string'
-        ? { error: error.message }
-        : (error.getResponse() as ErrorData)),
+      error: {
+        message: errorResponse.message,
+        code: 'TOKEN_EXPIRED',
+      },
+      status: HttpStatus.UNAUTHORIZED,
     };
   }
 
-  private tryToGetErrorData(error: unknown): ErrorData {
-    Logger.log(error);
-
-    if (error instanceof EntityNotFoundError) {
-      return this.handleEntityNotFoundError();
-    }
-
-    if (error instanceof QueryFailedError) {
-      return this.handleQueryFailedError(error);
-    }
-
-    if (error instanceof HttpException) {
-      return this.handleHttpException(error);
-    }
-
+  private handleBadRequestException(error: BadRequestException): ErrorData {
+    const errorResponse = error.getResponse() as ErrorResponseBadRequestException;
+    Logger.warn(errorResponse.message, error.name);
     return {
-      error: errorMessage.INTERNAL_SERVER_ERROR,
-      status: HttpStatus.INTERNAL_SERVER_ERROR,
+      status: error.getStatus(),
+      error: {
+        message: errorResponse.message,
+      },
+    };
+  }
+  private handleHttpException(error: HttpException): ErrorData {
+    const errorResponse = error.getResponse() as string;
+    Logger.warn(errorResponse, error.name);
+    return {
+      status: error.getStatus(),
+      error: {
+        message: errorResponse,
+      },
     };
   }
 
