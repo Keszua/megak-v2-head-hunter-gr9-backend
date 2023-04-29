@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { GetAllEmailsResponse } from 'src/types';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -34,8 +35,12 @@ export class UsersService {
     await User.update(id, { hashPwd: await hashData(password) });
   }
 
-  async getAllEmails(): Promise<string[]> {
-    const users = await User.find();
-    return users.map(user => user.email);
+  async getAllEmails(): Promise<GetAllEmailsResponse> {
+    const [email] = await User.find({
+      select: {
+        email: true,
+      },
+    });
+    return email;
   }
 }
