@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { DataSource } from 'typeorm';
+import { DataSource, MoreThan } from 'typeorm';
 
 import { ActivationToken, PasswordResetToken, RefreshToken } from './entities';
 import { TokenEntityType } from './types';
@@ -183,5 +183,43 @@ export class TokensService {
     }
 
     return { secret, expiresIn };
+  }
+
+  getTokenActiveByUserId(userId: string, options: TokenOptions): Promise<TokenEntityType> {
+    const queryOptions = {
+      where: { user: { id: userId }, isUsed: false, expiresIn: MoreThan(Date.now()) },
+      relations: { user: true },
+      select: {
+        id: true,
+        hashToken: true,
+        isUsed: true,
+        expiresIn: true,
+        user: {
+          id: true,
+        },
+      },
+    };
+    switch (options.tokenType) {
+      case 'activation':
+        return ActivationToken.findOne(queryOptions);
+      case 'password-reset':
+        return PasswordResetToken.findOne(queryOptions);
+      case 'refresh':
+        return RefreshToken.findOne(queryOptions);
+      default:
+        throw new BadRequestException('Invalid token type');
+    }
+  }
+
+  async markTokenAsUsed(tokenActive: TokenEntityType): Promise<void> {
+    tokenActive.isUsed = true;
+    await tokenActive.save();
+  }
+
+  async revokeActiveRefreshToken(userId: string): Promise<void> {
+    const refreshTokenActive = await this.getTokenActiveByUserId(userId, { tokenType: 'refresh' });
+    if (refreshTokenActive) {
+      await this.markTokenAsUsed(refreshTokenActive);
+    }
   }
 }
