@@ -5,10 +5,12 @@ import { Response } from 'express';
 import { CookiesService } from './cookies.service';
 import { LoginDto, RegisterDto } from './dto';
 
+import { UnauthorizedTokenException } from '../common';
 import { TokensService } from '../tokens/tokens.service';
-import { CookiesNames, TokenOptions, UserResponse } from '../types';
+import { CookiesNames, TokenOptions, TokenPayload, UserResponse } from '../types';
 import { User } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
+import { TokenErrorCodes } from '../utils';
 
 @Injectable()
 export class AuthService {
@@ -71,12 +73,32 @@ export class AuthService {
   }
 
   async renewAuthAndRefreshTokensAndSetCookies(user: User, res: Response): Promise<void> {
-    // TODO: add revoke active refresh token
+    await this.tokensService.revokeActiveRefreshToken(user.id);
     await this.generateAuthTokenAndSetCookie(user, res, { tokenType: 'authentication' });
     await this.generateAuthTokenAndSetCookie(user, res, { tokenType: 'refresh' });
   }
 
   getAuthenticatedUserByAuthenticationToken(userId: string): Promise<User> {
     return this.usersService.getUserById(userId);
+  }
+
+  async getAuthenticatedUserByRefreshToken(
+    refreshToken: string,
+    payload: TokenPayload,
+  ): Promise<User> {
+    const { userId, tokenType } = payload;
+    const user = await this.usersService.getUserById(userId);
+    const tokenActive = await this.tokensService.getTokenActiveByUserId(userId, { tokenType });
+    if (!tokenActive) {
+      throw new UnauthorizedTokenException(TokenErrorCodes.ACTIVE_REFRESH_TOKEN_NOT_FOUND);
+    }
+    await this.tokensService.verifyToken(refreshToken, tokenActive.hashToken);
+    await this.tokensService.markTokenAsUsed(tokenActive);
+    return user;
+  }
+
+  async getNewAuthenticatedTokensByRefreshToken(user: User, res: Response): Promise<UserResponse> {
+    await this.renewAuthAndRefreshTokensAndSetCookies(user, res);
+    return user;
   }
 }
