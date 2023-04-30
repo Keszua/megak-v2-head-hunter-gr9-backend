@@ -27,9 +27,7 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     HrModule,
   ],
-  controllers: [AppController],
   providers: [
-    AppService,
     AdminCommand,
     {
       provide: APP_FILTER,

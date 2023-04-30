@@ -1,19 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { HrCreateRequest, HrCreatedResponse } from 'src/types';
+import { HrCreatedResponse, UserRole } from 'src/types';
+import { UsersService } from 'src/users/users.service';
 
+import { CreateHrDto } from './dto';
 import { Hr } from './entities/hr.entity';
 
 @Injectable()
 export class HrService {
-  async createHr(hrData: HrCreateRequest): Promise<HrCreatedResponse> {
-    const { fullName, company } = hrData;
+  constructor(private readonly usersService: UsersService) {}
+
+  async createHr(hrData: CreateHrDto): Promise<HrCreatedResponse> {
+    const { email, fullName, company } = hrData;
+    const user = await this.usersService.createUser({
+      email,
+      role: UserRole.HR,
+    });
     const hr = new Hr();
     hr.fullName = fullName;
     hr.company = company;
-    await hr.save();
-    return {
-      id: hr.id,
-      ...hrData,
-    };
+    hr.user = user;
+    return hr.save();
   }
 }
