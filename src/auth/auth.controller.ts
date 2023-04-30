@@ -63,4 +63,16 @@ export class AuthController {
   ): Promise<UserResponse> {
     return this.authService.getNewAuthenticatedTokensByRefreshToken(user, res);
   }
+
+  @ApiOperation({ summary: 'Wylogowuje użytkownika i usuwa tokeny autoryzacyjne' })
+  @ApiOkResponse({ description: 'Użytkownik wylogowany' })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'Nieprawidłowy token autoryzacyjny',
+  })
+  @HttpCode(HttpStatus.OK)
+  @Post('logout')
+  logout(@CurrentUser() user: User, @Res({ passthrough: true }) res: Response): Promise<void> {
+    return this.authService.logout(user, res);
+  }
 }
