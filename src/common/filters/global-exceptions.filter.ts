@@ -93,12 +93,26 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
   private handleBadRequestException(error: BadRequestException): ErrorData {
     const errorResponse = error.getResponse() as ErrorResponseBadRequestException;
+    if (Array.isArray(errorResponse.message)) {
+      return this.handleValidationException(errorResponse.message);
+    }
     Logger.warn(errorResponse.message, error.name);
     return {
       status: error.getStatus(),
       error: {
         message: errorResponse.message,
       },
+    };
+  }
+
+  private handleValidationException(messages: string[]): ErrorData {
+    Logger.warn(`Validation errors: ${JSON.stringify(messages)}`, 'ValidationException');
+
+    const customErrorMessage = 'Validation failed. Please check your input and try again.';
+
+    return {
+      error: { message: customErrorMessage },
+      status: HttpStatus.BAD_REQUEST,
     };
   }
   private handleHttpException(error: HttpException): ErrorData {
