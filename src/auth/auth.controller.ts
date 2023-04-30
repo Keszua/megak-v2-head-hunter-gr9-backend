@@ -16,7 +16,7 @@ import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './dto';
 import { JwtRefreshGuard, LocalAuthGuard } from './guards';
 
-import { CurrentUser } from '../common';
+import { CurrentUser, Public } from '../common';
 import { UserResponse } from '../types';
 import { User } from '../users/entities/user.entity';
 
@@ -40,6 +40,7 @@ export class AuthController {
   @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: 'Nieprawidłowe dane logowania' })
   @HttpCode(HttpStatus.OK)
   @UseGuards(LocalAuthGuard)
+  @Public()
   @Post('login')
   login(
     @CurrentUser() user: User,
@@ -53,6 +54,7 @@ export class AuthController {
   @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: 'Nieprawidłowy token odświeżania' })
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtRefreshGuard)
+  @Public()
   @Get('refresh')
   refresh(
     @CurrentUser() user: User,
