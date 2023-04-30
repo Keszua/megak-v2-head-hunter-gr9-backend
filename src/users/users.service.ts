@@ -33,7 +33,7 @@ export class UsersService {
   async changePassword(id: string, password: string): Promise<void> {
     await User.update(id, { hashPwd: await hashData(password) });
   }
-    
+
   async getAllEmails(): Promise<string[]> {
     const users = await User.find();
     return users.map(user => user.email);
