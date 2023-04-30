@@ -14,7 +14,6 @@ import { User } from '../../users/entities/user.entity';
 
 @Entity('hr')
 export class Hr extends BaseEntity implements HrEntity {
-  email?: string;
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -35,7 +34,7 @@ export class Hr extends BaseEntity implements HrEntity {
   @Column({ type: 'smallint', nullable: false, unsigned: true })
   maxReservedStudents: number;
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
