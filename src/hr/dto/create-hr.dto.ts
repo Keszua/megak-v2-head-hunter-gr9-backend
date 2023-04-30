@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsAlpha, IsEmail, IsPositive, IsString } from 'class-validator';
+import { IsAlpha, IsEmail, IsPositive, IsString, Max } from 'class-validator';
 import { HrCreateRequest } from 'src/types';
 
 export class CreateHrDto implements HrCreateRequest {
@@ -29,5 +29,6 @@ export class CreateHrDto implements HrCreateRequest {
     example: '5',
   })
   @IsPositive()
+  @Max(999)
   maxReservedStudents: number;
 }

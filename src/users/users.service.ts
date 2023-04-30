@@ -31,7 +31,7 @@ export class UsersService {
   }
 
   async getAllEmails(): Promise<string[]> {
-    const users = await User.find();
+    const users = await User.find({ select: { email: true } });
     return users.map(user => user.email);
   }
 }
