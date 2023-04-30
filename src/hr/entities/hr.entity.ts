@@ -6,14 +6,14 @@ import {
   JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 import { HrEntity } from '../../types';
 import { User } from '../../users/entities/user.entity';
 
-@Entity('Hr')
+@Entity('hr')
 export class Hr extends BaseEntity implements HrEntity {
-  email?: string;
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -34,8 +34,11 @@ export class Hr extends BaseEntity implements HrEntity {
   @Column({ type: 'smallint', nullable: false, unsigned: true })
   maxReservedStudents: number;
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @CreateDateColumn()
   createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 
   @OneToOne(() => User, user => user.hr)
   @JoinColumn()

@@ -1,5 +1,6 @@
 import { Controller, Body, HttpStatus, HttpCode, Patch } from '@nestjs/common';
-import { HrCreateRequest, HrCreatedResponse } from 'src/types';
+import { ApiBody, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { HrCreatedResponse } from 'src/types';
 
 import { HrService } from './hr.service';
 
@@ -7,9 +8,12 @@ import { HrService } from './hr.service';
 export class HrController {
   constructor(private readonly hrService: HrService) {}
 
+  @ApiOperation({ summary: 'Tworzy Hr i dodaje do bazy danych.' })
+  @ApiBody({ type: CreateHrDto })
+  @ApiOkResponse({ description: 'Hr został dodany do bazy danych.' })
   @HttpCode(HttpStatus.OK)
   @Patch('/')
-  createHr(@Body() hrData: HrCreateRequest): Promise<HrCreatedResponse> {
+  createHr(@Body() hrData: CreateHrDto): Promise<HrCreatedResponse> {
     return this.hrService.createHr(hrData);
   }
 }
