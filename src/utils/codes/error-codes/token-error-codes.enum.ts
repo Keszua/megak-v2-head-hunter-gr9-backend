@@ -23,4 +23,9 @@ export enum TokenErrorCodes {
    * Occurs when the token has expired
    */
   TOKEN_EXPIRED = 'TOKEN_EXPIRED',
+  /**
+   * Occurs when an active refresh token is not found for the user
+   * during an access token refresh attempt.
+   */
+  ACTIVE_REFRESH_TOKEN_NOT_FOUND = 'ACTIVE_REFRESH_TOKEN_NOT_FOUND',
 }
