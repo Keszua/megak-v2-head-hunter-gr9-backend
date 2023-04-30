@@ -15,7 +15,7 @@ import {
   ErrorResponseBadRequestException,
   MysqlErrorCodes,
 } from 'src/types';
-import { errorMessage, mySqlErrorMessage } from 'src/utils';
+import { errorMessage, mySqlErrorMessage, TokenErrorCodes } from 'src/utils';
 import { EntityNotFoundError, QueryFailedError } from 'typeorm';
 
 import { UnauthorizedTokenException } from '../exceptions';
@@ -85,7 +85,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     return {
       error: {
         message: errorResponse.message,
-        code: 'TOKEN_EXPIRED',
+        code: TokenErrorCodes.TOKEN_EXPIRED,
       },
       status: HttpStatus.UNAUTHORIZED,
     };
