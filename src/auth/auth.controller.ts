@@ -1,22 +1,22 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Patch,
   Post,
-  Req,
   Res,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './dto';
-import { LocalAuthGuard } from './guards';
+import { JwtRefreshGuard, LocalAuthGuard } from './guards';
 
-import { CurrentUser } from '../common/decorators';
+import { CurrentUser } from '../common';
 import { UserResponse } from '../types';
 import { User } from '../users/entities/user.entity';
 
@@ -46,5 +46,18 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ): Promise<UserResponse> {
     return this.authService.login(user, res);
+  }
+
+  @ApiOperation({ summary: 'Odświeża tokeny i zwraca je w cookies' })
+  @ApiOkResponse({ description: 'Tokeny odświeżone i zwrócone w cookies' })
+  @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: 'Nieprawidłowy token odświeżania' })
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(JwtRefreshGuard)
+  @Get('refresh')
+  refresh(
+    @CurrentUser() user: User,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<UserResponse> {
+    return this.authService.getNewAuthenticatedTokensByRefreshToken(user, res);
   }
 }
