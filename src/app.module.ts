@@ -20,6 +20,11 @@ import { UsersModule } from './users/users.module';
         ...mailerConfig,
       }),
     }),
+    MailerModule.forRootAsync({
+      useFactory: () => ({
+        ...mailerConfig,
+      }),
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: envValidationObjectSchema,
