@@ -29,6 +29,7 @@ export class AuthController {
   @ApiBody({ type: RegisterDto })
   @ApiOkResponse({ description: 'Użytkownik zarejestrowany i konto aktywowane' })
   @HttpCode(HttpStatus.OK)
+  @Public()
   @Patch('register')
   register(@Body() registerDto: RegisterDto): Promise<void> {
     return this.authService.register(registerDto);
