@@ -9,6 +9,7 @@ import { AdminCommand } from './commands/admin.command';
 import { GlobalExceptionFilter, GlobalResponseInterceptor } from './common';
 import { envValidationObjectSchema } from './config';
 import { DatabaseModule } from './database/database.module';
+import { HrModule } from './hr/hr.module';
 import { StudentsModule } from './students/students.module';
 import { UsersModule } from './users/users.module';
 
@@ -24,8 +25,8 @@ import { UsersModule } from './users/users.module';
     ConsoleModule,
     StudentsModule,
     AuthModule,
+    HrModule,
   ],
-  controllers: [],
   providers: [
     AdminCommand,
     {

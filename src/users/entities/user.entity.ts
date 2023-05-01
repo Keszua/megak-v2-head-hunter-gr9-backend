@@ -1,3 +1,4 @@
+import { Hr } from 'src/hr/entities/hr.entity';
 import {
   BaseEntity,
   Column,
@@ -36,4 +37,7 @@ export class User extends BaseEntity implements UserEntity {
 
   @OneToOne(() => Student, student => student.user)
   student: Student;
+
+  @OneToOne(() => Hr, hr => hr.user)
+  hr: Hr;
 }
