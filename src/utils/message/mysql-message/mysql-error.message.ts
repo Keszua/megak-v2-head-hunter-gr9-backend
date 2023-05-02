@@ -7,7 +7,7 @@ export const mySqlErrorMessage = {
   ER_INVALID_DEFAULT: ' Invalid default value.',
   ER_SYNTAX_ERROR:
     'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use.',
-  ER_WRONG_VALUE_COUNT: 'Column count doesn not match value count.',
+  ER_WRONG_VALUE_COUNT: 'Column count does not match value count.',
   ER_UNSUPPORTED_EXTENSION: 'Table uses an extension that does not exist in this MySQL version.',
   ER_QUERY_INTERRUPTED: 'Query execution was interrupted.',
   ER_LOCK_WAIT_TIMEOUT: 'Lock wait timeout exceeded; try restarting transaction.',

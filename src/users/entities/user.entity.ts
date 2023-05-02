@@ -1,14 +1,17 @@
+import { Hr } from 'src/hr/entities/hr.entity';
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import { Student } from '../../students/entities';
+import { ActivationToken, PasswordResetToken, RefreshToken } from '../../tokens/entities';
 import { UserEntity, UserRole } from '../../types';
 
 @Entity('users')
@@ -36,4 +39,16 @@ export class User extends BaseEntity implements UserEntity {
 
   @OneToOne(() => Student, student => student.user)
   student: Student;
+
+  @OneToMany(() => ActivationToken, activationToken => activationToken.user)
+  activationTokens: ActivationToken[];
+
+  @OneToMany(() => PasswordResetToken, passwordResetToken => passwordResetToken.user)
+  passwordResetTokens: PasswordResetToken[];
+
+  @OneToMany(() => RefreshToken, refreshToken => refreshToken.user)
+  refreshTokens: RefreshToken[];
+
+  @OneToOne(() => Hr, hr => hr.user)
+  hr: Hr;
 }

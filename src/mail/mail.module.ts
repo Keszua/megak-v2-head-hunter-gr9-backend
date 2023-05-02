@@ -1,5 +1,6 @@
 // eslint-disable-next-line max-classes-per-file
 import { Module } from '@nestjs/common';
+<<<<<<< HEAD
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { BullModule } from 'nest-bull';
@@ -43,3 +44,17 @@ const bullModule = BullModule.forRoot(mailBullConfig);
 })
 export class MailModule { }
 export class MailModule { }
+=======
+import { TokensModule } from 'src/tokens/tokens.module';
+
+import { MailController } from './mail.controller';
+import { MailService } from './mail.service';
+
+@Module({
+  imports: [TokensModule],
+  controllers: [MailController],
+  providers: [MailService],
+  exports: [MailService],
+})
+export class MailModule {}
+>>>>>>> 4dab83a3ddf0d87f3c9f5fc30c3abb40c8cc9239
