@@ -12,6 +12,7 @@ import { GlobalExceptionFilter, GlobalResponseInterceptor } from './common';
 import { envValidationObjectSchema,validationPipeOptions, mailerConfig } from './config';
 import { DatabaseModule } from './database/database.module';
 import { HrModule } from './hr/hr.module';
+import { MailModule } from './mail/mail.module';
 import { StudentsModule } from './students/students.module';
 import { TokensModule } from './tokens/tokens.module';
 import { UsersModule } from './users/users.module';
@@ -35,6 +36,7 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     TokensModule,
     HrModule,
+    MailModule,
   ],
   providers: [
     AdminCommand,

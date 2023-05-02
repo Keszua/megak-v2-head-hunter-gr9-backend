@@ -50,6 +50,7 @@ export class AuthController {
   @ApiBadRequestResponse(registerBadRequestResponse)
   @Public()
   @HttpCode(HttpStatus.OK)
+  @Public()
   @Patch('register')
   register(@Body() registerDto: RegisterDto): Promise<void> {
     return this.authService.register(registerDto);

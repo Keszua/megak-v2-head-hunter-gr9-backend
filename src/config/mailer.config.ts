@@ -3,8 +3,8 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
 
 export const mailerConfig: MailerOptions = {
   transport: {
-    host: `localhost`,
-    port: 1025,
+    host: process.env.MAIL_HOST,
+    port: process.env.MAIL_PORT,
     ignoreTLS: true,
     secure: false,
     auth: {
@@ -13,11 +13,19 @@ export const mailerConfig: MailerOptions = {
     },
   },
   defaults: {
-    from: 'admin@test.example.com',
+    from: process.env.DEFAULT_FROM,
   },
-  preview: true,
+  options: {
+    partials: {
+      dir: `${process.cwd()}/templates/partials`,
+      options: {
+        strict: true,
+      },
+    },
+  },
+  preview: false,
   template: {
-    dir: `${process.cwd()}/src/templates/email`,
+    dir: `${process.cwd()}/templates/email`,
     adapter: new HandlebarsAdapter(),
     options: {
       strict: true,
