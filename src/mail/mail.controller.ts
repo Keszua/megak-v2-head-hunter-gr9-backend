@@ -13,4 +13,10 @@ export class MailController {
   async sendRegisterConfirmation(@CurrentUser() user: User): Promise<void> {
     await this.mailService.sendRegisterConfirmation(user);
   }
+
+  @HttpCode(HttpStatus.OK)
+  @Post('/reset-pwd')
+  async resetPassword(@CurrentUser() user: User): Promise<void> {
+    await this.mailService.resetPassword(user);
+  }
 }
