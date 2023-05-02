@@ -11,43 +11,28 @@ import {
   ApiBadRequestResponse,
   ApiBody,
   ApiConsumes,
-  ApiInternalServerErrorResponse,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
-  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
 import { StudentGradesService } from './student-grades.service';
+import {
+  importStudentsBadRequestResponse,
+  importStudentsOkResponse,
+} from './students.swagger.response';
 
 import { ImportResultResponse } from '../types';
 import {
   csvFileFilter,
   csvFileSchema,
-  importStudentsResultResponseSchema,
-  unauthorizedExample,
-  errorResponseSchema,
-  errorCodeDataSchema,
-  createResponseSchema,
-  importStudentsResultResponseExample,
+  CommonApiInternalServerErrorResponse,
+  CommonApiUnauthorizedResponse,
 } from '../utils';
 
-@ApiTags('students')
-@ApiUnauthorizedResponse({
-  description: 'Unauthorized access',
-  schema: errorResponseSchema({
-    statusCode: HttpStatus.UNAUTHORIZED,
-    exampleData: unauthorizedExample,
-    dataSchema: errorCodeDataSchema,
-  }),
-})
-@ApiInternalServerErrorResponse({
-  description: 'An internal server error occurred while processing the request.',
-  schema: errorResponseSchema({
-    statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-    exampleData: { message: 'Internal server error' },
-  }),
-})
+@ApiTags('Students')
+@CommonApiUnauthorizedResponse()
+@CommonApiInternalServerErrorResponse()
 @Controller('students')
 export class StudentsController {
   constructor(private readonly studentGradesService: StudentGradesService) {}
@@ -58,21 +43,8 @@ export class StudentsController {
     description: 'CSV file containing student data',
     schema: csvFileSchema,
   })
-  @ApiOkResponse({
-    description: 'Students imported successfully',
-    schema: createResponseSchema({
-      statusCode: HttpStatus.OK,
-      dataSchema: importStudentsResultResponseSchema,
-      exampleData: importStudentsResultResponseExample,
-    }),
-  })
-  @ApiBadRequestResponse({
-    description: 'Invalid file type. Only CSV files are allowed.',
-    schema: errorResponseSchema({
-      statusCode: HttpStatus.BAD_REQUEST,
-      exampleData: { message: 'Invalid file type. Only CSV files are allowed.' },
-    }),
-  })
+  @ApiOkResponse(importStudentsOkResponse)
+  @ApiBadRequestResponse(importStudentsBadRequestResponse)
   @HttpCode(HttpStatus.OK)
   @Post('import')
   @UseInterceptors(FileInterceptor('csv', { fileFilter: csvFileFilter }))

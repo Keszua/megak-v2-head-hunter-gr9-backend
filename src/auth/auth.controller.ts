@@ -12,7 +12,6 @@ import {
 import {
   ApiBadRequestResponse,
   ApiBody,
-  ApiInternalServerErrorResponse,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
@@ -21,46 +20,34 @@ import {
 import { Response } from 'express';
 
 import { AuthService } from './auth.service';
+import {
+  loginOkResponse,
+  loginUnauthorizedResponse,
+  logoutOkResponse,
+  logoutUnauthorizedResponse,
+  refreshTokensOkResponse,
+  refreshTokensUnauthorizedResponse,
+  registerBadRequestResponse,
+  registerOkResponse,
+} from './auth.swagger.response';
 import { LoginDto, RegisterDto } from './dto';
 import { JwtRefreshGuard, LocalAuthGuard } from './guards';
 
 import { CurrentUser, Public } from '../common';
 import { UserResponse } from '../types';
 import { User } from '../users/entities/user.entity';
-import {
-  createResponseSchema,
-  errorCodeDataSchema,
-  errorResponseSchema,
-  unauthorizedExample,
-  userResponseExample,
-  userResponseSchema,
-} from '../utils';
+import { CommonApiInternalServerErrorResponse } from '../utils';
 
-@ApiTags('auth')
-@ApiInternalServerErrorResponse({
-  description: 'An internal server error occurred while processing the request.',
-  schema: errorResponseSchema({
-    statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-    exampleData: { message: 'Internal server error' },
-  }),
-})
+@ApiTags('Authentication')
+@CommonApiInternalServerErrorResponse()
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @ApiOperation({ summary: 'Registers a user and activates the account' })
-  @ApiBody({ type: RegisterDto })
-  @ApiOkResponse({
-    description: 'User registered and account activated',
-    schema: createResponseSchema({ statusCode: HttpStatus.OK }),
-  })
-  @ApiBadRequestResponse({
-    description: 'User already registered',
-    schema: errorResponseSchema({
-      statusCode: HttpStatus.BAD_REQUEST,
-      exampleData: { message: 'User already registered' },
-    }),
-  })
+  @ApiBody({ type: RegisterDto, description: 'User registration  details: email and password' })
+  @ApiOkResponse(registerOkResponse)
+  @ApiBadRequestResponse(registerBadRequestResponse)
   @Public()
   @HttpCode(HttpStatus.OK)
   @Patch('register')
@@ -69,23 +56,9 @@ export class AuthController {
   }
 
   @ApiOperation({ summary: 'Logs in a user and returns tokens in cookies' })
-  @ApiBody({ type: LoginDto })
-  @ApiOkResponse({
-    description: 'User logged in and tokens in cookies',
-    schema: createResponseSchema({
-      statusCode: HttpStatus.OK,
-      dataSchema: userResponseSchema,
-      exampleData: userResponseExample,
-    }),
-  })
-  @ApiUnauthorizedResponse({
-    description: 'Invalid login credentials',
-    schema: errorResponseSchema({
-      dataSchema: errorCodeDataSchema,
-      statusCode: HttpStatus.UNAUTHORIZED,
-      exampleData: unauthorizedExample,
-    }),
-  })
+  @ApiBody({ type: LoginDto, description: 'User login credentials: email and password' })
+  @ApiOkResponse(loginOkResponse)
+  @ApiUnauthorizedResponse(loginUnauthorizedResponse)
   @HttpCode(HttpStatus.OK)
   @UseGuards(LocalAuthGuard)
   @Public()
@@ -98,22 +71,8 @@ export class AuthController {
   }
 
   @ApiOperation({ summary: 'Refreshes tokens and returns them in cookies' })
-  @ApiOkResponse({
-    description: 'Tokens refreshed and returned in cookies',
-    schema: createResponseSchema({
-      statusCode: HttpStatus.OK,
-      dataSchema: userResponseSchema,
-      exampleData: userResponseExample,
-    }),
-  })
-  @ApiUnauthorizedResponse({
-    description: 'Invalid refresh token',
-    schema: errorResponseSchema({
-      dataSchema: errorCodeDataSchema,
-      statusCode: HttpStatus.UNAUTHORIZED,
-      exampleData: unauthorizedExample,
-    }),
-  })
+  @ApiOkResponse(refreshTokensOkResponse)
+  @ApiUnauthorizedResponse(refreshTokensUnauthorizedResponse)
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtRefreshGuard)
   @Public()
@@ -126,18 +85,8 @@ export class AuthController {
   }
 
   @ApiOperation({ summary: 'Logs out a user and removes authentication tokens' })
-  @ApiOkResponse({
-    description: 'User logged out',
-    schema: createResponseSchema({ statusCode: HttpStatus.OK }),
-  })
-  @ApiUnauthorizedResponse({
-    description: 'Invalid authentication token',
-    schema: errorResponseSchema({
-      dataSchema: errorCodeDataSchema,
-      statusCode: HttpStatus.UNAUTHORIZED,
-      exampleData: unauthorizedExample,
-    }),
-  })
+  @ApiOkResponse(logoutOkResponse)
+  @ApiUnauthorizedResponse(logoutUnauthorizedResponse)
   @HttpCode(HttpStatus.OK)
   @Post('logout')
   logout(@CurrentUser() user: User, @Res({ passthrough: true }) res: Response): Promise<void> {
