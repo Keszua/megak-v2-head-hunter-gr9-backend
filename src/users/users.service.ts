@@ -30,7 +30,7 @@ export class UsersService {
   }
 
   getUserByEmail(email: string): Promise<User> {
-    return User.findOneOrFail({
+    return User.findOne({
       where: { email },
     });
   }
