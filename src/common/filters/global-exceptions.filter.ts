@@ -74,7 +74,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
     return {
       error: { message },
-      status: HttpStatus.BAD_REQUEST,
+      status: HttpStatus.INTERNAL_SERVER_ERROR,
     };
   }
 
