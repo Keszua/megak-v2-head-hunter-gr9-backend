@@ -71,10 +71,13 @@ export class StudentGradesService {
     const studentPromises = uniqueStudentsData.map(async student => {
       if (!this.isValidEmail(student.email)) {
         errors.invalidEmails.details.push(student.email);
-        Logger.warn(`Invalid email: ${student.email}`);
+        Logger.warn(`Invalid email: ${student.email}`, StudentGradesService.name);
       } else if (this.emailExistsInDatabase(student.email, existingEmails)) {
         errors.databaseDuplicates.details.push(student.email);
-        Logger.warn(`Email ${student.email} already exists in the database`);
+        Logger.warn(
+          `Email ${student.email} already exists in the database`,
+          StudentGradesService.name,
+        );
       } else {
         await this.addStudent(student);
         addedEmails.push(student.email);
@@ -105,7 +108,7 @@ export class StudentGradesService {
         uniqueStudentsData.push(student);
       } else {
         errors.csvDuplicates.details.push(student.email);
-        Logger.warn(`CSV duplicate email found: ${student.email}`);
+        Logger.warn(`CSV duplicate email found: ${student.email}`, StudentGradesService.name);
       }
     });
     return uniqueStudentsData;
@@ -115,7 +118,7 @@ export class StudentGradesService {
     const student = await this.studentsService.createStudent(studentData.email);
     student.grades = await this.addStudentGrade(studentData);
     await student.save();
-    Logger.log(`Added student ${studentData.email}`);
+    Logger.log(`Added student ${studentData.email}`, StudentGradesService.name);
   }
 
   addStudentGrade(studentData: StudentGradesRequest): Promise<StudentGrades> {
