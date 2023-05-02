@@ -7,11 +7,10 @@ import { checkHash, hashData } from '../utils';
 
 @Injectable()
 export class UsersService {
-  async createUser(userData: CreateUserDto): Promise<User> {
-    const { email, password, role } = userData;
+  createUser(userDto: CreateUserDto): Promise<User> {
+    const { email, role } = userDto;
     const user = new User();
     user.email = email;
-    user.hashPwd = password ? await this.hashPassword(password) : null;
     user.role = role;
     return user.save();
   }
@@ -33,7 +32,7 @@ export class UsersService {
   }
 
   async changePassword(id: string, password: string): Promise<void> {
-    await User.update(id, { hashPwd: await hashData(password) });
+    await User.update(id, { hashPwd: await this.hashPassword(password) });
   }
 
   hashPassword(password: string): Promise<string> {

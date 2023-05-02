@@ -12,9 +12,9 @@ export class AdminService {
   async createAdmin(createAdminDto: CreateAdminDto): Promise<void> {
     const admin = await this.usersService.createUser({
       email: createAdminDto.email,
-      password: createAdminDto.password,
       role: UserRole.ADMIN,
     });
+    await this.usersService.changePassword(admin.id, createAdminDto.password);
 
     await this.usersService.activateUser(admin.id);
   }

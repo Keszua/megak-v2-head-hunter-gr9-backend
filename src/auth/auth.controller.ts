@@ -28,6 +28,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Rejestruje użytkownika i aktywuje konto' })
   @ApiBody({ type: RegisterDto })
   @ApiOkResponse({ description: 'Użytkownik zarejestrowany i konto aktywowane' })
+  @Public()
   @HttpCode(HttpStatus.OK)
   @Public()
   @Patch('register')
