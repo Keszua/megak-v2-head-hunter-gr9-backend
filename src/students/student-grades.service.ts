@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import * as Papa from 'papaparse';
+import { EmailEmitter } from 'src/orders';
 
 import { StudentGrades } from './entities';
 import { mapProcessedStudentsResponse } from './mappers.response';
@@ -18,6 +19,7 @@ export class StudentGradesService {
   constructor(
     private readonly usersService: UsersService,
     private readonly studentsService: StudentsService,
+    private readonly emailEmitter: EmailEmitter,
   ) {}
 
   async importStudents(csvData: string): Promise<ImportResultResponse> {
@@ -59,6 +61,7 @@ export class StudentGradesService {
       existingEmails,
       errors,
     );
+    await this.emailEmitter.emitRegistrationEmailSendEvent({ email: addedEmails });
     return mapProcessedStudentsResponse(addedEmails, studentErrors);
   }
 
