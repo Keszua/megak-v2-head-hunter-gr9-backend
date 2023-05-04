@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -7,11 +7,14 @@ import { checkHash, hashData } from '../utils';
 
 @Injectable()
 export class UsersService {
-  async createUser(userData: CreateUserDto): Promise<User> {
-    const { email, password, role } = userData;
+  async createUser(userDto: CreateUserDto): Promise<User> {
+    const { email, role } = userDto;
+    if (await this.getUserByEmail(email)) {
+      Logger.warn(`User with this email already exists`, UsersService.name);
+      throw new BadRequestException(`User with this email already exists`);
+    }
     const user = new User();
     user.email = email;
-    user.hashPwd = password ? await this.hashPassword(password) : null;
     user.role = role;
     return user.save();
   }
@@ -27,13 +30,13 @@ export class UsersService {
   }
 
   getUserByEmail(email: string): Promise<User> {
-    return User.findOneOrFail({
+    return User.findOne({
       where: { email },
     });
   }
 
   async changePassword(id: string, password: string): Promise<void> {
-    await User.update(id, { hashPwd: await hashData(password) });
+    await User.update(id, { hashPwd: await this.hashPassword(password) });
   }
 
   hashPassword(password: string): Promise<string> {

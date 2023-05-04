@@ -4,6 +4,7 @@ import { UsersService } from 'src/users/users.service';
 
 import { CreateHrDto } from './dto';
 import { Hr } from './entities/hr.entity';
+import { mapHrCreatedResponse } from './mappers.response';
 
 @Injectable()
 export class HrService {
@@ -20,6 +21,6 @@ export class HrService {
     hr.company = company;
     hr.maxReservedStudents = maxReservedStudents;
     hr.user = user;
-    return hr.save();
+    return mapHrCreatedResponse(await hr.save());
   }
 }

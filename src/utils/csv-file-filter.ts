@@ -9,12 +9,15 @@ export const csvFileFilter = (
 ): void => {
   const mimeType = mime.lookup(file.originalname);
   if (mimeType !== 'text/csv' && mimeType !== 'application/vnd.ms-excel') {
-    Logger.warn(`File upload failed: Invalid file type for "${file.originalname}"`);
+    Logger.warn(
+      `File upload failed: Invalid file type for "${file.originalname}"`,
+      csvFileFilter.name,
+    );
     return callback(
       new BadRequestException('Invalid file type. Only CSV files are allowed.'),
       false,
     );
   }
-  Logger.log(`File "${file.originalname}" uploaded and processed successfully`);
+  Logger.log(`File "${file.originalname}" uploaded and processed successfully`, csvFileFilter.name);
   callback(null, true);
 };

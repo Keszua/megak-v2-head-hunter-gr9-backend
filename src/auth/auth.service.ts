@@ -21,6 +21,9 @@ export class AuthService {
   ) {}
   async register(registerDto: RegisterDto): Promise<void> {
     const user = await this.usersService.getUserByEmail(registerDto.email);
+    if (user.hashPwd) {
+      throw new BadRequestException('User already registered');
+    }
     await this.usersService.changePassword(user.id, registerDto.password);
     await this.usersService.activateUser(user.id);
   }
