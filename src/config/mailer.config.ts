@@ -1,23 +1,27 @@
+import { ConfigService } from '@nestjs/config';
 import { MailerOptions } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
-export const mailerConfig: MailerOptions = {
+import path from 'path';
+
+// eslint-disable-next-line max-lines-per-function
+export const getMailerConfig = (configService: ConfigService): MailerOptions => ({
   transport: {
-    host: process.env.MAIL_HOST,
-    port: process.env.MAIL_PORT,
+    host: configService.get('MAIL_HOST'),
+    port: configService.get('MAIL_PORT'),
     ignoreTLS: true,
     secure: false,
     auth: {
-      user: process.env.MAILDEV_INCOMING_USER,
-      pass: process.env.MAILDEV_INCOMING_PASS,
+      user: configService.get('MAILDEV_INCOMING_USER'),
+      pass: configService.get('MAILDEV_INCOMING_PASS'),
     },
   },
   defaults: {
-    from: process.env.DEFAULT_FROM,
+    from: configService.get('DEFAULT_FROM'),
   },
   options: {
     partials: {
-      dir: `${process.cwd()}/templates/partials`,
+      dir: path.join(__dirname, 'templates/partials'),
       options: {
         strict: true,
       },
@@ -25,10 +29,10 @@ export const mailerConfig: MailerOptions = {
   },
   preview: false,
   template: {
-    dir: `${process.cwd()}/templates/email`,
+    dir: path.join(__dirname, 'templates/email'),
     adapter: new HandlebarsAdapter(),
     options: {
       strict: true,
     },
   },
-};
+});

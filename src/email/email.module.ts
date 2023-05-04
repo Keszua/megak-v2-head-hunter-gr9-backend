@@ -2,13 +2,13 @@
 import { Module } from '@nestjs/common';
 import { TokensModule } from 'src/tokens/tokens.module';
 
-import { MailController } from './mail.controller';
-import { MailService } from './mail.service';
+import { MailController } from './email.controller';
+import { EmailService } from './email.service';
 
 @Module({
   imports: [TokensModule],
   controllers: [MailController],
-  providers: [MailService],
-  exports: [MailService],
+  providers: [EmailService],
+  exports: [EmailModule],
 })
-export class MailModule {}
+export class EmailModule {}

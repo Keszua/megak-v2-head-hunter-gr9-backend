@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { ConsoleModule } from 'nestjs-console';
 
@@ -9,10 +10,11 @@ import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards';
 import { AdminCommand } from './commands/admin.command';
 import { GlobalExceptionFilter, GlobalResponseInterceptor } from './common';
-import { envValidationObjectSchema, mailerConfig } from './config';
+import { envValidationObjectSchema, eventEmmiterConfig, getMailerConfig } from './config';
 import { DatabaseModule } from './database/database.module';
+import { EmailModule } from './email/email.module';
 import { HrModule } from './hr/hr.module';
-import { MailModule } from './mail/mail.module';
+import { EventsModule } from './orders/events.module';
 import { StudentsModule } from './students/students.module';
 import { TokensModule } from './tokens/tokens.module';
 import { UsersModule } from './users/users.module';
@@ -20,10 +22,11 @@ import { UsersModule } from './users/users.module';
 @Module({
   imports: [
     MailerModule.forRootAsync({
-      useFactory: () => ({
-        ...mailerConfig,
-      }),
+      imports: [ConfigModule],
+      useFactory: getMailerConfig,
+      inject: [ConfigService],
     }),
+    EventEmitterModule.forRoot(eventEmmiterConfig),
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: envValidationObjectSchema,
@@ -36,7 +39,8 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     TokensModule,
     HrModule,
-    MailModule,
+    EmailModule,
+    EventsModule,
   ],
   providers: [
     AdminCommand,
