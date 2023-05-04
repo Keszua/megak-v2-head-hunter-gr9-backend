@@ -1,5 +1,5 @@
-/* eslint-disable max-lines-per-function */
 import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { MailerService } from '@nestjs-modules/mailer';
 import { TokensService } from 'src/tokens/tokens.service';
 import { RegistrationLinks } from 'src/types';
@@ -31,7 +31,7 @@ export class EmailService {
     return registrationLinks;
   }
 
-  async sendRegisterConfirmation(email: string[]): Promise<void> {
+  async sendRegisterConfirmation(email: string[], configService?: ConfigService): Promise<void> {
     const users = (await User.find()).filter(user => email.some(e => e === user.email));
     const tokenType: TokenOptions = { tokenType: 'activation' };
     const urls = await this.createUrls(users, tokenType);
@@ -41,7 +41,7 @@ export class EmailService {
     urls.forEach(async obj => {
       await this.mailerService.sendMail({
         to: obj.email,
-        from: process.env.DEFAULT_FROM,
+        from: configService.get('DEFAULT_FROM'),
         subject: MailSubject.REGISTER,
         template: `${__dirname}/templates/email/${MailTemplate.REGISTER}`,
         context: {
