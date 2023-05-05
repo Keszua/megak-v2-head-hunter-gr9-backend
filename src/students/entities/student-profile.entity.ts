@@ -17,16 +17,16 @@ export class StudentProfile extends BaseEntity implements StudentProfileEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, length: 25 })
   tel?: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, length: 50 })
   firstName: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, length: 50 })
   lastName: string;
 
-  @Column({ unique: true, nullable: false })
+  @Column({ unique: true, nullable: false, length: 39 })
   githubUsername: string;
 
   @Column({ type: 'simple-array', nullable: true })
@@ -35,7 +35,7 @@ export class StudentProfile extends BaseEntity implements StudentProfileEntity {
   @Column({ type: 'simple-array', nullable: false })
   projectUrls: string[];
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'text', nullable: true, length: 1000 })
   bio?: string;
 
   @Column({
@@ -46,7 +46,7 @@ export class StudentProfile extends BaseEntity implements StudentProfileEntity {
   })
   expectedTypeWork: ExpectedTypeWork;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, length: 100 })
   targetWorkCity?: string;
 
   @Column({
@@ -57,7 +57,7 @@ export class StudentProfile extends BaseEntity implements StudentProfileEntity {
   })
   expectedContractType: ExpectedContractType;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, length: 10 })
   expectedSalary?: string;
 
   @Column({ nullable: false, default: false })
@@ -66,13 +66,13 @@ export class StudentProfile extends BaseEntity implements StudentProfileEntity {
   @Column({ nullable: false, default: 0 })
   monthsOfCommercialExp: number;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'text', nullable: true, length: 2000 })
   education?: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'text', nullable: true, length: 2000 })
   workExperience?: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'text', nullable: true, length: 2000 })
   courses?: string;
 
   @OneToOne(() => Student, student => student.profile)
