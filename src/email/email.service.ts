@@ -41,7 +41,7 @@ export class EmailService {
     urls.forEach(async obj => {
       await this.mailerService.sendMail({
         to: obj.email,
-        from: configService.get('DEFAULT_FROM'),
+        from: configService.get('MAIL_DEFAULT_FROM'),
         subject: MailSubject.REGISTER,
         template: `${__dirname}/templates/email/${MailTemplate.REGISTER}`,
         context: {

@@ -21,7 +21,7 @@ export const getMailerConfig = (configService: ConfigService): MailerOptions => 
   },
   options: {
     partials: {
-      dir: path.join(__dirname, 'templates/partials'),
+      dir: path.join(__dirname, 'templates', 'partials'),
       options: {
         strict: true,
       },
@@ -29,7 +29,7 @@ export const getMailerConfig = (configService: ConfigService): MailerOptions => 
   },
   preview: false,
   template: {
-    dir: path.join(__dirname, 'templates/email'),
+    dir: path.join(__dirname, 'templates', 'email'),
     adapter: new HandlebarsAdapter(),
     options: {
       strict: true,

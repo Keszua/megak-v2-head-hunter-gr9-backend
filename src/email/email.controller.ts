@@ -1,4 +1,4 @@
-import { Controller, Post, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 
 import { EmailService } from './email.service';
 
