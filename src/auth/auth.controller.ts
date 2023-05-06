@@ -48,7 +48,6 @@ export class AuthController {
   @ApiBody({ type: RegisterDto, description: 'User registration  details: email and password' })
   @ApiOkResponse(registerOkResponse)
   @ApiBadRequestResponse(registerBadRequestResponse)
-  @Public()
   @HttpCode(HttpStatus.OK)
   @Public()
   @Patch('register')
