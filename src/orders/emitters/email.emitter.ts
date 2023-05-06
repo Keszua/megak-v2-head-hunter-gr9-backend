@@ -1,8 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { EmailRegistrationLinkEvent } from '../events';
-import { events } from '../events/events.name';
+import { EmailRegistrationLinkEvent, events } from '../events';
 
 @Injectable()
 export class EmailEmitter {

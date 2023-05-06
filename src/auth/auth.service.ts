@@ -21,6 +21,9 @@ export class AuthService {
   ) {}
   async register(registerDto: RegisterDto): Promise<void> {
     const user = await this.usersService.getUserByEmail(registerDto.email);
+    if (user.hashPwd) {
+      throw new BadRequestException('User already registered');
+    }
     await this.usersService.changePassword(user.id, registerDto.password);
     await this.usersService.activateUser(user.id);
   }
@@ -100,5 +103,11 @@ export class AuthService {
   async getNewAuthenticatedTokensByRefreshToken(user: User, res: Response): Promise<UserResponse> {
     await this.renewAuthAndRefreshTokensAndSetCookies(user, res);
     return user;
+  }
+
+  async logout(user: User, res: Response): Promise<void> {
+    this.cookiesService.clearCookie(res, CookiesNames.AUTHENTICATION);
+    this.cookiesService.clearCookie(res, CookiesNames.REFRESH);
+    await this.tokensService.revokeActiveRefreshToken(user.id);
   }
 }

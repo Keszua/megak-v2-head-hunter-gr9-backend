@@ -1,8 +1,3 @@
-import { IsEmail, IsString } from 'class-validator';
+import { RegisterDto } from '../../auth/dto';
 
-export class CreateAdminDto {
-  @IsEmail()
-  email: string;
-  @IsString()
-  password: string;
-}
+export class CreateAdminDto extends RegisterDto {}

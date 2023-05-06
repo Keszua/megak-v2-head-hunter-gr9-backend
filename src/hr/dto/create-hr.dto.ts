@@ -1,31 +1,35 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsAlpha, IsEmail, IsPositive, IsString, Max } from 'class-validator';
+import { IsEmail, IsPositive, IsString, Max, MaxLength, MinLength } from 'class-validator';
 import { HrCreateRequest } from 'src/types';
 
 export class CreateHrDto implements HrCreateRequest {
   @ApiProperty({
-    description: 'Email użytkownika',
+    description: 'User email',
     example: 'user@example.com',
   })
   @IsEmail()
   email: string;
 
   @ApiProperty({
-    description: 'Pełna nazwa użytkownika',
+    description: 'User full name',
     example: 'Janusz Kowalski',
   })
-  @IsAlpha()
+  @IsString()
+  @MinLength(2)
+  @MaxLength(255)
   fullName: string;
 
   @ApiProperty({
-    description: 'Firma',
+    description: 'Company',
     example: 'Megak Sp. z o.o.',
   })
   @IsString()
+  @MinLength(2)
+  @MaxLength(255)
   company: string;
 
   @ApiProperty({
-    description: 'Maksymalna ilość zapisanych kursantów.',
+    description: 'Maximum number of reserved students.',
     example: '5',
   })
   @IsPositive()

@@ -2,16 +2,17 @@ import { Injectable, Logger } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
 import { Command, Console } from 'nestjs-console';
+import { QueryFailedError } from 'typeorm';
 
 import { AdminService } from '../admin/admin.service';
 import { CreateAdminDto } from '../admin/dto/create-admin.dto';
+import { getMysqlErrorMessage } from '../utils';
 
 @Injectable()
 @Console({
   command: 'admin',
 })
 export class AdminCommand {
-  private readonly logger = new Logger(AdminCommand.name);
   constructor(private readonly adminService: AdminService) {}
 
   @Command({
@@ -20,13 +21,36 @@ export class AdminCommand {
   })
   async createAdmin(email: string, password: string): Promise<void> {
     const createAdminDto = plainToInstance(CreateAdminDto, { email, password });
-    const errors = await validate(createAdminDto);
 
-    if (errors.length > 0) {
-      this.logger.error('Validation failed:', errors[0].constraints);
+    if (!(await this.handleValidationErrors(createAdminDto))) {
       return;
     }
-    await this.adminService.createAdmin(createAdminDto);
-    this.logger.log(`Admin account created with email: ${email}`);
+
+    try {
+      await this.adminService.createAdmin(createAdminDto);
+      Logger.log(`Admin account created with email: ${email}`, AdminCommand.name);
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
+  private async handleValidationErrors(createAdminDto: CreateAdminDto): Promise<boolean> {
+    const errors = await validate(createAdminDto);
+    if (errors.length > 0) {
+      const errorMessages = errors.map(error => Object.values(error.constraints)).flat();
+      Logger.error(`ValidationError: ${JSON.stringify(errorMessages)}`, AdminCommand.name);
+      return false;
+    }
+    return true;
+  }
+
+  private handleError(error: Error): void {
+    if (error instanceof QueryFailedError) {
+      const { code } = error.driverError;
+      const message = getMysqlErrorMessage(code);
+      Logger.error(`${error.name}: ${message}. Code: ${code}`, AdminCommand.name);
+    } else {
+      Logger.error(`Unexpected error: ${error.message}`, AdminCommand.name);
+    }
   }
 }

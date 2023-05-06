@@ -1,4 +1,3 @@
-// eslint-disable-next-line max-classes-per-file
 import { Module } from '@nestjs/common';
 import { TokensModule } from 'src/tokens/tokens.module';
 

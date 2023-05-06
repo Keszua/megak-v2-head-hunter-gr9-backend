@@ -3,7 +3,6 @@ import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ActivationToken, PasswordResetToken, RefreshToken } from './entities';
-import { TokensController } from './tokens.controller';
 import { TokensService } from './tokens.service';
 
 @Module({
@@ -11,7 +10,6 @@ import { TokensService } from './tokens.service';
     TypeOrmModule.forFeature([ActivationToken, PasswordResetToken, RefreshToken]),
     JwtModule.register({}),
   ],
-  controllers: [TokensController],
   providers: [TokensService],
   exports: [TokensService],
 })
