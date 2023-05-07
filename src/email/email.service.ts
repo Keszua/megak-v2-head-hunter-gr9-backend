@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MailerService } from '@nestjs-modules/mailer';
 
-import { SendEmailOptions } from '../types';
+import { SendEmailOptions, StudentWithActivationLink } from '../types';
 import { User } from '../users/entities/user.entity';
 import { MailSubject, MailTemplate } from '../utils';
 
@@ -34,5 +34,21 @@ export class EmailService {
         url: activationLink,
       },
     });
+  }
+
+  async sendRegistrationConfirmationToStudents(
+    studentsWithActivationsLinks: StudentWithActivationLink[],
+  ): Promise<void> {
+    const promises = studentsWithActivationsLinks.map(async student => {
+      await this.sendEmail({
+        email: student.email,
+        subject: MailSubject.REGISTER,
+        template: MailTemplate.REGISTER,
+        context: {
+          url: student.activationLink,
+        },
+      });
+    });
+    await Promise.all(promises);
   }
 }

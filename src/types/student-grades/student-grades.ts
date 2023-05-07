@@ -1,3 +1,4 @@
+import { Student } from '../../students/entities';
 import { StudentEntity } from '../student';
 
 export interface StudentGradesRequest {
@@ -31,6 +32,6 @@ export interface ImportErrors {
 }
 
 export interface ProcessedStudents {
-  addedEmails: string[];
+  addedStudents: Student[];
   errors: ImportErrors;
 }

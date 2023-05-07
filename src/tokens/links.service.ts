@@ -3,7 +3,8 @@ import { ConfigService } from '@nestjs/config';
 
 import { TokensService } from './tokens.service';
 
-import { TokenData, TokenOptions } from '../types';
+import { Student } from '../students/entities';
+import { StudentWithActivationLink, TokenData, TokenOptions } from '../types';
 import { User } from '../users/entities/user.entity';
 
 @Injectable()
@@ -26,43 +27,16 @@ export class LinksService {
     return this.generateTokenLink(tokenData.token, { tokenType: 'activation' });
   }
 
-  // async createRegisterUrls(email: string[]): Promise<RegistrationLinks[]> {
-  //   const users = (await User.find()).filter(user => email.some(e => e === user.email));
-  //   const tokenType: TokenOptions = { tokenType: 'activation' };
-  //   const registrationLinks: RegistrationLinks[] = [];
-  //   const promises = users.map(async user => {
-  //     const tokenData: TokenData = await this.tokensService.createToken(user, tokenType);
-  //     const { token } = tokenData;
-  //     const url = path.join(
-  //       this.configService.get('CLIENT_URL'),
-  //       'api',
-  //       'auth',
-  //       'register',
-  //       `${user.id}`,
-  //       `${token}`,
-  //     );
-  //     registrationLinks.push({
-  //       email: user.email,
-  //       url,
-  //     });
-  //   });
-  //   await Promise.all(promises);
-  //   Logger.log('users', users, 'tokenType', tokenType);
-  //   return registrationLinks;
-  // }
-
-  // async sendRegisterConfirmation(urls: RegistrationLinks[]): Promise<void> {
-  //   (await urls).forEach(async obj => {
-  //     await this.mailerService.sendMail({
-  //       to: obj.email,
-  //       from: this.configService.get('MAIL_DOMAIN'),
-  //       subject: MailSubject.REGISTER,
-  //       template: path.join(__dirname, '../', 'email', 'templates', MailTemplate.REGISTER),
-  //       context: {
-  //         url: obj.url,
-  //         subject: MailSubject.REGISTER,
-  //       },
-  //     });
-  //   });
-  // }
+  async createActivationLinksForStudents(
+    students: Student[],
+  ): Promise<StudentWithActivationLink[]> {
+    const studentsWithActivationLinks: StudentWithActivationLink[] = [];
+    const users: User[] = students.map(student => student.user);
+    const promises = users.map(async user => {
+      const activationLink = await this.createActivationLink(user);
+      studentsWithActivationLinks.push({ email: user.email, activationLink });
+    });
+    await Promise.all(promises);
+    return studentsWithActivationLinks;
+  }
 }
