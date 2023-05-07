@@ -1,7 +1,6 @@
 import { Module, ValidationPipe } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
-import { MailerModule } from '@nestjs-modules/mailer';
 import { ConsoleModule } from 'nestjs-console';
 
 import { AdminModule } from './admin/admin.module';
@@ -9,7 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards';
 import { AdminCommand } from './commands/admin.command';
 import { GlobalExceptionFilter, GlobalResponseInterceptor } from './common';
-import { envValidationObjectSchema, getMailerConfig, validationPipeOptions } from './config';
+import { envValidationObjectSchema, validationPipeOptions } from './config';
 import { DatabaseModule } from './database/database.module';
 import { EmailModule } from './email/email.module';
 import { EventsModule } from './events/events.module';
@@ -20,11 +19,6 @@ import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
-    MailerModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: getMailerConfig,
-      inject: [ConfigService],
-    }),
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: envValidationObjectSchema,
