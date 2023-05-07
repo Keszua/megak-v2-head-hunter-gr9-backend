@@ -19,6 +19,10 @@ export class StudentsService {
     return student.save();
   }
 
+  getStudentById(id: string): Promise<Student> {
+    return Student.findOne({ where: { user: { id } }, relations: { user: true, grades: true } });
+  }
+
   getEmailsFromAddedStudents(addedStudents: Student[]): string[] {
     return addedStudents.map(student => student.user.email);
   }
