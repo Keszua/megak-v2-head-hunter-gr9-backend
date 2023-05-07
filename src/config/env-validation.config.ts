@@ -22,5 +22,5 @@ export const envValidationObjectSchema = Joi.object({
   CLIENT_URL: Joi.string().required(),
   MAIL_INCOMING_USER: Joi.string().required(),
   MAIL_INCOMING_PASS: Joi.string().required(),
-  MAIL_DEFAULT_FROM: Joi.string().required(),
+  MAIL_DOMAIN: Joi.string().required(),
 });

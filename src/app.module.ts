@@ -12,12 +12,12 @@ import { AdminCommand } from './commands/admin.command';
 import { GlobalExceptionFilter, GlobalResponseInterceptor } from './common';
 import {
   envValidationObjectSchema,
-  validationPipeOptions,
   eventEmmiterConfig,
   getMailerConfig,
+  validationPipeOptions,
 } from './config';
 import { DatabaseModule } from './database/database.module';
-import { EmailModule } from './email';
+import { EmailModule } from './email/email.module';
 import { HrModule } from './hr/hr.module';
 import { EventsModule } from './orders/events.module';
 import { StudentsModule } from './students/students.module';

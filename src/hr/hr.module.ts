@@ -6,8 +6,11 @@ import { Hr } from './entities/hr.entity';
 import { HrController } from './hr.controller';
 import { HrService } from './hr.service';
 
+import { EmailModule } from '../email/email.module';
+import { TokensModule } from '../tokens/tokens.module';
+
 @Module({
-  imports: [TypeOrmModule.forFeature([Hr]), UsersModule],
+  imports: [TypeOrmModule.forFeature([Hr]), UsersModule, EmailModule, TokensModule],
   controllers: [HrController],
   providers: [HrService],
 })

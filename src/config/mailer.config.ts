@@ -2,8 +2,9 @@ import { ConfigService } from '@nestjs/config';
 import { MailerOptions } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
-import path from 'path';
+import { join } from 'path';
 
+const templatePath = join(__dirname, '..', 'email', 'templates');
 // eslint-disable-next-line max-lines-per-function
 export const getMailerConfig = (configService: ConfigService): MailerOptions => ({
   transport: {
@@ -12,16 +13,16 @@ export const getMailerConfig = (configService: ConfigService): MailerOptions => 
     ignoreTLS: true,
     secure: false,
     auth: {
-      user: configService.get('MAILDEV_INCOMING_USER'),
-      pass: configService.get('MAILDEV_INCOMING_PASS'),
+      user: configService.get('MAIL_INCOMING_USER'),
+      pass: configService.get('MAIL_INCOMING_PASS'),
     },
   },
   defaults: {
-    from: configService.get('DEFAULT_FROM'),
+    from: `Head Hunter - Admin <admin@${configService.get('MAIL_DOMAIN')}>}`,
   },
   options: {
     partials: {
-      dir: path.join(__dirname, 'templates', 'partials'),
+      dir: join(templatePath, 'partials'),
       options: {
         strict: true,
       },
@@ -29,7 +30,7 @@ export const getMailerConfig = (configService: ConfigService): MailerOptions => 
   },
   preview: false,
   template: {
-    dir: path.join(__dirname, 'templates', 'email'),
+    dir: join(templatePath, 'emails'),
     adapter: new HandlebarsAdapter(),
     options: {
       strict: true,
