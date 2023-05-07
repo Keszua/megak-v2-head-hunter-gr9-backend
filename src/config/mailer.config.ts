@@ -12,10 +12,13 @@ export const getMailerConfig = (configService: ConfigService): MailerOptions => 
     port: configService.get('MAIL_PORT'),
     ignoreTLS: true,
     secure: false,
-    auth: {
-      user: configService.get('MAIL_INCOMING_USER'),
-      pass: configService.get('MAIL_INCOMING_PASS'),
-    },
+    auth:
+      configService.get('MAIL_INCOMING_USER') && configService.get('MAIL_INCOMING_PASS')
+        ? {
+            user: configService.get('MAIL_INCOMING_USER'),
+            pass: configService.get('MAIL_INCOMING_PASS'),
+          }
+        : null,
   },
   defaults: {
     from: `Head Hunter - Admin <admin@${configService.get('MAIL_DOMAIN')}>}`,

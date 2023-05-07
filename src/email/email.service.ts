@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MailerService } from '@nestjs-modules/mailer';
 
@@ -15,14 +15,23 @@ export class EmailService {
 
   public async sendEmail(options: SendEmailOptions): Promise<void> {
     const { email, template, subject, context, from } = options;
-
-    await this.mailerService.sendMail({
-      to: email,
-      from: from ? from : `Head Hunter - Admin <admin@${this.configService.get('MAIL_DOMAIN')}>`,
-      subject: `Head Hunter - ${subject}`,
-      template,
-      context,
-    });
+    try {
+      await this.mailerService.sendMail({
+        to: email,
+        from: from ? from : `Head Hunter - Admin <admin@${this.configService.get('MAIL_DOMAIN')}>`,
+        subject: `Head Hunter - ${subject}`,
+        template,
+        context,
+      });
+      Logger.log(`Email sent to ${email} with subject "${subject}"`, EmailService.name);
+    } catch (error) {
+      Logger.error(
+        `Failed to send email to ${email} with subject "${subject}"`,
+        error.stack,
+        EmailService.name,
+      );
+      throw error;
+    }
   }
 
   async sendRegistrationConfirmation(user: User, activationLink: string): Promise<void> {
