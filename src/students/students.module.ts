@@ -1,3 +1,4 @@
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -15,6 +16,7 @@ import { UsersModule } from '../users/users.module';
     TypeOrmModule.forFeature([Student, StudentGrades, StudentProfile]),
     UsersModule,
     EventsModule,
+    HttpModule,
   ],
   controllers: [StudentsController],
   providers: [StudentsService, StudentGradesService, StudentsProfilesService],
