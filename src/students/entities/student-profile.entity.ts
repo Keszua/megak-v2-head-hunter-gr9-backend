@@ -3,6 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -35,7 +36,7 @@ export class StudentProfile extends BaseEntity implements StudentProfileEntity {
   @Column({ type: 'simple-array', nullable: false })
   projectUrls: string[];
 
-  @Column({ type: 'text', nullable: true, length: 1000 })
+  @Column({ type: 'text', nullable: true })
   bio?: string;
 
   @Column({
@@ -66,16 +67,17 @@ export class StudentProfile extends BaseEntity implements StudentProfileEntity {
   @Column({ nullable: false, default: 0 })
   monthsOfCommercialExp: number;
 
-  @Column({ type: 'text', nullable: true, length: 2000 })
+  @Column({ type: 'text', nullable: true })
   education?: string;
 
-  @Column({ type: 'text', nullable: true, length: 2000 })
+  @Column({ type: 'text', nullable: true })
   workExperience?: string;
 
-  @Column({ type: 'text', nullable: true, length: 2000 })
+  @Column({ type: 'text', nullable: true })
   courses?: string;
 
   @OneToOne(() => Student, student => student.profile)
+  @JoinColumn()
   student: Student;
 
   @CreateDateColumn({ type: 'timestamp' })

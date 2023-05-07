@@ -24,11 +24,9 @@ export class Student extends BaseEntity implements StudentEntity {
   user: User;
 
   @OneToOne(() => StudentProfile, profile => profile.student)
-  @JoinColumn()
   profile: StudentProfile;
 
   @OneToOne(() => StudentGrades, grades => grades.student)
-  @JoinColumn()
   grades: StudentGrades;
 
   @CreateDateColumn({ type: 'timestamp' })
