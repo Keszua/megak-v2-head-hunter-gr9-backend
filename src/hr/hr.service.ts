@@ -6,9 +6,14 @@ import { CreateHrDto } from './dto';
 import { Hr } from './entities/hr.entity';
 import { mapHrCreatedResponse } from './mappers.response';
 
+import { EmailEmitter } from '../events/emitters';
+
 @Injectable()
 export class HrService {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly emailEmitter: EmailEmitter,
+  ) {}
 
   async createHr(hrData: CreateHrDto): Promise<HrCreatedResponse> {
     const { email, fullName, company, maxReservedStudents } = hrData;
@@ -21,6 +26,8 @@ export class HrService {
     hr.company = company;
     hr.maxReservedStudents = maxReservedStudents;
     hr.user = user;
-    return mapHrCreatedResponse(await hr.save());
+    const newHr = await hr.save();
+    await this.emailEmitter.emitRegistrationEmailSendEvent({ user });
+    return mapHrCreatedResponse(newHr);
   }
 }

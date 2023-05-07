@@ -10,6 +10,8 @@ import { AdminCommand } from './commands/admin.command';
 import { GlobalExceptionFilter, GlobalResponseInterceptor } from './common';
 import { envValidationObjectSchema, validationPipeOptions } from './config';
 import { DatabaseModule } from './database/database.module';
+import { EmailModule } from './email/email.module';
+import { EventsModule } from './events/events.module';
 import { HrModule } from './hr/hr.module';
 import { StudentsModule } from './students/students.module';
 import { TokensModule } from './tokens/tokens.module';
@@ -29,6 +31,8 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     TokensModule,
     HrModule,
+    EmailModule,
+    EventsModule,
   ],
   providers: [
     AdminCommand,

@@ -1,12 +1,9 @@
 import * as Joi from 'joi';
-
+//TODO Validation will be added later
 export const envValidationObjectSchema = Joi.object({
   DB_HOST: Joi.string().required(),
   DB_PORT: Joi.number().required(),
   DB_USERNAME: Joi.string().required(),
-  /**
-    Password validation will be added later
-     */
   // DB_PASSWORD: Joi.string().required(),
   DB_DATABASE: Joi.string().required(),
   DB_SYNCHRONIZE: Joi.boolean().required(),
@@ -20,4 +17,8 @@ export const envValidationObjectSchema = Joi.object({
   JWT_SECRET_AUTHENTICATION_TOKEN: Joi.string().required(),
   JWT_EXPIRATION_TIME_AUTHENTICATION_TOKEN: Joi.number().required(),
   CLIENT_URL: Joi.string().required(),
+  // MAIL_INCOMING_USER: Joi.string().required(),
+  // MAIL_INCOMING_PASS: Joi.string().required(),
+  MAIL_DOMAIN: Joi.string().required(),
+  MAIL_HOST: Joi.string().required(),
 });

@@ -18,4 +18,8 @@ export class StudentsService {
     student.user = user;
     return student.save();
   }
+
+  getEmailsFromAddedStudents(addedStudents: Student[]): string[] {
+    return addedStudents.map(student => student.user.email);
+  }
 }

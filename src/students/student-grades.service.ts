@@ -1,10 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import * as Papa from 'papaparse';
 
-import { StudentGrades } from './entities';
+import { Student, StudentGrades } from './entities';
 import { mapProcessedStudentsResponse } from './mappers.response';
 import { StudentsService } from './students.service';
 
+import { EmailEmitter } from '../events/emitters';
 import {
   ImportErrors,
   ImportResultResponse,
@@ -18,12 +19,18 @@ export class StudentGradesService {
   constructor(
     private readonly usersService: UsersService,
     private readonly studentsService: StudentsService,
+    private readonly emailEmitter: EmailEmitter,
   ) {}
 
   async importStudents(csvData: string): Promise<ImportResultResponse> {
     const studentsData = this.parseCsvData(csvData);
     const existingEmails = await this.usersService.getAllEmails();
-    return this.processStudents(studentsData, existingEmails);
+    const { addedStudents, errors } = await this.processStudents(studentsData, existingEmails);
+
+    await this.emailEmitter.emitRegistrationEmailsSendToStudentsEvent({ students: addedStudents });
+
+    const emails = this.studentsService.getEmailsFromAddedStudents(addedStudents);
+    return mapProcessedStudentsResponse(emails, errors);
   }
 
   private parseCsvData(csvData: string): StudentGradesRequest[] {
@@ -47,19 +54,19 @@ export class StudentGradesService {
   private async processStudents(
     studentsData: StudentGradesRequest[],
     existingEmails: string[],
-  ): Promise<ImportResultResponse> {
+  ): Promise<ProcessedStudents> {
     const errors: ImportErrors = {
       csvDuplicates: { count: 0, details: [] },
       databaseDuplicates: { count: 0, details: [] },
       invalidEmails: { count: 0, details: [] },
     };
     const uniqueStudentsData = this.removeDuplicateRecords(studentsData, errors);
-    const { addedEmails, errors: studentErrors } = await this.processUniqueStudents(
+    const { addedStudents, errors: studentErrors } = await this.processUniqueStudents(
       uniqueStudentsData,
       existingEmails,
       errors,
     );
-    return mapProcessedStudentsResponse(addedEmails, studentErrors);
+    return { addedStudents, errors: studentErrors };
   }
 
   private async processUniqueStudents(
@@ -67,7 +74,7 @@ export class StudentGradesService {
     existingEmails: string[],
     errors: ImportErrors,
   ): Promise<ProcessedStudents> {
-    const addedEmails: string[] = [];
+    const addedStudents: Student[] = [];
     const studentPromises = uniqueStudentsData.map(async student => {
       if (!this.isValidEmail(student.email)) {
         errors.invalidEmails.details.push(student.email);
@@ -79,12 +86,12 @@ export class StudentGradesService {
           StudentGradesService.name,
         );
       } else {
-        await this.addStudent(student);
-        addedEmails.push(student.email);
+        const addedStudent = await this.addStudent(student);
+        addedStudents.push(addedStudent);
       }
     });
     await Promise.all(studentPromises);
-    return { addedEmails, errors };
+    return { addedStudents, errors };
   }
 
   private isValidEmail(email: string): boolean {
@@ -114,11 +121,11 @@ export class StudentGradesService {
     return uniqueStudentsData;
   }
 
-  private async addStudent(studentData: StudentGradesRequest): Promise<void> {
+  private async addStudent(studentData: StudentGradesRequest): Promise<Student> {
     const student = await this.studentsService.createStudent(studentData.email);
     student.grades = await this.addStudentGrade(studentData);
-    await student.save();
     Logger.log(`Added student ${studentData.email}`, StudentGradesService.name);
+    return student.save();
   }
 
   addStudentGrade(studentData: StudentGradesRequest): Promise<StudentGrades> {
