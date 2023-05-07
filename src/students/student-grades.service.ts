@@ -5,7 +5,7 @@ import { Student, StudentGrades } from './entities';
 import { mapProcessedStudentsResponse } from './mappers.response';
 import { StudentsService } from './students.service';
 
-import { EmailService } from '../email/email.service';
+import { EmailEmitter } from '../events/emitters';
 import {
   ImportErrors,
   ImportResultResponse,
@@ -19,7 +19,7 @@ export class StudentGradesService {
   constructor(
     private readonly usersService: UsersService,
     private readonly studentsService: StudentsService,
-    private readonly emailService: EmailService,
+    private readonly emailEmitter: EmailEmitter,
   ) {}
 
   async importStudents(csvData: string): Promise<ImportResultResponse> {
@@ -27,7 +27,7 @@ export class StudentGradesService {
     const existingEmails = await this.usersService.getAllEmails();
     const { addedStudents, errors } = await this.processStudents(studentsData, existingEmails);
 
-    await this.emailService.createActivationLinksAndSendToStudents(addedStudents);
+    await this.emailEmitter.emitRegistrationEmailsSendToStudentsEvent({ students: addedStudents });
 
     const emails = this.studentsService.getEmailsFromAddedStudents(addedStudents);
     return mapProcessedStudentsResponse(emails, errors);

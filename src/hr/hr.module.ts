@@ -6,10 +6,10 @@ import { Hr } from './entities/hr.entity';
 import { HrController } from './hr.controller';
 import { HrService } from './hr.service';
 
-import { EmailModule } from '../email/email.module';
+import { EventsModule } from '../events/events.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Hr]), UsersModule, EmailModule],
+  imports: [TypeOrmModule.forFeature([Hr]), UsersModule, EventsModule],
   controllers: [HrController],
   providers: [HrService],
 })

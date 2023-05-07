@@ -1,7 +1,6 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
-import { EventEmitterModule } from '@nestjs/event-emitter';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { ConsoleModule } from 'nestjs-console';
 
@@ -10,16 +9,11 @@ import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards';
 import { AdminCommand } from './commands/admin.command';
 import { GlobalExceptionFilter, GlobalResponseInterceptor } from './common';
-import {
-  envValidationObjectSchema,
-  eventEmmiterConfig,
-  getMailerConfig,
-  validationPipeOptions,
-} from './config';
+import { envValidationObjectSchema, getMailerConfig, validationPipeOptions } from './config';
 import { DatabaseModule } from './database/database.module';
 import { EmailModule } from './email/email.module';
+import { EventsModule } from './events/events.module';
 import { HrModule } from './hr/hr.module';
-import { EventsModule } from './orders/events.module';
 import { StudentsModule } from './students/students.module';
 import { TokensModule } from './tokens/tokens.module';
 import { UsersModule } from './users/users.module';
@@ -31,7 +25,6 @@ import { UsersModule } from './users/users.module';
       useFactory: getMailerConfig,
       inject: [ConfigService],
     }),
-    EventEmitterModule.forRoot(eventEmmiterConfig),
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: envValidationObjectSchema,
