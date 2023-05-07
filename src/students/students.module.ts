@@ -7,16 +7,10 @@ import { StudentsController } from './students.controller';
 import { StudentsService } from './students.service';
 
 import { EmailModule } from '../email/email.module';
-import { TokensModule } from '../tokens/tokens.module';
 import { UsersModule } from '../users/users.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Student, StudentGrades]),
-    UsersModule,
-    EmailModule,
-    TokensModule,
-  ],
+  imports: [TypeOrmModule.forFeature([Student, StudentGrades]), UsersModule, EmailModule],
   controllers: [StudentsController],
   providers: [StudentsService, StudentGradesService],
 })

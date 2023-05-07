@@ -6,7 +6,6 @@ import { mapProcessedStudentsResponse } from './mappers.response';
 import { StudentsService } from './students.service';
 
 import { EmailService } from '../email/email.service';
-import { LinksService } from '../tokens/links.service';
 import {
   ImportErrors,
   ImportResultResponse,
@@ -20,7 +19,6 @@ export class StudentGradesService {
   constructor(
     private readonly usersService: UsersService,
     private readonly studentsService: StudentsService,
-    private readonly linksService: LinksService,
     private readonly emailService: EmailService,
   ) {}
 
@@ -29,10 +27,7 @@ export class StudentGradesService {
     const existingEmails = await this.usersService.getAllEmails();
     const { addedStudents, errors } = await this.processStudents(studentsData, existingEmails);
 
-    const studentsWithActivationLinks = await this.linksService.createActivationLinksForStudents(
-      addedStudents,
-    );
-    await this.emailService.sendRegistrationConfirmationToStudents(studentsWithActivationLinks);
+    await this.emailService.createActivationLinksAndSendToStudents(addedStudents);
 
     const emails = this.studentsService.getEmailsFromAddedStudents(addedStudents);
     return mapProcessedStudentsResponse(emails, errors);

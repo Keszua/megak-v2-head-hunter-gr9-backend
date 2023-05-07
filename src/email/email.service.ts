@@ -2,6 +2,8 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MailerService } from '@nestjs-modules/mailer';
 
+import { Student } from '../students/entities';
+import { LinksService } from '../tokens/links.service';
 import { SendEmailOptions, StudentWithActivationLink } from '../types';
 import { User } from '../users/entities/user.entity';
 import { MailSubject, MailTemplate } from '../utils';
@@ -11,6 +13,7 @@ export class EmailService {
   constructor(
     private readonly mailerService: MailerService,
     private readonly configService: ConfigService,
+    private readonly linksService: LinksService,
   ) {}
 
   public async sendEmail(options: SendEmailOptions): Promise<void> {
@@ -59,5 +62,17 @@ export class EmailService {
       });
     });
     await Promise.all(promises);
+  }
+
+  async createActivationLinksAndSendToStudents(students: Student[]): Promise<void> {
+    const studentsWithActivationLinks = await this.linksService.createActivationLinksForStudents(
+      students,
+    );
+    await this.sendRegistrationConfirmationToStudents(studentsWithActivationLinks);
+  }
+
+  async createActivationLinkAndSendToUser(user: User): Promise<void> {
+    const activationLink = await this.linksService.createActivationLink(user);
+    await this.sendRegistrationConfirmation(user, activationLink);
   }
 }
