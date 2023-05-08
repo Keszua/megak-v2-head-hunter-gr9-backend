@@ -1,4 +1,3 @@
-import { Hr } from 'src/hr/entities/hr.entity';
 import {
   BaseEntity,
   Column,
@@ -10,6 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import { Hr } from '../../hr/entities/hr.entity';
 import { Student } from '../../students/entities';
 import { ActivationToken, PasswordResetToken, RefreshToken } from '../../tokens/entities';
 import { UserEntity, UserRole } from '../../types';
