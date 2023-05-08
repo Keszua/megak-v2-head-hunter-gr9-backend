@@ -159,3 +159,117 @@ export const getAllStudentsResponseSchema = {
     },
   },
 };
+
+export const getOneStudentResponseSchema = {
+  type: 'object',
+  properties: {
+    studentId: {
+      type: 'string',
+    },
+    details: {
+      type: 'object',
+      properties: {
+        profile: {
+          type: 'object',
+          properties: {
+            firstName: {
+              type: 'string',
+            },
+            lastName: {
+              type: 'string',
+            },
+            githubUsername: {
+              type: 'string',
+            },
+            tel: {
+              type: 'string',
+            },
+            email: {
+              type: 'string',
+            },
+            bio: {
+              type: 'string',
+            },
+          },
+        },
+        grades: {
+          type: 'object',
+          properties: {
+            courseCompletion: {
+              type: 'integer',
+            },
+            courseEngagement: {
+              type: 'integer',
+            },
+            projectDegree: {
+              type: 'integer',
+            },
+            teamProjectDegree: {
+              type: 'integer',
+            },
+          },
+        },
+        portfolio: {
+          type: 'object',
+          properties: {
+            portfolioUrls: {
+              type: 'array',
+              items: {
+                type: 'string',
+              },
+            },
+            projectUrls: {
+              type: 'array',
+              items: {
+                type: 'string',
+              },
+            },
+            bonusProjectUrls: {
+              type: 'array',
+              items: {
+                type: 'string',
+              },
+            },
+          },
+        },
+        employmentExpectations: {
+          type: 'object',
+          properties: {
+            expectedTypeWork: {
+              type: 'string',
+            },
+            targetWorkCity: {
+              type: 'string',
+            },
+            expectedContractType: {
+              type: 'string',
+            },
+            expectedSalary: {
+              type: 'string',
+            },
+            canTakeApprenticeship: {
+              type: 'boolean',
+            },
+            monthsOfCommercialExp: {
+              type: 'integer',
+            },
+          },
+        },
+        educationAndExperience: {
+          type: 'object',
+          properties: {
+            education: {
+              type: 'string',
+            },
+            courses: {
+              type: 'string',
+            },
+            workExperience: {
+              type: 'string',
+            },
+          },
+        },
+      },
+    },
+  },
+};
