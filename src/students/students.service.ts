@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DataSource } from 'typeorm';
+import { DataSource, SelectQueryBuilder } from 'typeorm';
 
 import { PageDto, PageMetaDto, PageOptionsDto } from './dto';
 import { Student } from './entities';
@@ -33,19 +33,36 @@ export class StudentsService {
   }
 
   public async getAllStudents(pageOptionsDto: PageOptionsDto): Promise<PageDto<Student>> {
-    const queryBuilder = this.dataSource
-      .createQueryBuilder()
-      .select('student')
-      .from(Student, 'student')
-      .orderBy('student.createdAt', pageOptionsDto.order)
-      .skip(pageOptionsDto.skip)
-      .take(pageOptionsDto.take);
-
+    const queryBuilder = this.getAllStudentsQuery(pageOptionsDto);
     const itemCount = await queryBuilder.getCount();
     const { entities: students } = await queryBuilder.getRawAndEntities();
-
     const pageMetaDto = new PageMetaDto({ itemCount, pageOptionsDto });
 
     return new PageDto(students, pageMetaDto);
+  }
+
+  private getAllStudentsQuery(pageOptionsDto: PageOptionsDto): SelectQueryBuilder<Student> {
+    return this.dataSource
+      .createQueryBuilder()
+      .from(Student, 'student')
+      .leftJoinAndSelect('student.grades', 'grades')
+      .leftJoinAndSelect('student.profile', 'profile')
+      .skip(pageOptionsDto.skip)
+      .take(pageOptionsDto.take)
+      .select([
+        'student.id',
+        'student.createdAt',
+        'grades.courseCompletion',
+        'grades.courseEngagement',
+        'grades.projectDegree',
+        'grades.teamProjectDegree',
+        'profile.expectedTypeWork',
+        'profile.targetWorkCity',
+        'profile.expectedContractType',
+        'profile.expectedSalary',
+        'profile.canTakeApprenticeship',
+        'profile.monthsOfCommercialExp',
+      ])
+      .orderBy('student.createdAt', pageOptionsDto.order);
   }
 }

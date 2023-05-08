@@ -65,27 +65,31 @@ export const studentProfileResponseExample = {
 };
 
 export const getAllStudentsResponseExample = {
-  ok: true,
-  statusCode: 201,
-  data: {
-    students: [
-      {
-        id: 'a413dbc5-f91a-4500-a41f-4b46bc54e5ec',
-        createdAt: '2023-05-08T16:21:24.390Z',
-        updatedAt: '2023-05-08T16:21:24.390Z',
+  students: [
+    {
+      id: 'a413dbc5-f91a-4500-a41f-4b46bc54e5ec',
+      createdAt: '2023-05-08T16:21:24.390Z',
+      grades: {
+        courseCompletion: 3,
+        courseEngagement: 5,
+        projectDegree: 4,
+        teamProjectDegree: 3,
       },
-      {
-        id: '5db02607-fe33-472b-aab8-0c527e540ed9',
-        createdAt: '2023-05-08T16:21:24.398Z',
-        updatedAt: '2023-05-08T16:21:24.398Z',
+      profile: {
+        expectedTypeWork: 'hybrid',
+        targetWorkCity: 'San Francisco',
+        expectedContractType: 'no_preference',
+        expectedSalary: '5000',
+        canTakeApprenticeship: true,
+        monthsOfCommercialExp: 12,
       },
-    ],
-    meta: {
-      take: '2',
-      itemCount: 8,
-      pageCount: 4,
-      hasPreviousPage: false,
-      hasNextPage: false,
     },
+  ],
+  meta: {
+    take: '1',
+    itemCount: 8,
+    pageCount: 8,
+    hasPreviousPage: false,
+    hasNextPage: false,
   },
 };

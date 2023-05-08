@@ -1,5 +1,3 @@
-import { HttpStatus } from '@nestjs/common';
-
 export const csvFileSchema = {
   type: 'object',
   properties: {
@@ -119,20 +117,44 @@ export const studentProfileResponseSchema = {
 export const getAllStudentsResponseSchema = {
   type: 'object',
   properties: {
-    ok: { type: 'boolean' },
-    statusCode: { type: 'string' },
     students: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' },
+          createdAt: { type: 'string', format: 'date-time' },
+          grades: {
+            type: 'object',
+            properties: {
+              courseCompletion: { type: 'integer' },
+              courseEngagement: { type: 'integer' },
+              projectDegree: { type: 'integer' },
+              teamProjectDegree: { type: 'integer' },
+            },
+          },
+          profile: {
+            type: 'object',
+            properties: {
+              expectedTypeWork: { type: 'string' },
+              targetWorkCity: { type: 'string' },
+              expectedContractType: { type: 'string' },
+              expectedSalary: { type: 'string' },
+              canTakeApprenticeship: { type: 'boolean' },
+              monthsOfCommercialExp: { type: 'integer' },
+            },
+          },
+        },
+      },
+    },
+    meta: {
       type: 'object',
       properties: {
-        data: { type: 'array', items: { type: 'string' } },
-        meta: { type: 'object' },
-        properties: {
-          take: { type: 'string' },
-          itemCount: { type: 'number' },
-          pageCount: { type: 'number' },
-          hasPreviousPage: { type: 'boolean' },
-          hasNextPage: { type: 'boolean' },
-        },
+        take: { type: 'string' },
+        itemCount: { type: 'integer' },
+        pageCount: { type: 'integer' },
+        hasPreviousPage: { type: 'boolean' },
+        hasNextPage: { type: 'boolean' },
       },
     },
   },
