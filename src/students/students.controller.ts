@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
+  Query,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -18,10 +20,13 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-import { CreateStudentProfileDto } from './dto';
+import { CreateStudentProfileDto, PageDto, PageOptionsDto } from './dto';
+import { Student } from './entities';
 import { StudentGradesService } from './student-grades.service';
 import { StudentsProfilesService } from './students-profiles.service';
+import { StudentsService } from './students.service';
 import {
+  getAllStudentsOkResponse,
   importStudentsBadRequestResponse,
   importStudentsOkResponse,
   studentProfileCreatedResponse,
@@ -45,6 +50,7 @@ export class StudentsController {
   constructor(
     private readonly studentGradesService: StudentGradesService,
     private readonly studentsProfilesService: StudentsProfilesService,
+    private readonly studentsService: StudentsService,
   ) {}
 
   @ApiOperation({ summary: 'Import students from a CSV file' })
@@ -75,5 +81,13 @@ export class StudentsController {
       createStudentProfileDto,
       user,
     );
+  }
+
+  @ApiOperation({ summary: 'Return an array of all students' })
+  @ApiOkResponse(getAllStudentsOkResponse)
+  @HttpCode(HttpStatus.OK)
+  @Get('/')
+  getAllStudents(@Query() pageOptionsDto: PageOptionsDto): Promise<PageDto<Student>> {
+    return this.studentsService.getAllStudents(pageOptionsDto);
   }
 }
