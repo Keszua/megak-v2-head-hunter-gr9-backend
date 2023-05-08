@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Student } from './student.entity';
 
@@ -25,5 +25,6 @@ export class StudentGrades extends BaseEntity implements StudentGradesEntity {
   bonusProjectUrls: string[];
 
   @OneToOne(() => Student, student => student.grades)
+  @JoinColumn()
   student: Student;
 }

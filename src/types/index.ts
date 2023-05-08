@@ -7,4 +7,5 @@ export * from './cookie';
 export * from './hr';
 export * from './student-grades';
 export * from './error';
+export * from './student-profile';
 export * from './email';

@@ -5,6 +5,8 @@ import {
   errorResponseSchema,
   importStudentsResultResponseExample,
   importStudentsResultResponseSchema,
+  studentProfileResponseExample,
+  studentProfileResponseSchema,
 } from '../utils';
 
 export const importStudentsOkResponse = {
@@ -21,5 +23,14 @@ export const importStudentsBadRequestResponse = {
   schema: errorResponseSchema({
     statusCode: HttpStatus.BAD_REQUEST,
     exampleData: { message: 'Invalid file type. Only CSV files are allowed.' },
+  }),
+};
+
+export const studentProfileCreatedResponse = {
+  description: 'Student profile created successfully',
+  schema: createResponseSchema({
+    statusCode: HttpStatus.CREATED,
+    dataSchema: studentProfileResponseSchema,
+    exampleData: studentProfileResponseExample,
   }),
 };
