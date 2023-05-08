@@ -5,6 +5,8 @@ import {
   errorResponseSchema,
   getAllStudentsResponseExample,
   getAllStudentsResponseSchema,
+  getOneStudentResponseExample,
+  getOneStudentResponseSchema,
   importStudentsResultResponseExample,
   importStudentsResultResponseSchema,
   studentProfileResponseExample,
@@ -43,5 +45,14 @@ export const getAllStudentsOkResponse = {
     statusCode: HttpStatus.OK,
     dataSchema: getAllStudentsResponseSchema,
     exampleData: getAllStudentsResponseExample,
+  }),
+};
+
+export const getStudentOkResponse = {
+  description: 'Student fetched successfully.',
+  schema: createResponseSchema({
+    statusCode: HttpStatus.OK,
+    dataSchema: getOneStudentResponseSchema,
+    exampleData: getOneStudentResponseExample,
   }),
 };

@@ -4,6 +4,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
   Query,
   UploadedFile,
@@ -27,6 +28,7 @@ import { StudentsProfilesService } from './students-profiles.service';
 import { StudentsService } from './students.service';
 import {
   getAllStudentsOkResponse,
+  getStudentOkResponse,
   importStudentsBadRequestResponse,
   importStudentsOkResponse,
   studentProfileCreatedResponse,
@@ -86,8 +88,16 @@ export class StudentsController {
   @ApiOperation({ summary: 'Return an array of all students' })
   @ApiOkResponse(getAllStudentsOkResponse)
   @HttpCode(HttpStatus.OK)
-  @Get('/')
+  @Get('/all-students')
   getAllStudents(@Query() pageOptionsDto: PageOptionsDto): Promise<PageDto<Student>> {
     return this.studentsService.getAllStudents(pageOptionsDto);
+  }
+
+  @ApiOperation({ summary: 'Return one student.' })
+  @ApiOkResponse(getStudentOkResponse)
+  @HttpCode(HttpStatus.OK)
+  @Get('/:studentId')
+  getOneStudents(@Param('studentId') studentId: string): Promise<StudentResponse> {
+    return this.studentsService.getOneStudent(studentId);
   }
 }

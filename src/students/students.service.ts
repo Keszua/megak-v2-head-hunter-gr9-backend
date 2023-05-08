@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { DataSource, SelectQueryBuilder } from 'typeorm';
 
 import { PageDto, PageMetaDto, PageOptionsDto } from './dto';
 import { Student } from './entities';
 
-import { StudentEntity, UserRole } from '../types';
+import { StudentResponse, StudentEntity, UserRole } from '../types';
+
 import { UsersService } from '../users/users.service';
 
 @Injectable()
@@ -64,5 +65,62 @@ export class StudentsService {
         'profile.monthsOfCommercialExp',
       ])
       .orderBy('student.createdAt', pageOptionsDto.order);
+  }
+
+  // eslint-disable-next-line max-lines-per-function
+  public async getOneStudent(studentId: string): Promise<StudentResponse> {
+    const student = await this.getOneStudentQuery(studentId);
+    const studentResponse: StudentResponse = {
+      studentId: student.id,
+      createdAt: student.createdAt,
+      updatedAt: student.updatedAt,
+      details: {
+        profile: {
+          firstName: student.profile.firstName,
+          lastName: student.profile.lastName,
+          githubUsername: student.profile.githubUsername,
+          tel: student.profile.tel,
+          email: student.user.email,
+          bio: student.profile.bio,
+        },
+        grades: {
+          courseCompletion: student.grades.courseCompletion,
+          courseEngagement: student.grades.courseEngagement,
+          projectDegree: student.grades.projectDegree,
+          teamProjectDegree: student.grades.teamProjectDegree,
+        },
+        portfolio: {
+          portfolioUrls: student.profile.portfolioUrls,
+          projectUrls: student.profile.projectUrls,
+          bonusProjectUrls: student.grades.bonusProjectUrls,
+        },
+        employmentExpectations: {
+          expectedTypeWork: student.profile.expectedTypeWork,
+          targetWorkCity: student.profile.targetWorkCity,
+          expectedContractType: student.profile.expectedContractType,
+          expectedSalary: student.profile.expectedSalary,
+          canTakeApprenticeship: student.profile.canTakeApprenticeship,
+          monthsOfCommercialExp: student.profile.monthsOfCommercialExp,
+        },
+        educationAndExperience: {
+          education: student.profile.education,
+          courses: student.profile.courses,
+          workExperience: student.profile.workExperience,
+        },
+      },
+    };
+    return studentResponse;
+  }
+
+  private getOneStudentQuery(studentId: string): Promise<Student> {
+    return this.dataSource
+      .createQueryBuilder()
+      .from(Student, 'student')
+      .where('student.id = :id', { id: studentId })
+      .leftJoinAndSelect('student.user', 'user')
+      .leftJoinAndSelect('student.grades', 'grades')
+      .leftJoinAndSelect('student.profile', 'profile')
+      .select(['student.id', 'user.email', 'grades', 'profile'])
+      .getOne();
   }
 }
