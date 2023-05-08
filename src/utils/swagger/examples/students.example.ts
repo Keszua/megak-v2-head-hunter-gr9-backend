@@ -63,3 +63,29 @@ export const studentProfileResponseExample = {
     },
   },
 };
+
+export const getAllStudentsResponseExample = {
+  ok: true,
+  statusCode: 201,
+  data: {
+    students: [
+      {
+        id: 'a413dbc5-f91a-4500-a41f-4b46bc54e5ec',
+        createdAt: '2023-05-08T16:21:24.390Z',
+        updatedAt: '2023-05-08T16:21:24.390Z',
+      },
+      {
+        id: '5db02607-fe33-472b-aab8-0c527e540ed9',
+        createdAt: '2023-05-08T16:21:24.398Z',
+        updatedAt: '2023-05-08T16:21:24.398Z',
+      },
+    ],
+    meta: {
+      take: '2',
+      itemCount: 8,
+      pageCount: 4,
+      hasPreviousPage: false,
+      hasNextPage: false,
+    },
+  },
+};

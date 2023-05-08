@@ -1,3 +1,5 @@
+import { HttpStatus } from '@nestjs/common';
+
 export const csvFileSchema = {
   type: 'object',
   properties: {
@@ -108,6 +110,28 @@ export const studentProfileResponseSchema = {
             courses: { type: 'string', nullable: true },
             workExperience: { type: 'string', nullable: true },
           },
+        },
+      },
+    },
+  },
+};
+
+export const getAllStudentsResponseSchema = {
+  type: 'object',
+  properties: {
+    ok: { type: 'boolean' },
+    statusCode: { type: 'string' },
+    students: {
+      type: 'object',
+      properties: {
+        data: { type: 'array', items: { type: 'string' } },
+        meta: { type: 'object' },
+        properties: {
+          take: { type: 'string' },
+          itemCount: { type: 'number' },
+          pageCount: { type: 'number' },
+          hasPreviousPage: { type: 'boolean' },
+          hasNextPage: { type: 'boolean' },
         },
       },
     },
