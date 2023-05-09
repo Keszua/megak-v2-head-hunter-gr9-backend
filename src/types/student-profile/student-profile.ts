@@ -1,4 +1,4 @@
-import { StudentEntity } from '../student';
+import { EmploymentExpectations, Grades, Profile, StudentEntity } from '../student';
 
 export interface StudentProfileEntity {
   id: string;
@@ -36,4 +36,11 @@ export enum ExpectedContractType {
   B2B_POSSIBLE = 'b2b_possible',
   UZ_UOD_POSSIBLE = 'uz_uod_possible',
   NO_PREFERENCE = 'no_preference',
+}
+
+export interface StudentProfileAndGrades {
+  id: string;
+  createdAt: Date;
+  grades: Grades;
+  profile: EmploymentExpectations;
 }

@@ -36,14 +36,14 @@ import { UsersModule } from './users/users.module';
   ],
   providers: [
     AdminCommand,
-    {
-      provide: APP_FILTER,
-      useClass: GlobalExceptionFilter,
-    },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: GlobalResponseInterceptor,
-    },
+    // {
+    //   provide: APP_FILTER,
+    //   useClass: GlobalExceptionFilter,
+    // },
+    // {
+    //   provide: APP_INTERCEPTOR,
+    //   useClass: GlobalResponseInterceptor,
+    // },
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,

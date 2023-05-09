@@ -8,6 +8,8 @@ import {
   ImportResultResponse,
   Portfolio,
   Profile,
+  StudentGradesAndEmpExpectationsResponse,
+  StudentProfileAndGrades,
   StudentResponse,
 } from '../types';
 import { User } from '../users/entities/user.entity';
@@ -47,7 +49,7 @@ const mapProfile = (studentProfile: StudentProfile, user: User): Profile => ({
   githubUsername: studentProfile.githubUsername,
 });
 
-const mapGrades = (grades: StudentGrades): Grades => ({
+const mapGrades = (grades: Grades): Grades => ({
   courseCompletion: grades.courseCompletion,
   courseEngagement: grades.courseEngagement,
   projectDegree: grades.projectDegree,
@@ -60,8 +62,10 @@ const mapPortfolio = (studentProfile: StudentProfile, grades: StudentGrades): Po
   bonusProjectUrls: grades.bonusProjectUrls,
 });
 
-const mapEmploymentExpectations = (studentProfile: StudentProfile): EmploymentExpectations => ({
-  expectedTypeWork: studentProfile.expectedTypeWork,
+const mapEmploymentExpectations = (
+  studentProfile: EmploymentExpectations,
+): EmploymentExpectations => ({
+  expectedTypeWork: studentProfile.expectedSalary,
   targetWorkCity: studentProfile.targetWorkCity,
   expectedContractType: studentProfile.expectedContractType,
   expectedSalary: studentProfile.expectedSalary,
@@ -89,6 +93,22 @@ export const mapStudentProfileResponse = (studentProfile: StudentProfile): Stude
       portfolio: mapPortfolio(studentProfile, grades),
       employmentExpectations: mapEmploymentExpectations(studentProfile),
       educationAndExperience: mapEducationAndExperience(studentProfile),
+    },
+  };
+};
+
+export const mapStudentsResponse = (
+  studentProfile: StudentProfileAndGrades,
+): StudentGradesAndEmpExpectationsResponse => {
+  const { grades } = studentProfile;
+  const { profile } = studentProfile;
+
+  return {
+    studentId: studentProfile.id,
+    createdAt: studentProfile.createdAt,
+    details: {
+      grades: mapGrades(grades),
+      employmentExpectations: mapEmploymentExpectations(profile),
     },
   };
 };
