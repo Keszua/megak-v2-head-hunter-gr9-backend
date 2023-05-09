@@ -22,7 +22,6 @@ import {
 } from '@nestjs/swagger';
 
 import { CreateStudentProfileDto, PageDto, PageOptionsDto } from './dto';
-import { Student } from './entities';
 import { StudentGradesService } from './student-grades.service';
 import { StudentsProfilesService } from './students-profiles.service';
 import { StudentsService } from './students.service';
