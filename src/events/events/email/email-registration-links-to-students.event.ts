@@ -1,5 +1,5 @@
-import { Student } from '../../../students/entities';
+import { StudentEntity } from '../../../types';
 
 export class EmailRegistrationLinksToStudentsEvent {
-  students: Student[];
+  students: StudentEntity[];
 }

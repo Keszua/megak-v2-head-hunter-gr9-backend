@@ -3,8 +3,7 @@ import { ConfigService } from '@nestjs/config';
 
 import { TokensService } from './tokens.service';
 
-import { Student } from '../students/entities';
-import { StudentWithActivationLink, TokenData, TokenOptions } from '../types';
+import { StudentEntity, StudentWithActivationLink, TokenData, TokenOptions } from '../types';
 import { User } from '../users/entities/user.entity';
 
 @Injectable()
@@ -28,10 +27,10 @@ export class LinksService {
   }
 
   async createActivationLinksForStudents(
-    students: Student[],
+    students: StudentEntity[],
   ): Promise<StudentWithActivationLink[]> {
     const studentsWithActivationLinks: StudentWithActivationLink[] = [];
-    const users: User[] = students.map(student => student.user);
+    const users = students.map(student => student.user) as User[];
     const promises = users.map(async user => {
       const activationLink = await this.createActivationLink(user);
       studentsWithActivationLinks.push({ email: user.email, activationLink });
