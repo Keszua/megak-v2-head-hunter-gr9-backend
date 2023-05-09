@@ -49,3 +49,12 @@ export interface EducationAndExperience {
   courses?: string;
   workExperience?: string;
 }
+
+export type StudentsResponse = {
+  studentId: string;
+  createdAt: Date;
+  details: {
+    grades: Grades;
+    employmentExpectations: EmploymentExpectations;
+  };
+};
