@@ -4,7 +4,7 @@ import { DataSource, SelectQueryBuilder } from 'typeorm';
 import { PageDto, PageMetaDto, PageOptionsDto } from './dto';
 import { Student } from './entities';
 
-import { StudentResponse, UserRole } from '../types';
+import { StudentResponse, StudentsResponse, UserRole } from '../types';
 import { UsersService } from '../users/users.service';
 
 @Injectable()
@@ -32,10 +32,36 @@ export class StudentsService {
     return addedStudents.map(student => student.user.email);
   }
 
-  public async getAllStudents(pageOptionsDto: PageOptionsDto): Promise<PageDto<Student>> {
+  // eslint-disable-next-line max-lines-per-function
+  public async getAllStudents(pageOptionsDto: PageOptionsDto): Promise<PageDto<StudentsResponse>> {
     const queryBuilder = this.getAllStudentsQuery(pageOptionsDto);
     const itemCount = await queryBuilder.getCount();
-    const { entities: students } = await queryBuilder.getRawAndEntities();
+    const { entities } = await queryBuilder.getRawAndEntities();
+    const students: StudentsResponse[] = [];
+    Logger.log(entities);
+    entities.forEach(entity => {
+      students.push({
+        studentId: entity.id,
+        createdAt: entity.createdAt,
+        details: {
+          grades: {
+            courseCompletion: entity.grades.courseCompletion,
+            courseEngagement: entity.grades.courseEngagement,
+            projectDegree: entity.grades.projectDegree,
+            teamProjectDegree: entity.grades.teamProjectDegree,
+          },
+          employmentExpectations: {
+            expectedTypeWork: entity.profile.expectedTypeWork,
+            targetWorkCity: entity.profile.targetWorkCity,
+            expectedContractType: entity.profile.expectedContractType,
+            expectedSalary: entity.profile.expectedSalary,
+            canTakeApprenticeship: entity.profile.canTakeApprenticeship,
+            monthsOfCommercialExp: entity.profile.monthsOfCommercialExp,
+          },
+        },
+      });
+    });
+
     const pageMetaDto = new PageMetaDto({ itemCount, pageOptionsDto });
 
     return new PageDto(students, pageMetaDto);

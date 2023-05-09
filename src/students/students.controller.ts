@@ -35,7 +35,7 @@ import {
 } from './students.swagger.response';
 
 import { CurrentUser } from '../common';
-import { ImportResultResponse, StudentResponse } from '../types';
+import { ImportResultResponse, StudentResponse, StudentsResponse } from '../types';
 import { User } from '../users/entities/user.entity';
 import {
   CommonApiInternalServerErrorResponse,
@@ -89,7 +89,7 @@ export class StudentsController {
   @ApiOkResponse(getAllStudentsOkResponse)
   @HttpCode(HttpStatus.OK)
   @Get('/all-students')
-  getAllStudents(@Query() pageOptionsDto: PageOptionsDto): Promise<PageDto<Student>> {
+  getAllStudents(@Query() pageOptionsDto: PageOptionsDto): Promise<PageDto<StudentsResponse>> {
     return this.studentsService.getAllStudents(pageOptionsDto);
   }
 

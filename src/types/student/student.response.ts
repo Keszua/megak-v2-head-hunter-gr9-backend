@@ -18,3 +18,12 @@ export type StudentResponse = {
     educationAndExperience: EducationAndExperience;
   };
 };
+
+export type StudentsResponse = {
+  studentId: string;
+  createdAt: Date;
+  details: {
+    grades: Grades;
+    employmentExpectations: EmploymentExpectations;
+  };
+};
