@@ -3,9 +3,16 @@ import { DataSource, SelectQueryBuilder } from 'typeorm';
 
 import { PageDto, PageMetaDto, PageOptionsDto } from './dto';
 import { Student } from './entities';
+import { mapStudentsResponse } from './mappers.response';
 
 import { StudentResponse, StudentEntity,StudentsResponse, UserRole } from '../types';
 
+import {
+  StudentGradesAndEmpExpectationsResponse,
+  StudentProfileAndGrades,
+  StudentResponse,
+  UserRole,
+} from '../types';
 import { UsersService } from '../users/users.service';
 
 @Injectable()
@@ -33,47 +40,28 @@ export class StudentsService {
     return addedStudents.map(student => student.user.email);
   }
 
-  // eslint-disable-next-line max-lines-per-function
-  public async getAllStudents(pageOptionsDto: PageOptionsDto): Promise<PageDto<StudentsResponse>> {
+  public async getAllStudents(
+    pageOptionsDto: PageOptionsDto,
+  ): Promise<PageDto<StudentGradesAndEmpExpectationsResponse>> {
     const queryBuilder = this.getAllStudentsQuery(pageOptionsDto);
     const itemCount = await queryBuilder.getCount();
     const { entities } = await queryBuilder.getRawAndEntities();
-    const students: StudentsResponse[] = [];
-    Logger.log(entities);
-    entities.forEach(entity => {
-      students.push({
-        studentId: entity.id,
-        createdAt: entity.createdAt,
-        details: {
-          grades: {
-            courseCompletion: entity.grades.courseCompletion,
-            courseEngagement: entity.grades.courseEngagement,
-            projectDegree: entity.grades.projectDegree,
-            teamProjectDegree: entity.grades.teamProjectDegree,
-          },
-          employmentExpectations: {
-            expectedTypeWork: entity.profile.expectedTypeWork,
-            targetWorkCity: entity.profile.targetWorkCity,
-            expectedContractType: entity.profile.expectedContractType,
-            expectedSalary: entity.profile.expectedSalary,
-            canTakeApprenticeship: entity.profile.canTakeApprenticeship,
-            monthsOfCommercialExp: entity.profile.monthsOfCommercialExp,
-          },
-        },
-      });
-    });
+    const students = entities.map(entity => mapStudentsResponse(entity));
 
-    const pageMetaDto = new PageMetaDto({ itemCount, pageOptionsDto });
+    const pageMetaDto = plainToInstance(PageMetaDto, { ...pageOptionsDto, itemCount });
 
     return new PageDto(students, pageMetaDto);
   }
 
-  private getAllStudentsQuery(pageOptionsDto: PageOptionsDto): SelectQueryBuilder<Student> {
+  // eslint-disable-next-line max-lines-per-function
+  private getAllStudentsQuery(
+    pageOptionsDto: PageOptionsDto,
+  ): SelectQueryBuilder<StudentProfileAndGrades> {
     return this.dataSource
       .createQueryBuilder()
       .from(Student, 'student')
       .leftJoinAndSelect('student.grades', 'grades')
-      .leftJoinAndSelect('student.profile', 'profile')
+      .innerJoinAndSelect('student.profile', 'profile')
       .skip(pageOptionsDto.skip)
       .take(pageOptionsDto.take)
       .select([
@@ -90,7 +78,10 @@ export class StudentsService {
         'profile.canTakeApprenticeship',
         'profile.monthsOfCommercialExp',
       ])
-      .orderBy('student.createdAt', pageOptionsDto.order);
+      .orderBy(
+        'student.createdAt',
+        pageOptionsDto.order,
+      ) as unknown as SelectQueryBuilder<StudentProfileAndGrades>;
   }
 
   // eslint-disable-next-line max-lines-per-function

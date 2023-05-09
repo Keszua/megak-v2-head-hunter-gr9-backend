@@ -1,3 +1,5 @@
+import { PageMetaDto } from 'src/students/dto';
+
 import { ExpectedContractType, ExpectedTypeWork } from '../student-profile';
 
 export type StudentResponse = {
@@ -57,4 +59,18 @@ export type StudentsResponse = {
     grades: Grades;
     employmentExpectations: EmploymentExpectations;
   };
+};
+
+export type StudentGradesAndEmpExpectationsResponse = {
+  studentId: string;
+  createdAt: Date;
+  details: {
+    grades: Grades;
+    employmentExpectations: EmploymentExpectations;
+  };
+};
+
+export type StudentsPage<T> = {
+  students: T[];
+  meta: PageMetaDto;
 };

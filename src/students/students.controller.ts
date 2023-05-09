@@ -34,7 +34,12 @@ import {
 } from './students.swagger.response';
 
 import { CurrentUser } from '../common';
-import { ImportResultResponse, StudentResponse, StudentsResponse } from '../types';
+import {
+  ImportResultResponse,
+  StudentGradesAndEmpExpectationsResponse,
+  StudentResponse,
+  StudentsPage,
+} from '../types';
 import { User } from '../users/entities/user.entity';
 import {
   CommonApiInternalServerErrorResponse,
@@ -87,8 +92,10 @@ export class StudentsController {
   @ApiOperation({ summary: 'Return an array of all students' })
   @ApiOkResponse(getAllStudentsOkResponse)
   @HttpCode(HttpStatus.OK)
-  @Get('/all-students')
-  getAllStudents(@Query() pageOptionsDto: PageOptionsDto): Promise<PageDto<StudentsResponse>> {
+  @Get('/')
+  getAllStudents(
+    @Query() pageOptionsDto: PageOptionsDto,
+  ): Promise<StudentsPage<StudentGradesAndEmpExpectationsResponse>> {
     return this.studentsService.getAllStudents(pageOptionsDto);
   }
 
