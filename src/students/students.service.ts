@@ -1,9 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
 import { DataSource, SelectQueryBuilder } from 'typeorm';
 
 import { PageDto, PageMetaDto, PageOptionsDto } from './dto';
-import { Student } from './entities';
-import { mapStudentsResponse } from './mappers.response';
+import { Student, StudentProfile } from './entities';
+import { mapGetOneStudentProfileResponse, mapStudentsResponse } from './mappers.response';
 
 import { StudentResponse, StudentEntity,StudentsResponse, UserRole } from '../types';
 
@@ -32,7 +33,7 @@ export class StudentsService {
     return student.save();
   }
 
-  getStudentById(id: string): Promise<Student> {
+  public getStudentById(id: string): Promise<Student> {
     return Student.findOne({ where: { user: { id } }, relations: { user: true, grades: true } });
   }
 
@@ -84,60 +85,75 @@ export class StudentsService {
       ) as unknown as SelectQueryBuilder<StudentProfileAndGrades>;
   }
 
-  // eslint-disable-next-line max-lines-per-function
   public async getOneStudent(studentId: string): Promise<StudentResponse> {
-    const student = await this.getOneStudentQuery(studentId);
-    const studentResponse: StudentResponse = {
-      studentId: student.id,
-      createdAt: student.createdAt,
-      updatedAt: student.updatedAt,
-      details: {
-        profile: {
-          firstName: student.profile.firstName,
-          lastName: student.profile.lastName,
-          githubUsername: student.profile.githubUsername,
-          tel: student.profile.tel,
-          email: student.user.email,
-          bio: student.profile.bio,
-        },
-        grades: {
-          courseCompletion: student.grades.courseCompletion,
-          courseEngagement: student.grades.courseEngagement,
-          projectDegree: student.grades.projectDegree,
-          teamProjectDegree: student.grades.teamProjectDegree,
-        },
-        portfolio: {
-          portfolioUrls: student.profile.portfolioUrls,
-          projectUrls: student.profile.projectUrls,
-          bonusProjectUrls: student.grades.bonusProjectUrls,
-        },
-        employmentExpectations: {
-          expectedTypeWork: student.profile.expectedTypeWork,
-          targetWorkCity: student.profile.targetWorkCity,
-          expectedContractType: student.profile.expectedContractType,
-          expectedSalary: student.profile.expectedSalary,
-          canTakeApprenticeship: student.profile.canTakeApprenticeship,
-          monthsOfCommercialExp: student.profile.monthsOfCommercialExp,
-        },
-        educationAndExperience: {
-          education: student.profile.education,
-          courses: student.profile.courses,
-          workExperience: student.profile.workExperience,
-        },
-      },
-    };
-    return studentResponse;
+    const queryBuilder = await this.getOneStudentQuery(studentId);
+    Logger.log({ queryBuilder });
+    const student = mapGetOneStudentProfileResponse(queryBuilder);
+
+    return student;
   }
 
-  private getOneStudentQuery(studentId: string): Promise<Student> {
-    return this.dataSource
-      .createQueryBuilder()
-      .from(Student, 'student')
-      .where('student.id = :id', { id: studentId })
-      .leftJoinAndSelect('student.user', 'user')
-      .leftJoinAndSelect('student.grades', 'grades')
-      .leftJoinAndSelect('student.profile', 'profile')
-      .select(['student.id', 'user.email', 'grades', 'profile'])
-      .getOne();
+  // eslint-disable-next-line max-lines-per-function
+  private getOneStudentQuery(studentId: string): Promise<StudentResponse> {
+    return (
+      this.dataSource
+        .createQueryBuilder()
+        .from(Student, 'student')
+        .leftJoinAndSelect('student.user', 'user')
+        .leftJoinAndSelect('student.grades', 'grades')
+        .leftJoinAndSelect('student.profile', 'profile')
+        .where('student.id = :id', { id: studentId })
+        .select([
+          'student.id',
+          'student.createdAt',
+          'student.updatedAt',
+          'user.email',
+          'profile',
+          'grades',
+        ])
+        .getOne()
+        // eslint-disable-next-line max-lines-per-function
+        .then(result => {
+          return {
+            id: result.id,
+            createdAt: result.createdAt,
+            updatedAt: result.updatedAt,
+            details: {
+              profile: {
+                firstName: result.profile.firstName,
+                lastName: result.profile.lastName,
+                githubUsername: result.profile.githubUsername,
+                tel: result.profile.tel,
+                email: result.user.email,
+                bio: result.profile.bio,
+              },
+              grades: {
+                courseCompletion: result.grades.courseCompletion,
+                courseEngagement: result.grades.courseEngagement,
+                projectDegree: result.grades.projectDegree,
+                teamProjectDegree: result.grades.teamProjectDegree,
+              },
+              portfolio: {
+                portfolioUrls: result.profile.portfolioUrls,
+                projectUrls: result.profile.projectUrls,
+                bonusProjectUrls: result.grades.bonusProjectUrls,
+              },
+              employmentExpectations: {
+                expectedTypeWork: result.profile.expectedTypeWork,
+                targetWorkCity: result.profile.targetWorkCity,
+                expectedContractType: result.profile.expectedContractType,
+                expectedSalary: result.profile.expectedSalary,
+                canTakeApprenticeship: result.profile.canTakeApprenticeship,
+                monthsOfCommercialExp: result.profile.monthsOfCommercialExp,
+              },
+              educationAndExperience: {
+                education: result.profile.education,
+                courses: result.profile.education,
+                workExperience: result.profile.education,
+              },
+            },
+          };
+        }) as unknown as Promise<StudentResponse>
+    );
   }
 }

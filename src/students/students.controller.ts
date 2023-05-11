@@ -21,7 +21,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-import { CreateStudentProfileDto, PageDto, PageOptionsDto } from './dto';
+import { CreateStudentProfileDto, PageOptionsDto } from './dto';
 import { StudentGradesService } from './student-grades.service';
 import { StudentsProfilesService } from './students-profiles.service';
 import { StudentsService } from './students.service';
@@ -103,7 +103,7 @@ export class StudentsController {
   @ApiOkResponse(getStudentOkResponse)
   @HttpCode(HttpStatus.OK)
   @Get('/:studentId')
-  getOneStudents(@Param('studentId') studentId: string): Promise<StudentResponse> {
+  getOneStudent(@Param('studentId') studentId: string): Promise<StudentResponse> {
     return this.studentsService.getOneStudent(studentId);
   }
 }
