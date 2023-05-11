@@ -16,7 +16,7 @@ export class LinksService {
 
   private generateTokenLink(token: string, options: TokenOptions): string {
     const { tokenType } = options;
-    return `${this.clientUrl}/${tokenType}/${token}`;
+    return `${this.clientUrl}/${tokenType}?token=${token}`;
   }
 
   async createActivationLink(user: User): Promise<string> {
