@@ -1,5 +1,4 @@
 import { PageMetaDto } from 'src/students/dto';
-import { Student } from 'src/students/entities';
 
 import {
   EducationAndExperience,
