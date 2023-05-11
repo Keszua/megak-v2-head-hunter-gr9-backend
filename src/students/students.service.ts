@@ -3,7 +3,7 @@ import { plainToInstance } from 'class-transformer';
 import { DataSource, SelectQueryBuilder } from 'typeorm';
 
 import { PageDto, PageMetaDto, PageOptionsDto } from './dto';
-import { Student, StudentProfile } from './entities';
+import { Student } from './entities';
 import { mapGetOneStudentProfileResponse, mapStudentsResponse } from './mappers.response';
 
 import {
