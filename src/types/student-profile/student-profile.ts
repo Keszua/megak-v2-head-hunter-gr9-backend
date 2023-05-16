@@ -24,10 +24,3 @@ export interface StudentProfileEntity {
   createdAt: Date;
   updatedAt: Date;
 }
-
-export interface StudentProfileAndGrades {
-  id: string;
-  createdAt: Date;
-  grades: Grades;
-  profile: EmploymentExpectations;
-}
