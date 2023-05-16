@@ -3,6 +3,8 @@ import { HttpStatus } from '@nestjs/common';
 import {
   createResponseSchema,
   errorResponseSchema,
+  getAllStudentsResponseExample,
+  getAllStudentsResponseSchema,
   importStudentsResultResponseExample,
   importStudentsResultResponseSchema,
   studentProfileResponseExample,
@@ -32,5 +34,31 @@ export const studentProfileCreatedResponse = {
     statusCode: HttpStatus.CREATED,
     dataSchema: studentProfileResponseSchema,
     exampleData: studentProfileResponseExample,
+  }),
+};
+
+export const getAllStudentsOkResponse = {
+  description: 'Students fetched successfully.',
+  schema: createResponseSchema({
+    statusCode: HttpStatus.OK,
+    dataSchema: getAllStudentsResponseSchema,
+    exampleData: getAllStudentsResponseExample,
+  }),
+};
+
+export const getStudentOkResponse = {
+  description: 'Student fetched successfully.',
+  schema: createResponseSchema({
+    statusCode: HttpStatus.OK,
+    dataSchema: studentProfileResponseSchema,
+    exampleData: studentProfileResponseExample,
+  }),
+};
+
+export const getStudentNotFoundResponse = {
+  description: 'Student profile not found.',
+  schema: errorResponseSchema({
+    statusCode: HttpStatus.NOT_FOUND,
+    exampleData: { message: "Student profile not found'" },
   }),
 };

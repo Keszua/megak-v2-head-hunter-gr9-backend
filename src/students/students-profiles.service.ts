@@ -22,10 +22,10 @@ export class StudentsProfilesService {
   ): Promise<StudentResponse> {
     await this.checkGithubUsernameExists(studentProfileData.githubUsername);
 
-    const student = await this.studentsService.getStudentById(user.id);
-    const studentProfile = await this.createStudentProfile(studentProfileData, student);
+    const student = await this.studentsService.getStudentByUserId(user.id);
+    await this.createStudentProfile(studentProfileData, student);
 
-    return mapStudentProfileResponse(studentProfile);
+    return mapStudentProfileResponse(student);
   }
 
   async checkGithubUsernameExists(githubUsername: string): Promise<boolean> {

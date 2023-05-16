@@ -1,4 +1,6 @@
-import { StudentGrades, StudentProfile } from './entities';
+import { User } from 'src/users/entities/user.entity';
+
+import { Student, StudentGrades, StudentProfile } from './entities';
 
 import {
   EducationAndExperience,
@@ -10,7 +12,6 @@ import {
   Profile,
   StudentResponse,
 } from '../types';
-import { User } from '../users/entities/user.entity';
 
 export const mapProcessedStudentsResponse = (
   addedEmails: string[],
@@ -69,26 +70,27 @@ const mapEmploymentExpectations = (studentProfile: StudentProfile): EmploymentEx
   monthsOfCommercialExp: studentProfile.monthsOfCommercialExp,
 });
 
-const mapEducationAndExperience = (studentProfile: StudentProfile): EducationAndExperience => ({
+const mapEducationAndExperience = (
+  studentProfile: EducationAndExperience,
+): EducationAndExperience => ({
   education: studentProfile.education,
   courses: studentProfile.courses,
   workExperience: studentProfile.workExperience,
 });
 
-export const mapStudentProfileResponse = (studentProfile: StudentProfile): StudentResponse => {
-  const { student } = studentProfile;
-  const { user } = student;
-  const { grades } = student;
+export const mapStudentProfileResponse = (student: Student): StudentResponse => {
+  const { profile, user, grades } = student;
+
   return {
     studentId: student.id,
     createdAt: student.createdAt,
     updatedAt: student.updatedAt,
     details: {
-      profile: mapProfile(studentProfile, user),
+      profile: mapProfile(profile, user),
       grades: mapGrades(grades),
-      portfolio: mapPortfolio(studentProfile, grades),
-      employmentExpectations: mapEmploymentExpectations(studentProfile),
-      educationAndExperience: mapEducationAndExperience(studentProfile),
+      portfolio: mapPortfolio(profile, grades),
+      employmentExpectations: mapEmploymentExpectations(profile),
+      educationAndExperience: mapEducationAndExperience(profile),
     },
   };
 };

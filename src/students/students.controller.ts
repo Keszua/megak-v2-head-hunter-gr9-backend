@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -13,6 +15,7 @@ import {
   ApiBody,
   ApiConsumes,
   ApiCreatedResponse,
+  ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
@@ -21,7 +24,10 @@ import {
 import { CreateStudentProfileDto } from './dto';
 import { StudentGradesService } from './student-grades.service';
 import { StudentsProfilesService } from './students-profiles.service';
+import { StudentsService } from './students.service';
 import {
+  getStudentNotFoundResponse,
+  getStudentOkResponse,
   importStudentsBadRequestResponse,
   importStudentsOkResponse,
   studentProfileCreatedResponse,
@@ -45,6 +51,7 @@ export class StudentsController {
   constructor(
     private readonly studentGradesService: StudentGradesService,
     private readonly studentsProfilesService: StudentsProfilesService,
+    private readonly studentsService: StudentsService,
   ) {}
 
   @ApiOperation({ summary: 'Import students from a CSV file' })
@@ -75,5 +82,14 @@ export class StudentsController {
       createStudentProfileDto,
       user,
     );
+  }
+
+  @ApiOperation({ summary: 'Return one student.' })
+  @ApiOkResponse(getStudentOkResponse)
+  @ApiNotFoundResponse(getStudentNotFoundResponse)
+  @HttpCode(HttpStatus.OK)
+  @Get('/:studentId')
+  getOneStudent(@Param('studentId') studentId: string): Promise<StudentResponse> {
+    return this.studentsService.getStudentById(studentId);
   }
 }

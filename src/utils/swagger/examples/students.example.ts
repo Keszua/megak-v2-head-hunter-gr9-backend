@@ -63,3 +63,33 @@ export const studentProfileResponseExample = {
     },
   },
 };
+
+export const getAllStudentsResponseExample = {
+  students: [
+    {
+      id: 'a413dbc5-f91a-4500-a41f-4b46bc54e5ec',
+      createdAt: '2023-05-08T16:21:24.390Z',
+      grades: {
+        courseCompletion: 3,
+        courseEngagement: 5,
+        projectDegree: 4,
+        teamProjectDegree: 3,
+      },
+      profile: {
+        expectedTypeWork: 'hybrid',
+        targetWorkCity: 'San Francisco',
+        expectedContractType: 'no_preference',
+        expectedSalary: '5000',
+        canTakeApprenticeship: true,
+        monthsOfCommercialExp: 12,
+      },
+    },
+  ],
+  meta: {
+    take: '1',
+    itemCount: 8,
+    pageCount: 8,
+    hasPreviousPage: false,
+    hasNextPage: false,
+  },
+};
