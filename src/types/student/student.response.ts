@@ -1,10 +1,4 @@
-import {
-  EducationAndExperience,
-  EmploymentExpectations,
-  Grades,
-  Portfolio,
-  Profile,
-} from './student';
+import { ExpectedContractType, ExpectedTypeWork } from '../student-profile';
 
 export type StudentResponse = {
   studentId: string;
@@ -18,3 +12,40 @@ export type StudentResponse = {
     educationAndExperience: EducationAndExperience;
   };
 };
+
+export interface Grades {
+  courseCompletion: number;
+  courseEngagement: number;
+  projectDegree: number;
+  teamProjectDegree: number;
+}
+
+export interface Portfolio {
+  portfolioUrls: string[];
+  projectUrls: string[];
+  bonusProjectUrls: string[];
+}
+
+export interface Profile {
+  firstName: string;
+  lastName: string;
+  githubUsername: string;
+  tel?: string;
+  email: string;
+  bio?: string;
+}
+
+export interface EmploymentExpectations {
+  expectedTypeWork: ExpectedTypeWork;
+  targetWorkCity?: string;
+  expectedContractType: ExpectedContractType;
+  expectedSalary?: string;
+  canTakeApprenticeship: boolean;
+  monthsOfCommercialExp: number;
+}
+
+export interface EducationAndExperience {
+  education?: string;
+  courses?: string;
+  workExperience?: string;
+}

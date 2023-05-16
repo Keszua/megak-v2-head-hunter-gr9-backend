@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { Student } from './entities';
 
-import { UserRole } from '../types';
+import { StudentEntity, UserRole } from '../types';
 import { UsersService } from '../users/users.service';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class StudentsService {
     return Student.findOne({ where: { user: { id } }, relations: { user: true, grades: true } });
   }
 
-  getEmailsFromAddedStudents(addedStudents: Student[]): string[] {
+  getEmailsFromAddedStudents(addedStudents: StudentEntity[]): string[] {
     return addedStudents.map(student => student.user.email);
   }
 }
