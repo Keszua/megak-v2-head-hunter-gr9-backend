@@ -1,3 +1,5 @@
+import { ImportErrors } from './student-grades.response';
+
 import { StudentEntity } from '../student';
 
 export interface StudentGradesRequest {
@@ -17,17 +19,6 @@ export interface StudentGradesEntity {
   teamProjectDegree: number;
   bonusProjectUrls: string[];
   student: StudentEntity;
-}
-
-export interface ImportDetails {
-  count: number;
-  details: string[];
-}
-
-export interface ImportErrors {
-  csvDuplicates: ImportDetails;
-  databaseDuplicates: ImportDetails;
-  invalidEmails: ImportDetails;
 }
 
 export interface ProcessedStudents {
