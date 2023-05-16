@@ -1,6 +1,6 @@
 import { User } from 'src/users/entities/user.entity';
 
-import { StudentGrades, StudentProfile } from './entities';
+import { Student, StudentGrades, StudentProfile } from './entities';
 
 import {
   EducationAndExperience,
@@ -10,8 +10,6 @@ import {
   ImportResultResponse,
   Portfolio,
   Profile,
-  StudentGradesAndEmpExpectationsResponse,
-  StudentProfileAndGrades,
   StudentResponse,
 } from '../types';
 
@@ -41,15 +39,6 @@ export const mapProcessedStudentsResponse = (
   };
 };
 
-const mapOneStudentProfile = (studentProfile: Profile): Profile => ({
-  firstName: studentProfile.firstName,
-  lastName: studentProfile.lastName,
-  tel: studentProfile.tel,
-  email: studentProfile.email,
-  bio: studentProfile.bio,
-  githubUsername: studentProfile.githubUsername,
-});
-
 const mapProfile = (studentProfile: StudentProfile, user: User): Profile => ({
   firstName: studentProfile.firstName,
   lastName: studentProfile.lastName,
@@ -59,24 +48,11 @@ const mapProfile = (studentProfile: StudentProfile, user: User): Profile => ({
   githubUsername: studentProfile.githubUsername,
 });
 
-const mapOneStudentGrades = (grades: Grades): Grades => ({
-  courseCompletion: grades.courseCompletion,
-  courseEngagement: grades.courseEngagement,
-  projectDegree: grades.projectDegree,
-  teamProjectDegree: grades.teamProjectDegree,
-});
-
 const mapGrades = (grades: StudentGrades): Grades => ({
   courseCompletion: grades.courseCompletion,
   courseEngagement: grades.courseEngagement,
   projectDegree: grades.projectDegree,
   teamProjectDegree: grades.teamProjectDegree,
-});
-
-const mapOneUserPortfolio = (studentProfile: Portfolio): Portfolio => ({
-  portfolioUrls: studentProfile.portfolioUrls,
-  projectUrls: studentProfile.projectUrls,
-  bonusProjectUrls: studentProfile.bonusProjectUrls,
 });
 
 const mapPortfolio = (studentProfile: StudentProfile, grades: StudentGrades): Portfolio => ({
@@ -85,10 +61,8 @@ const mapPortfolio = (studentProfile: StudentProfile, grades: StudentGrades): Po
   bonusProjectUrls: grades.bonusProjectUrls,
 });
 
-const mapEmploymentExpectations = (
-  studentProfile: EmploymentExpectations,
-): EmploymentExpectations => ({
-  expectedTypeWork: studentProfile.expectedSalary,
+const mapEmploymentExpectations = (studentProfile: StudentProfile): EmploymentExpectations => ({
+  expectedTypeWork: studentProfile.expectedTypeWork,
   targetWorkCity: studentProfile.targetWorkCity,
   expectedContractType: studentProfile.expectedContractType,
   expectedSalary: studentProfile.expectedSalary,
@@ -104,56 +78,19 @@ const mapEducationAndExperience = (
   workExperience: studentProfile.workExperience,
 });
 
-export const mapStudentProfileResponse = (studentProfile: StudentProfile): StudentResponse => {
-  const { student } = studentProfile;
-  const { user } = student;
-  const { grades } = student;
+export const mapStudentProfileResponse = (student: Student): StudentResponse => {
+  const { profile, user, grades } = student;
+
   return {
     studentId: student.id,
     createdAt: student.createdAt,
     updatedAt: student.updatedAt,
     details: {
-      profile: mapProfile(studentProfile, user),
+      profile: mapProfile(profile, user),
       grades: mapGrades(grades),
-      portfolio: mapPortfolio(studentProfile, grades),
-      employmentExpectations: mapEmploymentExpectations(studentProfile),
-      educationAndExperience: mapEducationAndExperience(studentProfile),
-    },
-  };
-};
-
-export const mapGetOneStudentProfileResponse = (
-  studentProfile: StudentResponse,
-): StudentResponse => {
-  const { studentId, createdAt, updatedAt } = studentProfile;
-  const { details } = studentProfile;
-
-  return {
-    studentId,
-    createdAt: createdAt,
-    updatedAt: updatedAt,
-    details: {
-      profile: mapOneStudentProfile(details.profile),
-      grades: mapOneStudentGrades(details.grades),
-      portfolio: mapOneUserPortfolio(details.portfolio),
-      employmentExpectations: mapEmploymentExpectations(details.employmentExpectations),
-      educationAndExperience: mapEducationAndExperience(details.educationAndExperience),
-    },
-  };
-};
-
-export const mapStudentsResponse = (
-  studentProfile: StudentProfileAndGrades,
-): StudentGradesAndEmpExpectationsResponse => {
-  const { grades } = studentProfile;
-  const { profile } = studentProfile;
-
-  return {
-    studentId: studentProfile.id,
-    createdAt: studentProfile.createdAt,
-    details: {
-      grades: mapOneStudentGrades(grades),
+      portfolio: mapPortfolio(profile, grades),
       employmentExpectations: mapEmploymentExpectations(profile),
+      educationAndExperience: mapEducationAndExperience(profile),
     },
   };
 };
