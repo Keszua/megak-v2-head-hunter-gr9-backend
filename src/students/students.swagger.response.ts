@@ -54,3 +54,11 @@ export const getStudentOkResponse = {
     exampleData: studentProfileResponseExample,
   }),
 };
+
+export const getStudentNotFoundResponse = {
+  description: 'Student profile not found.',
+  schema: errorResponseSchema({
+    statusCode: HttpStatus.NOT_FOUND,
+    exampleData: { message: "Student profile not found'" },
+  }),
+};
