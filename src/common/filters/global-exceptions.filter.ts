@@ -6,6 +6,7 @@ import {
   HttpException,
   HttpStatus,
   Logger,
+  NotFoundException,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import {
@@ -46,6 +47,8 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       return this.handleEntityNotFoundError(error);
     } else if (error instanceof QueryFailedError) {
       return this.handleQueryFailedError(error);
+    } else if (error instanceof NotFoundException) {
+      return this.handleNotFoundException(error);
     } else if (error instanceof UnauthorizedTokenException) {
       return this.handleUnauthorizedTokenException(error);
     } else if (error instanceof BadRequestException) {
@@ -75,6 +78,14 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     return {
       error: { message },
       status: HttpStatus.INTERNAL_SERVER_ERROR,
+    };
+  }
+
+  private handleNotFoundException(error: NotFoundException): ErrorData {
+    Logger.warn(error.message, error.name);
+    return {
+      error: { message: error.message },
+      status: HttpStatus.NOT_FOUND,
     };
   }
 
