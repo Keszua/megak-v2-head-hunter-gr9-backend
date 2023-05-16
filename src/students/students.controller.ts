@@ -6,7 +6,6 @@ import {
   HttpStatus,
   Param,
   Post,
-  Query,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -16,17 +15,18 @@ import {
   ApiBody,
   ApiConsumes,
   ApiCreatedResponse,
+  ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
 
-import { CreateStudentProfileDto, PageOptionsDto } from './dto';
+import { CreateStudentProfileDto } from './dto';
 import { StudentGradesService } from './student-grades.service';
 import { StudentsProfilesService } from './students-profiles.service';
 import { StudentsService } from './students.service';
 import {
-  getAllStudentsOkResponse,
+  getStudentNotFoundResponse,
   getStudentOkResponse,
   importStudentsBadRequestResponse,
   importStudentsOkResponse,
@@ -34,12 +34,7 @@ import {
 } from './students.swagger.response';
 
 import { CurrentUser } from '../common';
-import {
-  ImportResultResponse,
-  StudentGradesAndEmpExpectationsResponse,
-  StudentResponse,
-  StudentsPage,
-} from '../types';
+import { ImportResultResponse, StudentResponse } from '../types';
 import { User } from '../users/entities/user.entity';
 import {
   CommonApiInternalServerErrorResponse,
@@ -89,21 +84,12 @@ export class StudentsController {
     );
   }
 
-  @ApiOperation({ summary: 'Return an array of all students' })
-  @ApiOkResponse(getAllStudentsOkResponse)
-  @HttpCode(HttpStatus.OK)
-  @Get('/')
-  getAllStudents(
-    @Query() pageOptionsDto: PageOptionsDto,
-  ): Promise<StudentsPage<StudentGradesAndEmpExpectationsResponse>> {
-    return this.studentsService.getAllStudents(pageOptionsDto);
-  }
-
   @ApiOperation({ summary: 'Return one student.' })
   @ApiOkResponse(getStudentOkResponse)
+  @ApiNotFoundResponse(getStudentNotFoundResponse)
   @HttpCode(HttpStatus.OK)
   @Get('/:studentId')
   getOneStudent(@Param('studentId') studentId: string): Promise<StudentResponse> {
-    return this.studentsService.getOneStudent(studentId);
+    return this.studentsService.getStudentById(studentId);
   }
 }
