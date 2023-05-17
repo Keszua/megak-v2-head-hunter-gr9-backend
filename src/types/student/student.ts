@@ -8,3 +8,8 @@ export interface StudentEntity {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export enum Order {
+  ASC = 'ASC',
+  DESC = 'DESC',
+}
