@@ -7,6 +7,7 @@ import {
   HttpStatus,
   Logger,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import {
@@ -51,6 +52,8 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       return this.handleNotFoundException(error);
     } else if (error instanceof UnauthorizedTokenException) {
       return this.handleUnauthorizedTokenException(error);
+    } else if (error instanceof UnauthorizedException) {
+      return this.handleUnauthorizedException(error);
     } else if (error instanceof BadRequestException) {
       return this.handleBadRequestException(error);
     } else if (error instanceof HttpException) {
@@ -97,6 +100,14 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         message: errorResponse.message,
         code: TokenErrorCodes.TOKEN_EXPIRED,
       },
+      status: HttpStatus.UNAUTHORIZED,
+    };
+  }
+
+  private handleUnauthorizedException(error: UnauthorizedException): ErrorData {
+    Logger.warn(error.message, error.name);
+    return {
+      error: { message: error.message },
       status: HttpStatus.UNAUTHORIZED,
     };
   }
