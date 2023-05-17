@@ -50,3 +50,36 @@ Przykładowo:
 ```bash
 npm run console admin create jakubkrol@megak.pl 'megaK!!@2023'
 ```
+
+### Przykładowe dane logowania
+#### Admin
+```bash
+email: jakubkrol@megak.pl
+hasło: megaK!!@2023
+```
+#### HR
+```bash
+email:anna.kowalska@xyz.pl
+hasło: Anna$2023
+``` 
+```bash
+email:lukasz.nowak@abc.com
+hasło: Lukasz$2023
+```
+```bash
+email:katarzyna.wisniewska@def.net
+hasło: Katarzyna$2023
+```
+#### Kandydat
+```bash
+email: jan.kowalski@example.com"
+hasło: janK$2023
+```
+```bash
+email: krzysztof.dudek@example.com
+hasło: krzysztofD$2023
+```
+```bash     
+email: adam.nowak@example.com
+hasło: adamN$2023
+```
