@@ -114,7 +114,7 @@ export const studentProfileResponseSchema = {
   },
 };
 
-export const getAllStudentsResponseSchema = {
+export const getAllBasicStudentsResponseSchema = {
   type: 'object',
   properties: {
     students: {
@@ -124,6 +124,13 @@ export const getAllStudentsResponseSchema = {
         properties: {
           id: { type: 'string' },
           createdAt: { type: 'string', format: 'date-time' },
+          profile: {
+            type: 'object',
+            properties: {
+              firstName: { type: 'string' },
+              lastName: { type: 'string' },
+            },
+          },
           grades: {
             type: 'object',
             properties: {
@@ -133,12 +140,18 @@ export const getAllStudentsResponseSchema = {
               teamProjectDegree: { type: 'integer' },
             },
           },
-          profile: {
+          employmentExpectations: {
             type: 'object',
             properties: {
-              expectedTypeWork: { type: 'string' },
+              expectedTypeWork: {
+                type: 'enum',
+                enum: ['onsite', 'relocation_ready', 'remote_only', 'hybrid', 'no_preference'],
+              },
               targetWorkCity: { type: 'string' },
-              expectedContractType: { type: 'string' },
+              expectedContractType: {
+                type: 'enum',
+                enum: ['uop_only', 'b2b_possible', 'uz_uod_possible', 'no_preference'],
+              },
               expectedSalary: { type: 'string' },
               canTakeApprenticeship: { type: 'boolean' },
               monthsOfCommercialExp: { type: 'integer' },
@@ -150,7 +163,8 @@ export const getAllStudentsResponseSchema = {
     meta: {
       type: 'object',
       properties: {
-        take: { type: 'string' },
+        page: { type: 'integer' },
+        take: { type: 'integer' },
         itemCount: { type: 'integer' },
         pageCount: { type: 'integer' },
         hasPreviousPage: { type: 'boolean' },

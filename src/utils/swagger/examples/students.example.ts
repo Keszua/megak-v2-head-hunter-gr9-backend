@@ -64,18 +64,22 @@ export const studentProfileResponseExample = {
   },
 };
 
-export const getAllStudentsResponseExample = {
+export const getAllBasicStudentsResponseExample = {
   students: [
     {
       id: 'a413dbc5-f91a-4500-a41f-4b46bc54e5ec',
       createdAt: '2023-05-08T16:21:24.390Z',
+      profile: {
+        firstName: 'Jan',
+        lastName: 'Kowalski',
+      },
       grades: {
         courseCompletion: 3,
         courseEngagement: 5,
         projectDegree: 4,
         teamProjectDegree: 3,
       },
-      profile: {
+      employmentExpectations: {
         expectedTypeWork: 'hybrid',
         targetWorkCity: 'San Francisco',
         expectedContractType: 'no_preference',
@@ -86,9 +90,10 @@ export const getAllStudentsResponseExample = {
     },
   ],
   meta: {
-    take: '1',
+    page: 1,
+    take: 10,
     itemCount: 8,
-    pageCount: 8,
+    pageCount: 1,
     hasPreviousPage: false,
     hasNextPage: false,
   },
