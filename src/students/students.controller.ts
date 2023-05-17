@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Query,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -21,11 +22,12 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-import { CreateStudentProfileDto } from './dto';
+import { CreateStudentProfileDto, PageOptionsDto } from './dto';
 import { StudentGradesService } from './student-grades.service';
 import { StudentsProfilesService } from './students-profiles.service';
 import { StudentsService } from './students.service';
 import {
+  getAllStudentsOkResponse,
   getStudentNotFoundResponse,
   getStudentOkResponse,
   importStudentsBadRequestResponse,
@@ -34,7 +36,7 @@ import {
 } from './students.swagger.response';
 
 import { CurrentUser } from '../common';
-import { ImportResultResponse, StudentResponse } from '../types';
+import { ImportResultResponse, PagedBasicStudentResponse, StudentResponse } from '../types';
 import { User } from '../users/entities/user.entity';
 import {
   CommonApiInternalServerErrorResponse,
@@ -82,6 +84,14 @@ export class StudentsController {
       createStudentProfileDto,
       user,
     );
+  }
+
+  @ApiOperation({ summary: 'Return an array of all basic data students' })
+  @ApiOkResponse(getAllStudentsOkResponse)
+  @HttpCode(HttpStatus.OK)
+  @Get('/')
+  getAllBasicStudents(@Query() pageOptionsDto: PageOptionsDto): Promise<PagedBasicStudentResponse> {
+    return this.studentsService.getAllBasicStudents(pageOptionsDto);
   }
 
   @ApiOperation({ summary: 'Return one student.' })

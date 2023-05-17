@@ -3,6 +3,7 @@ import { User } from 'src/users/entities/user.entity';
 import { Student, StudentGrades, StudentProfile } from './entities';
 
 import {
+  BasicStudentResponse,
   EducationAndExperience,
   EmploymentExpectations,
   Grades,
@@ -91,6 +92,20 @@ export const mapStudentProfileResponse = (student: Student): StudentResponse => 
       portfolio: mapPortfolio(profile, grades),
       employmentExpectations: mapEmploymentExpectations(profile),
       educationAndExperience: mapEducationAndExperience(profile),
+    },
+  };
+};
+
+export const mapBasicStudentProfileResponse = (student: Student): BasicStudentResponse => {
+  const { grades } = student;
+
+  return {
+    studentId: student.id,
+    createdAt: student.createdAt,
+    details: {
+      profile: { firstName: student.profile.firstName, lastName: student.profile.lastName },
+      grades: mapGrades(grades),
+      employmentExpectations: mapEmploymentExpectations(student.profile),
     },
   };
 };
