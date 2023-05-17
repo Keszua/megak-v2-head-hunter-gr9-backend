@@ -3,8 +3,8 @@ import { HttpStatus } from '@nestjs/common';
 import {
   createResponseSchema,
   errorResponseSchema,
-  getAllStudentsResponseExample,
-  getAllStudentsResponseSchema,
+  getAllBasicStudentsResponseExample,
+  getAllBasicStudentsResponseSchema,
   importStudentsResultResponseExample,
   importStudentsResultResponseSchema,
   studentProfileResponseExample,
@@ -41,8 +41,8 @@ export const getAllStudentsOkResponse = {
   description: 'Students fetched successfully.',
   schema: createResponseSchema({
     statusCode: HttpStatus.OK,
-    dataSchema: getAllStudentsResponseSchema,
-    exampleData: getAllStudentsResponseExample,
+    dataSchema: getAllBasicStudentsResponseSchema,
+    exampleData: getAllBasicStudentsResponseExample,
   }),
 };
 

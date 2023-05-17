@@ -21,9 +21,8 @@ export class StudentsProfilesService {
     user: User,
   ): Promise<StudentResponse> {
     await this.checkGithubUsernameExists(studentProfileData.githubUsername);
-
     const student = await this.studentsService.getStudentByUserId(user.id);
-    await this.createStudentProfile(studentProfileData, student);
+    student.profile = await this.createStudentProfile(studentProfileData, student);
 
     return mapStudentProfileResponse(student);
   }

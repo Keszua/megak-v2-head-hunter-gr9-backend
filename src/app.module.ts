@@ -1,6 +1,6 @@
-import { Module, ValidationPipe } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ConsoleModule } from 'nestjs-console';
 
 import { AdminModule } from './admin/admin.module';
@@ -8,7 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards';
 import { AdminCommand } from './commands/admin.command';
 import { GlobalExceptionFilter, GlobalResponseInterceptor } from './common';
-import { envValidationObjectSchema, validationPipeOptions } from './config';
+import { envValidationObjectSchema } from './config';
 import { DatabaseModule } from './database/database.module';
 import { EmailModule } from './email/email.module';
 import { EventsModule } from './events/events.module';
@@ -36,6 +36,7 @@ import { UsersModule } from './users/users.module';
   ],
   providers: [
     AdminCommand,
+
     {
       provide: APP_FILTER,
       useClass: GlobalExceptionFilter,
@@ -47,11 +48,6 @@ import { UsersModule } from './users/users.module';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
-    },
-    {
-      provide: APP_PIPE,
-      useClass: ValidationPipe,
-      useFactory: (): ValidationPipe => new ValidationPipe(validationPipeOptions),
     },
   ],
 })

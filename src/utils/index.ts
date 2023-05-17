@@ -4,4 +4,3 @@ export * from './csv-file-filter';
 export * from './codes';
 export * from './swagger';
 export * from './mail';
-export * from './constants';
