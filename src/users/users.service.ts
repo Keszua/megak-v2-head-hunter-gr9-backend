@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -26,7 +26,12 @@ export class UsersService {
   }
 
   async activateUser(id: string): Promise<void> {
-    await User.update(id, { isActive: true });
+    const updateResult = await User.update(id, { isActive: true });
+
+    if (updateResult.affected === 0) {
+      Logger.warn(`User not found`, 'activateUser', UsersService.name);
+      throw new NotFoundException('User not found');
+    }
   }
 
   getUserByEmail(email: string): Promise<User> {
@@ -36,7 +41,12 @@ export class UsersService {
   }
 
   async changePassword(id: string, password: string): Promise<void> {
-    await User.update(id, { hashPwd: await this.hashPassword(password) });
+    const updateResult = await User.update(id, { hashPwd: await this.hashPassword(password) });
+
+    if (updateResult.affected === 0) {
+      Logger.warn(`User not found`, 'changePassword', UsersService.name);
+      throw new NotFoundException('User not found');
+    }
   }
 
   hashPassword(password: string): Promise<string> {
