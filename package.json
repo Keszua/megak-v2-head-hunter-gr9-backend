@@ -20,10 +20,15 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "console:dev": "npm run build && npm run console",
-    "console": "node dist/console.js"
+    "console": "node dist/console.js",
+    "docker-db:run": "docker-compose -f ./docker/docker-compose.yaml --env-file .env -p head-hunter-gr9-db up -d",
+    "docker-db:stop": "docker-compose -f ./docker/docker-compose.yaml --env-file .env -p head-hunter-gr9-db down",
+    "docker-db:reset": "npm run docker-db:stop && npm run docker-db:run",
+    "docker-db:rm": "docker-compose -f ./docker/docker-compose.yaml --env-file .env -p head-hunter-gr9-db rm -f"
   },
   "dependencies": {
     "@nestjs-modules/mailer": "^1.8.1",
+    "@nestjs/axios": "^2.0.0",
     "@nestjs/common": "^9.4.0",
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.4.0",
@@ -33,6 +38,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.3.0",
     "@nestjs/typeorm": "^9.0.1",
+    "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",

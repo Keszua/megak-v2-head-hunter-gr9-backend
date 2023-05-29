@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 
 import { StudentGrades } from './student-grades.entity';
+import { StudentProfile } from './student-profile.entity';
 
 import { StudentEntity } from '../../types';
 import { User } from '../../users/entities/user.entity';
@@ -22,8 +23,10 @@ export class Student extends BaseEntity implements StudentEntity {
   @JoinColumn()
   user: User;
 
+  @OneToOne(() => StudentProfile, profile => profile.student)
+  profile: StudentProfile;
+
   @OneToOne(() => StudentGrades, grades => grades.student)
-  @JoinColumn()
   grades: StudentGrades;
 
   @CreateDateColumn({ type: 'timestamp' })

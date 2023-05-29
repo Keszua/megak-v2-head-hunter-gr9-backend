@@ -2,11 +2,10 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MailerService } from '@nestjs-modules/mailer';
 
-import { Student } from '../students/entities';
 import { LinksService } from '../tokens/links.service';
-import { SendEmailOptions, StudentWithActivationLink } from '../types';
+import { StudentEntity, StudentWithActivationLink } from '../types';
 import { User } from '../users/entities/user.entity';
-import { MailSubject, MailTemplate } from '../utils';
+import { MailSubject, MailTemplate, SendEmailOptions } from '../utils';
 
 @Injectable()
 export class EmailService {
@@ -64,7 +63,7 @@ export class EmailService {
     await Promise.all(promises);
   }
 
-  async createActivationLinksAndSendToStudents(students: Student[]): Promise<void> {
+  async createActivationLinksAndSendToStudents(students: StudentEntity[]): Promise<void> {
     const studentsWithActivationLinks = await this.linksService.createActivationLinksForStudents(
       students,
     );
