@@ -3,6 +3,7 @@ import { createTestUser, initializeTestingModule, userFindOneSpy } from './test.
 import { User } from '../entities/user.entity';
 import { UsersService } from '../users.service';
 
+// eslint-disable-next-line max-lines-per-function
 describe('UsersService - getUserByEmail', () => {
   let service: UsersService;
   const userEmail = 'test@example.com';
