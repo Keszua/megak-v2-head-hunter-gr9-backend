@@ -10,15 +10,15 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { EntityNotFoundError, QueryFailedError } from 'typeorm';
+
 import {
   ClientApiResponse,
   ErrorData,
   ErrorResponse,
   ErrorResponseBadRequestException,
-} from 'src/types';
-import { errorMessage, getMysqlErrorMessage, TokenErrorCodes } from 'src/utils';
-import { EntityNotFoundError, QueryFailedError } from 'typeorm';
-
+} from '../../types';
+import { errorMessage, getMysqlErrorMessage, TokenErrorCodes } from '../../utils';
 import { UnauthorizedTokenException } from '../exceptions';
 
 @Catch()
